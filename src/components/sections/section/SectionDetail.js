@@ -182,7 +182,7 @@ const BoxImgWrapper = styled.div`
   width: 360px;
   height: 280px;
 
-  background:${(props) =>
+  background: ${(props) =>
     props.imgcolor ||
     "linear-gradient(209.21deg, #9F7FE5 13.57%, #4E99E3 98.38%)"};
   box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px,
@@ -195,19 +195,18 @@ const BoxImgWrapper = styled.div`
   grid-template-columns: auto;
   justify-items: center;
   transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-margin-top:25px;
+  margin-top: 25px;
   &:hover {
     transform: scale(1.1);
     filter: hue-rotate(-30deg);
-
-    }
   }
+
   &:hover img {
     transform: scale(0.8);
   }
   @media (max-width: 450px) {
     width: 260px;
-  height: 180px;
+    height: 180px;
   }
 `;
 
@@ -218,9 +217,9 @@ const BoxImg = styled.img`
 const Logo = styled.img`
   width: 60px;
   height: 60px;
-  box-shadow: rgba(0,0,0,0.25) 0px 10px 20px, rgba(255,255,255,0.25) 0px 0px 0px 0.5px inset;
-    border-radius: 37px;
-}
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px,
+    rgba(255, 255, 255, 0.25) 0px 0px 0px 0.5px inset;
+  border-radius: 37px;
 `;
 
 const Title = styled(H1)`
@@ -258,20 +257,20 @@ const Desc2 = styled.p`
     background: #dddddd1f;
     margin-bottom: 10px;
     border-radius: 20px;
-    padding-right:30px;
-}
-    span {
-      padding: 10px;
-      margin-top: 40px;
-    }
+    padding-right: 30px;
   }
+  span {
+    padding: 10px;
+    margin-top: 40px;
+  }
+
   strong {
     font-family: "Alaraby";
     color: #32b3e4;
     font-size: 28px;
   }
-  span{
-    padding:0;
+  span {
+    padding: 0;
   }
   @media (max-width: 450px) {
     padding: 40px;
@@ -297,11 +296,11 @@ const InstracturImg = styled.img`
 const InstracturName = styled(Caption)``;
 
 const Line = styled.div`
-width: 280px;
-    height: 0.5px;
-    margin: 0px auto;
-    background: rgba(255, 255, 255, 0.3);
-}`;
+  width: 280px;
+  height: 0.5px;
+  margin: 0px auto;
+  background: rgba(255, 255, 255, 0.3);
+`;
 const TopicWrapper = styled.div`
   padding: 0px 20px;
   box-sizing: border-box;
