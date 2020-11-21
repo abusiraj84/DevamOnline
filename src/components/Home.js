@@ -1,33 +1,23 @@
-import React, { useState, useEffect } from "react";
-
-import UserService from "../services/user.service";
+import React from "react";
+import styled from "styled-components";
+import HeroSection from "./sections/HeroSection";
+import CoursesCards from "./sections/section/CoursesCards";
 
 const Home = () => {
-  const [content, setContent] = useState("");
-
-  useEffect(() => {
-    UserService.getPublicContent().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
-
-        setContent(_content);
-      }
-    );
-  }, []);
-
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
-    </div>
+    <Wrapper>
+      <HeroSection />
+      <CoursesCards />
+    </Wrapper>
   );
 };
 
 export default Home;
+
+const Wrapper = styled.div`
+  width: 1254px;
+  margin: auto auto;
+  @media (max-width: 1270px) {
+    width: 100%;
+  }
+`;

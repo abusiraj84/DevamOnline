@@ -1,128 +1,87 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Router, Switch, Route, Link } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import { Router, Switch, Route, withRouter } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import BoardUser from "./components/BoardUser";
-import BoardModerator from "./components/BoardModerator";
-import BoardAdmin from "./components/BoardAdmin";
 
-import { logout } from "./actions/auth";
-import { clearMessage } from "./actions/message";
+import Profile from "./components/Profile";
 
 import { history } from "./helpers/history";
+import Layout from "./components/layout/layout";
+import WaveBackground from "./components/backgrounds/WaveBackground";
+
+import CoursesPage from "./components/pages/CoursesPage";
+import CoursePage from "./components/pages/CoursePage";
+import InstructursPage from "./components/pages/InstructursPage";
+import InstructurPage from "./components/pages/InstructurPage";
+import PricesPage from "./components/pages/PricesPage";
+import ShopPage from "./components/pages/ShopPage";
+import LessonPage from "./components/pages/LessonPage";
+import ScrollToTop from "./components/ScrollToTop ";
+import StarBackground from "./components/backgrounds/StarBackground";
+import LoadingScreen from "./components/LoadingScreen";
+import ThankyouPage from "./components/pages/ThankyouPage";
+import Nav from "./components/Nav";
+const Home = lazy(() => import("./components/Home"));
 
 const App = () => {
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-  const [showAdminBoard, setShowAdminBoard] = useState(false);
-
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    history.listen((location) => {
-      dispatch(clearMessage()); // clear message when changing location
-    });
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (currentUser) {
-      setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-    }
-  }, [currentUser]);
-
-  const logOut = () => {
-    dispatch(logout());
-  };
-
   return (
     <Router history={history}>
-      <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/"} className="navbar-brand">
-            bezKoder
-          </Link>
-          <div className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
-            </li>
+      <ScrollToTop>
+        <div>
+          <Layout />
+          <StarBackground />
+          {/* <Header /> */}
+          <Nav />
+          <WaveBackground />
+          <Suspense fallback={<LoadingScreen />}>
+            <Switch>
+              <Route exact path={["/", "/home"]} component={withRouter(Home)} />
+              <Route exact path="/login" component={withRouter(Login)} />
+              <Route exact path="/register" component={withRouter(Register)} />
+              <Route exact path="/profile" component={withRouter(Profile)} />
 
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
+              <Route
+                exact
+                path="/courses"
+                component={withRouter(CoursesPage)}
+              />
+              <Route exact path="/course" component={withRouter(CoursePage)} />
+              <Route
+                exact
+                path="/course/:id"
+                component={withRouter(CoursePage)}
+              />
+              <Route
+                exact
+                path="/lesson/:id"
+                component={withRouter(LessonPage)}
+              />
 
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-
-            {currentUser && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-              </li>
-            )}
-          </div>
-
-          {currentUser ? (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
-                  {currentUser.username}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={logOut}>
-                  LogOut
-                </a>
-              </li>
-            </div>
-          ) : (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
-                  Login
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
-                  Sign Up
-                </Link>
-              </li>
-            </div>
-          )}
-        </nav>
-
-        <div className="container mt-3">
-          <Switch>
-            <Route exact path={["/", "/home"]} component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
-            <Route path="/user" component={BoardUser} />
-            <Route path="/mod" component={BoardModerator} />
-            <Route path="/admin" component={BoardAdmin} />
-          </Switch>
-        </div>
-      </div>
+              <Route
+                exact
+                path="/instructurs"
+                component={withRouter(InstructursPage)}
+              />
+              <Route
+                exact
+                path="/instructur"
+                component={withRouter(InstructurPage)}
+              />
+              <Route exact path="/prices" component={withRouter(PricesPage)} />
+              <Route exact path="/shop" component={withRouter(ShopPage)} />
+              <Route
+                exact
+                path="/thankyou"
+                component={withRouter(ThankyouPage)}
+              />
+            </Switch>
+          </Suspense>
+        </div>{" "}
+      </ScrollToTop>
     </Router>
   );
 };

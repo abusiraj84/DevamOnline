@@ -1,23 +1,47 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/auth/";
-
-const register = (username, email, password) => {
-  return axios.post(API_URL + "signup", {
-    username,
-    email,
-    password,
-  });
+const API_URL = "http://192.168.1.116:8000/api/";
+const headers = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
 };
 
-const login = (username, password) => {
+const register = (firstname, lastname, email, password) => {
   return axios
-    .post(API_URL + "signin", {
-      username,
+    .post(
+      API_URL + "register",
+      {
+        firstname,
+        lastname,
+        email,
+        password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    )
+    .then((response) => {
+      if (response.data.token) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        window.location.href = "/profile";
+      }
+      console.log(response.data);
+      return response.data;
+    })
+    .catch((err) => console.log(err));
+};
+
+const login = (email, password) => {
+  return axios
+    .post(API_URL + "login", {
+      email,
       password,
     })
     .then((response) => {
-      if (response.data.accessToken) {
+      if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
 
@@ -27,6 +51,7 @@ const login = (username, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
+  window.location.href = "/";
 };
 
 export default {
