@@ -7,7 +7,6 @@ import LessonsBox from "../sections/section/LessonsBox";
 import SectionDetail from "../sections/section/SectionDetail";
 import { Caption2 } from "../styles/TextStyles";
 import { Helmet } from "react-helmet";
-import { config } from "../../config";
 
 function CoursePage({ match }) {
   const { user: currentUser } = useSelector((state) => state.auth);
