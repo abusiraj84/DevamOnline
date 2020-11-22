@@ -164,6 +164,10 @@ export const Container = styled.div`
   max-width: 450px;
   padding: 60px 68px 40px;
   margin-bottom: 100px;
+  @media (max-width: 500px) {
+    width: 76%;
+    margin: -94px auto;
+  }
 `;
 
 export const Error = styled.div`
