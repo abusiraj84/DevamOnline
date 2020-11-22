@@ -52,7 +52,7 @@ const ContentWrapper = styled.div`
   display: grid;
   grid-template-columns: 360px auto;
   gap: 60px;
-  @media (max-width: 1085px) {
+  @media (max-width: 1270px) {
     grid-template-columns: auto;
     gap: 60px;
     padding: 170px 20px 250px;
@@ -103,6 +103,9 @@ const Title = styled(H1)`
     text-align: center;
     font-size: 50px;
   }
+  @media (max-width: 550px) {
+    font-size: 40px;
+  }
 `;
 const Description = styled(MediumText)`
   font-weight: normal;
@@ -116,18 +119,19 @@ const Description = styled(MediumText)`
     line-height: 140%;
     margin-bottom: 20px;
   }
+  @media (max-width: 550px) {
+    font-size: 16px;
+  }
 `;
 
 const ImgHero = styled.img`
-  width: 675px;
+  width: 634px;
   opacity: 0;
   animation: ${animation} 1s 0.7s forwards;
   @media (max-width: 1270px) {
     padding: 10px 30px;
     gap: 50px;
     width: 75px;
-  }
-  @media (max-width: 1085px) {
     display: none;
   }
 `;
