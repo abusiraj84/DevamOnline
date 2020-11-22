@@ -72,9 +72,9 @@ const CourseCardsWrapper = styled.div`
   }
 
   @media (max-width: 1300px) {
-    margin: 0px auto;
+    /* margin: 0px auto;
     width: 100%;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; */
   }
 
   @media (max-width: 1030px) {
@@ -167,9 +167,9 @@ text-align:center;
     opacity: 0;
       animation: ${animation} 1s 0.1s forwards;
       @media (max-width: 1300px) {
-    margin-right: 70px;
-    margin-left: 50px;
-    display:block;
+     margin-right: 70px;
+   /* margin-left: 50px;
+    display:block; */
   }
 
 }

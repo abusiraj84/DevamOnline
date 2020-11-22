@@ -51,7 +51,7 @@ const ContentWrapper = styled.div`
   overflow: hidden;
   display: grid;
   grid-template-columns: 360px auto;
-  gap: 60px;
+  gap: 135px;
   @media (max-width: 1270px) {
     grid-template-columns: auto;
     gap: 60px;

@@ -15,8 +15,8 @@ const Home = () => {
 export default Home;
 
 const Wrapper = styled.div`
-  width: 1254px;
-  margin: auto auto;
+  width: 1220px;
+  margin: 0 auto;
   @media (max-width: 1270px) {
     width: 100%;
   }
