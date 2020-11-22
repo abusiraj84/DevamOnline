@@ -52,6 +52,13 @@ const ContentWrapper = styled.div`
   display: grid;
   grid-template-columns: 360px auto;
   gap: 60px;
+  @media (max-width: 1085px) {
+    grid-template-columns: auto;
+    gap: 60px;
+    padding: 170px 20px 250px;
+    margin: 0px auto;
+    padding-bottom: 0px;
+  }
   @media (max-width: 450px) {
     grid-template-columns: auto;
     gap: 60px;
@@ -120,7 +127,7 @@ const ImgHero = styled.img`
     gap: 50px;
     width: 75px;
   }
-  @media (max-width: 450px) {
+  @media (max-width: 1085px) {
     display: none;
   }
 `;
