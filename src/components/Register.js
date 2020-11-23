@@ -6,6 +6,7 @@ import { register } from "../actions/auth";
 import axios from "axios";
 
 import { NavLink, Redirect } from "react-router-dom";
+import { config } from "../config";
 
 const Register = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -51,7 +52,7 @@ const Register = () => {
     //   });
     axios
       .post(
-        "http://192.168.1.116:8000/api/register",
+        `${config.siteUrl}/register`,
         {
           firstname,
           lastname,

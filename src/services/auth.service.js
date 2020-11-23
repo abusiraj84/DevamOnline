@@ -1,6 +1,7 @@
 import axios from "axios";
+import { config } from "../config";
 
-const API_URL = "http://192.168.1.116:8000/api/";
+const API_URL = config.siteUrl;
 const headers = {
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",

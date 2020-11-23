@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { config } from "../../config";
 
 function LessonPage({ match }) {
   useEffect(() => {
@@ -20,9 +21,7 @@ function LessonPage({ match }) {
   const [isComplete, setIsComplete] = useState(false);
 
   const fetchLessons = async () => {
-    const data = await fetch(
-      `http://192.168.1.116:8000/api/lessons/${match.params.id}`
-    );
+    const data = await fetch(`${config.siteUrl}/lessons/${match.params.id}`);
     const items = await data.json();
     console.log(items);
     setLesson(items);
@@ -37,7 +36,7 @@ function LessonPage({ match }) {
     if (!isComplete) {
       axios({
         method: "post",
-        url: "http://192.168.1.116:8000/api/lessonuser",
+        url: `${config.siteUrl}/lessonuser`,
         data: {
           lesson_id: lesson.lessons_id,
           user_id: currentUser.user.id,
@@ -45,7 +44,7 @@ function LessonPage({ match }) {
       });
     } else {
       axios.delete(
-        `http://192.168.1.116:8000/api/lessonuser/${currentUser.user.id}/${lesson.lessons_id}`
+        `${config.siteUrl}/lessonuser/${currentUser.user.id}/${lesson.lessons_id}`
       );
     }
   };

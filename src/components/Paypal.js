@@ -2,6 +2,7 @@ import React from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { config } from "../config";
 
 function Paypal(props) {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -15,7 +16,7 @@ function Paypal(props) {
     //   this.props.onSuccess(payment);
     axios({
       method: "post",
-      url: "http://192.168.1.116:8000/api/courseuser",
+      url: `${config.siteUrl}/courseuser`,
       data: {
         course_id: props.id,
         user_id: currentUser.user.id,

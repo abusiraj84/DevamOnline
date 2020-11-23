@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Caption, H1, H2, SmallText, SmallText2 } from "./styles/TextStyles";
+import { config } from "../config";
 
 const Profile = () => {
   useEffect(() => {
@@ -16,7 +17,7 @@ const Profile = () => {
   const [items, setItems] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch("http://192.168.1.116:8000/api/courses");
+    const data = await fetch(`${config.siteUrl}/courses`);
     const items = await data.json();
     console.log(items.data);
     setItems(items.data);

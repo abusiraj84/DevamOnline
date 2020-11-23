@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "../Card";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
+import { config } from "../../../config";
 
 function CoursesCards() {
   useEffect(() => {
@@ -10,7 +11,7 @@ function CoursesCards() {
   const [items, setItems] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch("http://192.168.1.116:8000/api/cats");
+    const data = await fetch(`${config.siteUrl}/courses/cats`);
     const items = await data.json();
     console.log(items.data);
     setItems(items.data);

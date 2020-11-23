@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { H1, H2, SmallText } from "../styles/TextStyles";
 import LoadingScreen from "../LoadingScreen";
+import { config } from "../../config";
 
 function InstructursPage() {
   useEffect(() => {
@@ -13,7 +14,7 @@ function InstructursPage() {
   const [items, setItems] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch("http://192.168.1.116:8000/api/instructors");
+    const data = await fetch(`${config.siteUrl}/instructors`);
     const items = await data.json();
     console.log(items.data);
     setItems(items.data);

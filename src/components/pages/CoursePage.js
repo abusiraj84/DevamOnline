@@ -7,7 +7,7 @@ import LessonsBox from "../sections/section/LessonsBox";
 import SectionDetail from "../sections/section/SectionDetail";
 import { Caption2 } from "../styles/TextStyles";
 import { Helmet } from "react-helmet";
-
+import { config } from "../../config";
 function CoursePage({ match }) {
   const { user: currentUser } = useSelector((state) => state.auth);
 
@@ -27,9 +27,7 @@ function CoursePage({ match }) {
   const [theuser, setTheuser] = useState([]);
 
   const fetchCourse = async () => {
-    const data = await fetch(
-      `http://192.168.1.116:8000/api/courses/${match.params.id}`
-    );
+    const data = await fetch(`${config.siteUrl}/courses/${match.params.id}`);
 
     const items = await data.json();
     setItems(items.data);
@@ -51,7 +49,7 @@ function CoursePage({ match }) {
     console.log(token());
   }
   const fetchUsers = async () => {
-    const users = await fetch(" http://192.168.1.116:8000/api/user", {
+    const users = await fetch(`ٍ${config.siteUrl}/user`, {
       method: "get",
       headers: new Headers({
         Authorization: "Bearer " + token(),
