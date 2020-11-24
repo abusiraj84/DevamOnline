@@ -43,13 +43,16 @@ function SectionDetail(props) {
   ////////////////////////////////////////////////////////////////////////////////
   const token = currentUser ? currentUser.token : [];
   const fetchUsers = async () => {
-    const users = await fetch(" http://localhost:8000/api/user", {
-      method: "get",
-      headers: new Headers({
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/x-www-form-urlencoded",
-      }),
-    });
+    const users = await fetch(
+      " https://devam.website/Devam-Api/public/api/user",
+      {
+        method: "get",
+        headers: new Headers({
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/x-www-form-urlencoded",
+        }),
+      }
+    );
 
     const userdata = await users.json();
 
