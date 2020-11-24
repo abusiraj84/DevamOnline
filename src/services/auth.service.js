@@ -10,7 +10,7 @@ const headers = {
 const register = (firstname, lastname, email, password) => {
   return axios
     .post(
-      API_URL + "register",
+      config.siteUrl + "register",
       {
         firstname,
         lastname,
@@ -37,7 +37,7 @@ const register = (firstname, lastname, email, password) => {
 
 const login = (email, password) => {
   return axios
-    .post(API_URL + "login", {
+    .post(config.siteUrl + "login", {
       email,
       password,
     })
