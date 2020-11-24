@@ -28,7 +28,7 @@ function CoursePage({ match }) {
 
   const fetchCourse = async () => {
     const data = await fetch(
-      `http://localhost:8000/api/courses/${match.params.id}`
+      `https://devam.website/Devam-Api/public/api/courses/${match.params.id}`
     );
 
     const items = await data.json();
@@ -51,13 +51,16 @@ function CoursePage({ match }) {
     console.log(token());
   }
   const fetchUsers = async () => {
-    const users = await fetch(" http://localhost:8000/api/user", {
-      method: "get",
-      headers: new Headers({
-        Authorization: "Bearer " + token(),
-        "Content-Type": "application/x-www-form-urlencoded",
-      }),
-    });
+    const users = await fetch(
+      " https://devam.website/Devam-Api/public/api/user",
+      {
+        method: "get",
+        headers: new Headers({
+          Authorization: "Bearer " + token(),
+          "Content-Type": "application/x-www-form-urlencoded",
+        }),
+      }
+    );
 
     const userdata = await users.json();
 
