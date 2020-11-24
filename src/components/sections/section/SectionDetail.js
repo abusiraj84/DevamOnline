@@ -4,7 +4,6 @@ import PurchaseButton from "../../buttons/PurchaseButton";
 import { useSelector } from "react-redux";
 import Paypal from "../../Paypal";
 import ReactHtmlParser from "react-html-parser";
-import { config } from "../../../config";
 
 import {
   Caption,
@@ -44,7 +43,7 @@ function SectionDetail(props) {
   ////////////////////////////////////////////////////////////////////////////////
   const token = currentUser ? currentUser.token : [];
   const fetchUsers = async () => {
-    const users = await fetch(`${config.siteUrl}/user`, {
+    const users = await fetch(" http://localhost:8000/api/user", {
       method: "get",
       headers: new Headers({
         Authorization: "Bearer " + token,
