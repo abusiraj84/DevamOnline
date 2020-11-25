@@ -1,6 +1,5 @@
 import React from "react";
 import "./modal.css";
-import FontAwesome from "react-fontawesome";
 
 const Modal = (props) => {
   const { closeModal } = props;

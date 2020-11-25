@@ -1,8 +1,6 @@
 import React from "react";
-import WaveBackground from "../backgrounds/WaveBackground";
 import PayPalBtn from "../buttons/PayPalBtn";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
 import { history } from "../../helpers/history";
 
 function PricesPage() {

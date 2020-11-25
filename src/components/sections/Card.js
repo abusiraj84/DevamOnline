@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Caption, SmallText, SmallText2 } from "../styles/TextStyles";
+import { SmallText, SmallText2 } from "../styles/TextStyles";
 
 function Card(props) {
   const {

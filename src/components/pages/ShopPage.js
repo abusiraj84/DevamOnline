@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../modal/modal";
 import styled from "styled-components";
-import { H1, H2, SmallText } from "../styles/TextStyles";
+import { H1, SmallText } from "../styles/TextStyles";
 import Waveform from "../Waveform";
 
 function ShopPage() {

@@ -2,10 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import PurchaseButton from "../../components/buttons/PurchaseButton";
 import WaveBackground from "../backgrounds/WaveBackground";
-// import bg from "../../../static/images/waves/hero-wave1.svg"
-// import CardsTest from "./CardsTest"
 import { H1, MediumText } from "../styles/TextStyles";
-import CoursesCards from "./section/CoursesCards";
 
 function HeroSection() {
   return (

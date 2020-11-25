@@ -1,7 +1,7 @@
-import React, { useState, useEffect, FC } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { H2, H3 } from "../../components/styles/TextStyles";
+import { H3 } from "../../components/styles/TextStyles";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -12,6 +12,12 @@ function LessonPage({ match }) {
   useEffect(() => {
     fetchLessons();
   }, []);
+  const fetchLessons = async () => {
+    const data = await fetch(`${config.siteUrl}/lessons/${match.params.id}`);
+    const items = await data.json();
+    console.log(items);
+    setLesson(items);
+  };
   const { user: currentUser } = useSelector((state) => state.auth);
 
   const [lesson, setLesson] = useState([]);
@@ -19,13 +25,6 @@ function LessonPage({ match }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [isComplete, setIsComplete] = useState(false);
-
-  const fetchLessons = async () => {
-    const data = await fetch(`${config.siteUrl}/lessons/${match.params.id}`);
-    const items = await data.json();
-    console.log(items);
-    setLesson(items);
-  };
 
   //TODO fetch lessonuser by id see if there is a table and setIscomplete according result by useEfect.
 
@@ -106,12 +105,12 @@ function LessonPage({ match }) {
           <Pre>السابق</Pre>
         </NextPreWrapper>
 
-        <button onClick={handleComplete}>تم الإنتهاء</button>
-        {complete()}
+        {/* <button onClick={handleComplete}>تم الإنتهاء</button>
+        {complete()} */}
         <Title>
-          {currentUser.user.lessons.map((item, i) =>
+          {/* {currentUser.user.lessons.map((item, i) =>
             item.lessons_id == lesson.lessons_id ? "Done" : ""
-          )}
+          )} */}
         </Title>
       </ContentWrapper>
     </Wrapper>
