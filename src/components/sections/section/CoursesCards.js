@@ -36,8 +36,8 @@ function CoursesCards() {
                 <Link to={`/course/${item.courses_id}`}>
                   <Card
                     title={item.title}
-                    img={item.img}
-                    instracturimg={item.instructors["0"].img}
+                    img={`https://devam.website/admin/_lib/file/img/${item.img}`}
+                    instracturimg={`https://devam.website/admin/_lib/file/img/${item.instructors["0"].img}`}
                     instracturname={item.instructors["0"].name}
                     bgcolor={item.color.color}
                     price={item.price}
