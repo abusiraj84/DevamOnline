@@ -88,6 +88,10 @@ const TextWrapper = styled.div`
   }
 `;
 const Title = styled(H1)`
+  font-weight: 600;
+  font-size: 55px;
+  line-height: 124%;
+  text-align: right;
   color: white;
   margin-bottom: 28px;
   opacity: 0;
@@ -109,8 +113,8 @@ const Description = styled(MediumText)`
   font-size: 18px;
   line-height: 180%;
   text-align: justify;
-  font-family: tahoma;
   margin-bottom: 7px;
+  font-weight: 200;
   @media (max-width: 1270px) {
     text-align: center;
     line-height: 140%;
@@ -122,7 +126,7 @@ const Description = styled(MediumText)`
 `;
 
 const ImgHero = styled.img`
-  width: 634px;
+  width: 674px;
   opacity: 0;
   animation: ${animation} 1s 0.7s forwards;
   @media (max-width: 1270px) {

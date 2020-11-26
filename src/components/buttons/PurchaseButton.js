@@ -7,7 +7,7 @@ export default function PurchaseButton(props) {
   const { title, subtitle } = props;
 
   return (
-    <Link to="/page-2">
+    <Link to="/courses">
       <Wrapper>
         <IconWrapper>
           <Icon src="/images/icons/credit.svg" />

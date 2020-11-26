@@ -82,9 +82,10 @@ const Box = styled.div`
 `;
 
 const BoxImg = styled.img`
-  width: 150px;
-  height: 150px;
-  margin-top: 30px;
+  width: 186px;
+  height: 114px;
+  margin-top: 45px;
+  opacity: 1;
   opacity: 1;
   animation: 1s ease 0s 1 normal forwards running jBcSpD;
   transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
@@ -92,9 +93,9 @@ const BoxImg = styled.img`
 
 const Title = styled.p`
   font-style: normal;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 140%;
-  font-weight: bold;
   text-align: center;
   color: rgb(255, 255, 255);
   margin: 0px;
