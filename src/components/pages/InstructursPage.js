@@ -26,7 +26,9 @@ function InstructursPage() {
         <CardWrapper>
           {items.map((item, i) => (
             <Card key={i}>
-              <Avatar src={item.img} />
+              <Avatar
+                src={`https://devam.website/admin/_lib/file/img ${item.img}`}
+              />
               <Name>{item.name}</Name>
               <CoursNum>عدد الدورات : {item.courses.length}</CoursNum>
               <Cv>{item.cv}</Cv>
