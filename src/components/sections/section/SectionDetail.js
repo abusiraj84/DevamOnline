@@ -105,13 +105,6 @@ function SectionDetail(props) {
       </BoxImgWrapper>
       <Logo src={logo || "images/icons/cubase.svg"} />
       <Title>{title}</Title>
-      <Desc1>
-        {sections || "0"} أقسام - {hours || "2"} ساعة
-      </Desc1>
-      <Desc2>
-        {ReactHtmlParser(desc) ||
-          " In this course we will show you how to create a promo video using After Effects."}
-      </Desc2>
       <InstracturWrapper>
         <InstracturImg
           src={
@@ -121,6 +114,14 @@ function SectionDetail(props) {
         />
         <InstracturName>المدرب: {name || "Husam Nasrullah"}</InstracturName>
       </InstracturWrapper>
+      <Desc1>
+        {sections || "0"} أقسام - {hours || "2"} ساعة
+      </Desc1>
+      <Desc2>
+        {ReactHtmlParser(desc) ||
+          " In this course we will show you how to create a promo video using After Effects."}
+      </Desc2>
+
       {isButtonvar()}
       <Line />
       <TopicWrapper>
@@ -278,14 +279,15 @@ const Desc2 = styled.p`
     padding: 0;
   }
   @media (max-width: 450px) {
-    padding: 40px;
-    width: 80%;
+    padding: 40px 20px;
+    width: 90%;
   }
 `;
 
 const InstracturWrapper = styled.div`
-  display: grid;
+  display: flex;
   grid-template-columns: 50px 250px;
+  gap: 25px;
   -webkit-box-pack: center;
   place-content: center;
   justify-items: center;

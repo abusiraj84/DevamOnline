@@ -7,7 +7,7 @@ import { H1 } from "../styles/TextStyles";
 function CoursesPage() {
   return (
     <Wrapper>
-      <Title> :: جميع الدورات :: </Title>
+      <Title> جميع الدورات </Title>
       <CoursesCards />
     </Wrapper>
   );

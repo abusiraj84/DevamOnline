@@ -72,16 +72,16 @@ const Profile = () => {
   };
   return (
     <Wrapper>
-      <TitleHome> :: الملف الشخصي :: </TitleHome>
+      <TitleHome>ملفي</TitleHome>
       <BoxWrapper>
         {/* {currentUser.user.firstname + " " + currentUser.user.lastname} */}
 
         <Menu>
           <Button onClick={() => setView(Profile())}>
-            <h2>الملف الشخصي</h2>
+            <h2>البيانات الشخصية</h2>
           </Button>
           <Button onClick={() => setView(Courses())}>
-            <h2>الكورسات</h2>
+            <h2>الدورات</h2>
           </Button>
           <Button onClick={() => setView(Shop())}>
             <h2>المتجر</h2>
@@ -215,9 +215,9 @@ const Email = styled(Caption)`
 
 const Box = styled.div`
   position: relative;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-right: 20px;
-
+  margin-left: 20px;
   border-radius: 20px;
   background: ${(props) => props.bgcolor || "palevioletred"};
   box-shadow: rgba(78, 153, 227, 0.3) 0px 20px 40px,
@@ -305,6 +305,7 @@ const VideosNum = styled(SmallText)`
   padding: 10px;
   border-radius: 20px;
   font-size: 12px;
+  text-align: center;
 `;
 
 const Hours = styled.div``;

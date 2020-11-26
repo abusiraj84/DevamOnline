@@ -48,7 +48,7 @@ export const tooltipData = [
     link: "/shop",
   },
   {
-    title: "الإعدادات",
+    title: "ملفي",
     icon: "../images/icons/settings.svg",
     link: "/profile",
   },
