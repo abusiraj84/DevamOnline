@@ -97,7 +97,7 @@ function CoursePage({ match }) {
             <SectionDetail
               logo={item.logo}
               title={item.title}
-              img={`http://localhost:3000/${item.img}`}
+              img={`https://devam.website/admin/_lib/file/img/${item.img}`}
               sections={sections.length}
               hours={item.hours}
               desc={item.description}

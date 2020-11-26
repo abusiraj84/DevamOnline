@@ -101,9 +101,19 @@ function SectionDetail(props) {
   return (
     <Wrapper>
       <BoxImgWrapper imgcolor={imgcolor}>
-        <BoxImg src={img || "images/ills/example1.svg"} />
+        <BoxImg
+          src={
+            `https://devam.website/admin/_lib/file/img/${img}` ||
+            "images/ills/example1.svg"
+          }
+        />
       </BoxImgWrapper>
-      <Logo src={logo || "images/icons/cubase.svg"} />
+      <Logo
+        src={
+          `https://devam.website/admin/_lib/file/img/${logo}` ||
+          "images/icons/cubase.svg"
+        }
+      />
       <Title>{title}</Title>
       <Desc1>
         {sections || "0"} أقسام - {hours || "2"} ساعة
