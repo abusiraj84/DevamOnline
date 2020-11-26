@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Caption, H1, H2, SmallText, SmallText2 } from "./styles/TextStyles";
 import { config } from "../config";
 
@@ -72,6 +72,7 @@ const Profile = () => {
   };
   return (
     <Wrapper>
+      <TitleHome> :: الملف الشخصي :: </TitleHome>
       <BoxWrapper>
         {/* {currentUser.user.firstname + " " + currentUser.user.lastname} */}
 
@@ -93,14 +94,29 @@ const Profile = () => {
 };
 
 export default Profile;
-
+const animation = keyframes`
+  from { opacity: 0; transform: translateY(-10px); filter: blur(10px); }
+  to { opacity: 1; transform: translateY(0px); filter: blur(0px); }
+`;
 const Wrapper = styled.div`
-  padding-top: 240px;
+  padding-top: 200px;
   width: 1234px;
   margin: auto auto;
   direction: rtl;
   text-align: right;
   overflow: hidden;
+  @media (max-width: 1420px) {
+    width: 100%;
+    margin: auto auto;
+  }
+`;
+
+const TitleHome = styled(H1)`
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: ${animation} 1s 0.1s forwards;
 `;
 
 const BoxWrapper = styled.div`
@@ -113,6 +129,11 @@ const BoxWrapper = styled.div`
   display: flex;
   min-height: 500px;
   gap: 30px;
+  @media (max-width: 1420px) {
+    width: 70%;
+    margin: auto auto;
+    flex-direction: column;
+  }
 `;
 
 const Menu = styled.div`
@@ -150,6 +171,11 @@ const View = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 50px;
+  @media (max-width: 1420px) {
+    width: 100%;
+    margin: auto auto;
+    flex-direction: column;
+  }
 `;
 
 const Avatar = styled.img`
@@ -159,6 +185,11 @@ const Avatar = styled.img`
   border: 4px solid #fff;
   margin-bottom: 20px;
   transition: all 0.3s ease-in-out 0s;
+  @media (max-width: 450px) {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
 `;
 const Subscription = styled(SmallText)`
   background: gold;
@@ -166,10 +197,14 @@ const Subscription = styled(SmallText)`
   padding: 8px 20px;
   border-radius: 20px;
   border: 4px solid #000;
+  margin-bottom: 20px;
 `;
 
 const Name = styled(H2)`
   margin-bottom: 10px;
+  @media (max-width: 1000px) {
+    font-size: 20px;
+  }
 `;
 const Email = styled(Caption)`
   margin-bottom: 20px;

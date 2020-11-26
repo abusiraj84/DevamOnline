@@ -23,39 +23,42 @@ function InstructursPage() {
   return (
     <>
       <Wrapper>
+        <Title> :: المدربون :: </Title>
         <CardWrapper>
-          {items.map((item, i) => (
-            <Card key={i}>
-              <Avatar
-                src={`https://devam.website/admin/_lib/file/img/${item.img}`}
-              />
-              <Name>{item.name}</Name>
-              <CoursNum>عدد الدورات : {item.courses.length}</CoursNum>
-              <Cv>{item.cv}</Cv>
-              <IconsWrapper>
-                <a href={item.facebook}>
-                  <Icon src="images/icons/facebook.svg"></Icon>
-                </a>
-                <a href={item.instagram}>
-                  <Icon src="images/icons/instagram.svg"></Icon>
-                </a>
-                <a href={item.youtube}>
-                  <Icon src="images/icons/youtube.svg"></Icon>
-                </a>
-                <a href={item.whatsapp}>
-                  <Icon src="images/icons/whatsapp.svg"></Icon>
-                </a>
-              </IconsWrapper>
-              <CourseWrapper>
-                <CoursNum style={{ textAlign: "center" }}>الدورات</CoursNum>
-                {item.courses.map((item, i) => (
-                  <Link key={i} to={`/course/${item.courses_id}`}>
-                    <CourseTitle key={i}>{item.title}</CourseTitle>
-                  </Link>
-                ))}{" "}
-              </CourseWrapper>
-            </Card>
-          ))}
+          {items.map((item, i) =>
+            item.courses.length ? (
+              <Card key={i}>
+                <Avatar
+                  src={`https://devam.website/admin/_lib/file/img/${item.img}`}
+                />
+                <Name>{item.name}</Name>
+                <CoursNum>عدد الدورات : {item.courses.length}</CoursNum>
+                <Cv>{item.cv}</Cv>
+                <IconsWrapper>
+                  <a href={item.facebook}>
+                    <Icon src="images/icons/facebook.svg"></Icon>
+                  </a>
+                  <a href={item.instagram}>
+                    <Icon src="images/icons/instagram.svg"></Icon>
+                  </a>
+                  <a href={item.youtube}>
+                    <Icon src="images/icons/youtube.svg"></Icon>
+                  </a>
+                  <a href={item.whatsapp}>
+                    <Icon src="images/icons/whatsapp.svg"></Icon>
+                  </a>
+                </IconsWrapper>
+                <CourseWrapper>
+                  <CoursNum style={{ textAlign: "center" }}>الدورات</CoursNum>
+                  {item.courses.map((item, i) => (
+                    <Link key={i} to={`/course/${item.courses_id}`}>
+                      <CourseTitle key={i}>{item.title}</CourseTitle>
+                    </Link>
+                  ))}{" "}
+                </CourseWrapper>
+              </Card>
+            ) : null
+          )}
         </CardWrapper>
       </Wrapper>
     </>
@@ -68,7 +71,7 @@ const animation = keyframes`
   to { opacity: 1; transform: translateY(0px); filter: blur(0px); }
 `;
 const Wrapper = styled.div`
-  padding-top: 120px;
+  padding-top: 200px;
   width: 1234px;
   margin: 0px auto;
 
@@ -77,6 +80,13 @@ const Wrapper = styled.div`
     margin: 0px auto;
     margin-bottom: 40px;
   }
+`;
+const Title = styled(H1)`
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: ${animation} 1s 0.1s forwards;
 `;
 
 const CardWrapper = styled.div`
