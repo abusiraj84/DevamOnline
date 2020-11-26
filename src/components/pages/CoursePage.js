@@ -95,14 +95,14 @@ function CoursePage({ match }) {
           <div key={item.courses_id}>
             {/* <SEO title={item.title} /> */}
             <SectionDetail
-              logo={item.logo}
+              logo={`https://devam.website/admin/_lib/file/img/${item.logo}`}
               title={item.title}
               img={`https://devam.website/admin/_lib/file/img/${item.img}`}
               sections={sections.length}
               hours={item.hours}
               desc={item.description}
               name={item.instructors["0"].name}
-              instaimg={item.instructors["0"].img}
+              instaimg={`https://devam.website/admin/_lib/file/img/${item.instructors["0"].img}`}
               topics={allLessons.length}
               imgcolor={item.color.color}
               price={item.price}
