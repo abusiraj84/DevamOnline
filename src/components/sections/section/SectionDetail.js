@@ -215,6 +215,9 @@ const BoxImgWrapper = styled.div`
 
 const BoxImg = styled.img`
   transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  width: 300px;
+  height: 200px;
+  border-radius: 21px;
 `;
 
 const Logo = styled.img`
