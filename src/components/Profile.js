@@ -295,8 +295,6 @@ const KindWrapper = styled.div`
   grid-template-columns: 4fr 4fr;
   gap: 50px;
   justify-content: space-around;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 `;
 
 const VideosNum = styled(SmallText)`

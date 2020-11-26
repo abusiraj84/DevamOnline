@@ -287,7 +287,6 @@ const Desc2 = styled.p`
 const InstracturWrapper = styled.div`
   display: flex;
   grid-template-columns: 50px 250px;
-  gap: 25px;
   -webkit-box-pack: center;
   place-content: center;
   justify-items: center;
@@ -298,6 +297,7 @@ const InstracturImg = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 100px;
+  margin-left: 25px;
 `;
 
 const InstracturName = styled(Caption)``;
@@ -330,8 +330,6 @@ const TopicDesc = styled(SmallText)`
 `;
 
 const Price = styled(H2)`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #e89325;
   padding: 10px;
   border-radius: 10px;
@@ -342,14 +340,11 @@ const Price = styled(H2)`
   backdrop-filter: blur(40px);
 `;
 const PriceTitle = styled(H2)`
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 22px;
 `;
 const Sale = styled(SmallText)`
   font-size: 30px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
   text-decoration: line-through;
   font-size: 22px;
 `;

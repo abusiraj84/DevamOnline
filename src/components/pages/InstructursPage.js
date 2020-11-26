@@ -228,7 +228,6 @@ const CourseTitle = styled.li`
 const IconsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 20px;
   margin-bottom: 20px;
 `;
 const Icon = styled.img`
@@ -240,6 +239,8 @@ const Icon = styled.img`
   background: #fff;
   padding: 8px;
   border-radius: 10px;
+  margin-left: 12px;
+  margin-right: 12px;
 
   :hover {
     transform: scale(1.1) !important;
