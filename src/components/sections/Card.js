@@ -19,7 +19,7 @@ function Card(props) {
     <Box bgcolor={bgcolor}>
       <BoxImg
         src={
-          `https://devam.website/admin/_lib/file/img/${img}` ||
+          img ||
           "//images.ctfassets.net/ooa29xqb8tix/7sZsITPVNFJcG5Fmu0AyBi/442a2ee3d4dc94a9795ae2ec5222f039/React_Hooks_Illustration_Cover.svg"
         }
         alt="Build a web app with React Hooks icon"
@@ -28,7 +28,7 @@ function Card(props) {
         <InstracturName>{instracturname || "Husam Nasrullah"}</InstracturName>
         <InstracturImg
           src={
-            `https://devam.website/admin/_lib/file/img/${instracturimg}` ||
+            instracturimg ||
             "https://scontent.fsaw1-9.fna.fbcdn.net/v/t1.0-9/60034390_10155925053061333_7596400182741172224_o.jpg?_nc_cat=101&ccb=2&_nc_sid=174925&_nc_ohc=6uu7a1JoBFQAX_7zy4J&_nc_ht=scontent.fsaw1-9.fna&oh=2a37c9ef28c306d04ef3bf53b1e8d8f5&oe=5FBCF9AC"
           }
         />
