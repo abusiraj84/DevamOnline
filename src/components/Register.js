@@ -154,7 +154,7 @@ export const Container = styled.div`
   padding: 60px 68px 40px;
   margin-bottom: 100px;
   @media (max-width: 500px) {
-    width: 76%;
+    width: 95%;
     margin: -94px auto;
   }
 `;

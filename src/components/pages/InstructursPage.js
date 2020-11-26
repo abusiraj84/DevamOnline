@@ -35,16 +35,16 @@ function InstructursPage() {
                 <CoursNum>عدد الدورات : {item.courses.length}</CoursNum>
                 <Cv>{item.cv}</Cv>
                 <IconsWrapper>
-                  <a href={item.facebook}>
+                  <a href={item.facebook} target="_blank">
                     <Icon src="images/icons/facebook.svg"></Icon>
                   </a>
-                  <a href={item.instagram}>
+                  <a href={item.instagram} target="_blank">
                     <Icon src="images/icons/instagram.svg"></Icon>
                   </a>
-                  <a href={item.youtube}>
+                  <a href={item.youtube} target="_blank">
                     <Icon src="images/icons/youtube.svg"></Icon>
                   </a>
-                  <a href={item.whatsapp}>
+                  <a href={item.whatsapp} target="_blank">
                     <Icon src="images/icons/whatsapp.svg"></Icon>
                   </a>
                 </IconsWrapper>

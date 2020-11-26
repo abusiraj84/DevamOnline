@@ -88,7 +88,7 @@ function SectionDetail(props) {
     } else if (course == undefined && price != 0.0) {
       return (
         <PriceWrapper>
-          <PriceTitle>احصل على الدورة بمقابل</PriceTitle>
+          <PriceTitle>اشترِ الدورة بمقابل</PriceTitle>
           <Sale>${sale}</Sale>
           <Price>${price}</Price>
           <Paypal total={price} id={id} />
@@ -256,7 +256,6 @@ const Desc2 = styled.p`
   box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px,
     rgba(255, 255, 255, 0.25) 0px 0px 0px 0.5px inset;
   border-radius: 20px;
-  font-family: tahoma;
   li {
     padding-bottom: 10px;
     padding-top: 10px;
@@ -271,7 +270,7 @@ const Desc2 = styled.p`
   }
 
   strong {
-    font-family: "Alaraby";
+    font-weight: 700;
     color: #32b3e4;
     font-size: 28px;
   }

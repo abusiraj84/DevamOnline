@@ -18,7 +18,7 @@ function HeroSection() {
             </Description>
 
             <PurchaseButton
-              title="اشترك الآن"
+              title="اشترِ الآن"
               subtitle="عشرات الدورات بانتظارك"
             />
           </TextWrapper>
