@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import HeroSection from "./sections/HeroSection";
 import CoursesCards from "./sections/section/CoursesCards";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet";
 
 const Home = () => {
   return (
     <Wrapper>
       <Helmet>
         <title>دوام أونلاين || Devam.online</title>
+        <meta name="title" content="Default Title" data-react-helmet="true" />
         <meta
           name="description"
           content="الموقع العربي الأول للدورات الاحترافية"

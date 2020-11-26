@@ -87,13 +87,14 @@ function CoursePage({ match }) {
 
   return (
     <Wrapper bgcolor={color}>
-      <Helmet>
+      <Helmet title={items.title}>
         <title>{items.title}</title>
+        {/* <meta name="description" content={items.title} />  */}
       </Helmet>
+
       <ContentWrapper>
         {items.map((item) => (
           <div key={item.courses_id}>
-            {/* <SEO title={item.title} /> */}
             <SectionDetail
               logo={`https://devam.website/admin/_lib/file/img/${item.logo}`}
               title={item.title}
