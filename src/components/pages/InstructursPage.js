@@ -27,7 +27,7 @@ function InstructursPage() {
           {items.map((item, i) => (
             <Card key={i}>
               <Avatar
-                src={`https://devam.website/admin/_lib/file/img ${item.img}`}
+                src={`https://devam.website/admin/_lib/file/img/${item.img}`}
               />
               <Name>{item.name}</Name>
               <CoursNum>عدد الدورات : {item.courses.length}</CoursNum>
