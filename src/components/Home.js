@@ -2,10 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import HeroSection from "./sections/HeroSection";
 import CoursesCards from "./sections/section/CoursesCards";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   return (
     <Wrapper>
+      <Helmet>
+        <title>دوام أونلاين || Devam.online</title>
+        <meta
+          name="description"
+          content="الموقع العربي الأول للدورات الاحترافية"
+        />
+        <meta
+          property="og:image"
+          itemprop="image primaryImageOfPage"
+          content="/images/logos/logo.svg"
+        ></meta>
+      </Helmet>
       <HeroSection />
       <CoursesCards />
     </Wrapper>
