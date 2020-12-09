@@ -11,7 +11,7 @@ function SvgLoading() {
       renderer: "svg", // Required
       loop: true, // Optional
       autoplay: true, // Optional
-      animationData: require("../data.json"),
+      animationData: require("../data2.json"),
     });
   }, []);
 
@@ -43,7 +43,6 @@ const SvgWrapper = styled.div`
   animation: ${Fadeanimation} 1s 0.6s forwards;
 `;
 const Center = styled.div`
-  width: 150px;
-  padding-top: 40vh;
+  width: 1250px;
   margin: 0px auto;
 `;

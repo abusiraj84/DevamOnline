@@ -10,7 +10,7 @@ function CoursesCards() {
     fetchData();
     setTimeout(() => {
       setIsLoaded(true);
-    }, 500);
+    }, 0);
   }, []);
   const [items, setItems] = useState([]);
 

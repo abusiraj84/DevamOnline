@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import CoursesCards from "../sections/section/CoursesCards";
 import { H1 } from "../styles/TextStyles";
+import SvgLoading from "../SvgLoading";
 
 function CoursesPage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2500);
+  }, []);
   return (
-    <Wrapper>
-      <Title> جميع الدورات </Title>
-      <CoursesCards />
-    </Wrapper>
+    <div>
+      {isLoaded ? (
+        <Wrapper>
+          <Title> جميع الدورات </Title>
+          <CoursesCards />
+        </Wrapper>
+      ) : (
+        <SvgLoading />
+      )}
+    </div>
   );
 }
 
