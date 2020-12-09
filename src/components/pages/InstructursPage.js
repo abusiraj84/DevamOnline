@@ -10,7 +10,7 @@ function InstructursPage() {
     fetchData();
     setTimeout(() => {
       setIsLoaded(true);
-    }, 2000);
+    }, 2200);
   }, []);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
