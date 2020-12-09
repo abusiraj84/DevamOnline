@@ -194,7 +194,7 @@ function CoursePage({ match }) {
           )}
         </All>
       ) : (
-        <SvgLoading />
+        <SvgLoading json="4" />
       )}
     </div>
   );

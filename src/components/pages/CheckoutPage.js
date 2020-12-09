@@ -11,7 +11,7 @@ function CheckoutPage({ match }) {
     fetchData();
     setTimeout(() => {
       setIsLoaded(true);
-    }, 1000);
+    }, 2000);
   }, []);
 
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -687,7 +687,7 @@ function CheckoutPage({ match }) {
           <Redirect to="/login" />
         )
       ) : (
-        <SvgLoading />
+        <SvgLoading json="5" />
       )}
     </div>
   );

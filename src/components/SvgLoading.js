@@ -2,8 +2,9 @@ import React, { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import lottie from "lottie-web";
 
-function SvgLoading() {
+function SvgLoading(props) {
   const container = useRef(null);
+  const { json } = props;
   useEffect(() => {
     lottie.loadAnimation({
       container: container.current, // Required
@@ -11,7 +12,7 @@ function SvgLoading() {
       renderer: "svg", // Required
       loop: true, // Optional
       autoplay: true, // Optional
-      animationData: require("../data2.json"),
+      animationData: require(`../${json}.json`),
     });
   }, []);
 

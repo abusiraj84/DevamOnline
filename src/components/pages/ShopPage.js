@@ -199,7 +199,6 @@ function ShopPage() {
               </Card>
             ))}
           </CardWrapper>
-          <Foo
         </Wrapper>
       ) : (
         <SvgLoading json="7" />

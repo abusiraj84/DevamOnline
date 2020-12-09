@@ -13,7 +13,7 @@ function OrderReceived({ match }) {
     fetchData();
     setTimeout(() => {
       setIsLoaded(true);
-    }, 2500);
+    }, 2000);
   }, []);
   const [items, setItems] = useState([]);
   const fetchData = async () => {
@@ -173,7 +173,7 @@ function OrderReceived({ match }) {
           </table>
         </Wrapper>
       ) : (
-        <SvgLoading />
+        <SvgLoading json="6" />
       )}
     </div>
   );

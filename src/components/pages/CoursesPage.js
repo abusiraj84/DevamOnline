@@ -11,7 +11,7 @@ function CoursesPage() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-    }, 2500);
+    }, 2000);
   }, []);
   return (
     <div>
@@ -21,7 +21,7 @@ function CoursesPage() {
           <CoursesCards />
         </Wrapper>
       ) : (
-        <SvgLoading />
+        <SvgLoading json="2" />
       )}
     </div>
   );

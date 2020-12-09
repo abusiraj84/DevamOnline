@@ -38,7 +38,7 @@ const Home = () => {
           <CoursesCards />
         </Wrapper>
       ) : (
-        <SvgLoading />
+        <SvgLoading json="1" />
       )}
     </div>
   );

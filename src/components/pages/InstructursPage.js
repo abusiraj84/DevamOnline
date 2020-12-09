@@ -10,7 +10,7 @@ function InstructursPage() {
     fetchData();
     setTimeout(() => {
       setIsLoaded(true);
-    }, 2500);
+    }, 2000);
   }, []);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
@@ -63,7 +63,7 @@ function InstructursPage() {
           </CardWrapper>
         </Wrapper>
       ) : (
-        <SvgLoading />
+        <SvgLoading json="3" />
       )}
     </>
   );
