@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Modal from "../modal/modal";
 import styled from "styled-components";
 import { H1, SmallText } from "../styles/TextStyles";
 import Waveform from "../Waveform";
+import SvgLoading from "../SvgLoading";
 
 function ShopPage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2000);
+  }, []);
   const [status, setStatus] = useState(false);
-  // https://www.mfiles.co.uk/mp3-downloads/franz-schubert-standchen-serenade.mp3
 
   const shopData = [
     {
@@ -107,90 +114,97 @@ function ShopPage() {
     },
   ];
   return (
-    <Wrapper>
-      {status && (
-        <Modal closeModal={() => setStatus(false)}>
-          <ModalImg
-            bg={
-              "url(https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg)"
-            }
-          />
-          <ContentWrapper>
-            <ModalTitle>Octave Music - (A Cappella) aCA001</ModalTitle>
-            <IconsWrapper>
-              <ModalPrice>$15.99</ModalPrice>
-              <ModalCart src="images/icons/shop.svg" />
-            </IconsWrapper>
-            <Waveform url="https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3" />
-            <BottomWrapper>
-              <SlideWrapper>
-                <Slide>
-                  <Type>Looped Audio</Type>
-                  <Choise>No</Choise>
-                </Slide>
-                <Slide>
-                  <Type>Audio Files Included</Type>
-                  <Choise>MP3, WAV</Choise>
-                </Slide>
-                <Slide>
-                  <Type>Bit Rate</Type>
-                  <Choise>320 kbps</Choise>
-                </Slide>
-                <Slide>
-                  <Type>Sample Rate</Type>
-                  <Choise>16-Bit Stereo, 44.1 Khz</Choise>
-                </Slide>
-                <Slide>
-                  <Type>Main Track Length</Type>
-                  <Choise>01:39</Choise>
-                </Slide>
+    <div>
+      {isLoaded ? (
+        <Wrapper>
+          {status && (
+            <Modal closeModal={() => setStatus(false)}>
+              <ModalImg
+                bg={
+                  "url(https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg)"
+                }
+              />
+              <ContentWrapper>
+                <ModalTitle>Octave Music - (A Cappella) aCA001</ModalTitle>
+                <IconsWrapper>
+                  <ModalPrice>$15.99</ModalPrice>
+                  <ModalCart src="images/icons/shop.svg" />
+                </IconsWrapper>
+                <Waveform url="https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3" />
+                <BottomWrapper>
+                  <SlideWrapper>
+                    <Slide>
+                      <Type>Looped Audio</Type>
+                      <Choise>No</Choise>
+                    </Slide>
+                    <Slide>
+                      <Type>Audio Files Included</Type>
+                      <Choise>MP3, WAV</Choise>
+                    </Slide>
+                    <Slide>
+                      <Type>Bit Rate</Type>
+                      <Choise>320 kbps</Choise>
+                    </Slide>
+                    <Slide>
+                      <Type>Sample Rate</Type>
+                      <Choise>16-Bit Stereo, 44.1 Khz</Choise>
+                    </Slide>
+                    <Slide>
+                      <Type>Main Track Length</Type>
+                      <Choise>01:39</Choise>
+                    </Slide>
 
-                <Slide>
-                  <Type>Instruments</Type>
-                  <Choise>Choir</Choise>
-                </Slide>
+                    <Slide>
+                      <Type>Instruments</Type>
+                      <Choise>Choir</Choise>
+                    </Slide>
 
-                <Slide>
-                  <Type>Tempo (BPM)</Type>
-                  <Choise>95</Choise>
-                </Slide>
+                    <Slide>
+                      <Type>Tempo (BPM)</Type>
+                      <Choise>95</Choise>
+                    </Slide>
 
-                <Slide>
-                  <Type>YouTube Content ID Registered</Type>
-                  <Choise>No</Choise>
-                </Slide>
-                <Slide>
-                  <Type>Tags</Type>
-                  <Choise>No</Choise>
-                </Slide>
-              </SlideWrapper>
-              <Desc>
-                A Cappella, for use in social media videos. (Watch Now) A
-                Cappella, for use in social media videos. (Watch Now) A
-                Cappella, for use in social media videos. (Watch Now) A
-                Cappella, for use in social media videos. (Watch Now) A
-                Cappella, for use in social media videos. (Watch Now) A
-                Cappella, for use in social media videos. (Watch Now) A
-                Cappella, for use in social media videos. (Watch Now) A
-              </Desc>
-            </BottomWrapper>
-          </ContentWrapper>
-        </Modal>
-      )}
-      <CardWrapper onClick={() => status && setStatus(false)}>
-        {shopData.map((item, i) => (
-          <Card key={i}>
-            <Img onClick={() => setStatus(true)} bg={`url(${item.img})`} />
-            <ContentWrapper>
-              <Title>{item.title}</Title>
-              <Waveform url={item.url} />
-              <Price>${item.price}</Price>
-              <Cart src="images/icons/shop.svg" />
-            </ContentWrapper>
-          </Card>
-        ))}
-      </CardWrapper>
-    </Wrapper>
+                    <Slide>
+                      <Type>YouTube Content ID Registered</Type>
+                      <Choise>No</Choise>
+                    </Slide>
+                    <Slide>
+                      <Type>Tags</Type>
+                      <Choise>No</Choise>
+                    </Slide>
+                  </SlideWrapper>
+                  <Desc>
+                    A Cappella, for use in social media videos. (Watch Now) A
+                    Cappella, for use in social media videos. (Watch Now) A
+                    Cappella, for use in social media videos. (Watch Now) A
+                    Cappella, for use in social media videos. (Watch Now) A
+                    Cappella, for use in social media videos. (Watch Now) A
+                    Cappella, for use in social media videos. (Watch Now) A
+                    Cappella, for use in social media videos. (Watch Now) A
+                  </Desc>
+                </BottomWrapper>
+              </ContentWrapper>
+            </Modal>
+          )}
+          <CardWrapper onClick={() => status && setStatus(false)}>
+            {shopData.map((item, i) => (
+              <Card key={i}>
+                <Img onClick={() => setStatus(true)} bg={`url(${item.img})`} />
+                <ContentWrapper>
+                  <Title>{item.title}</Title>
+                  <Waveform url={item.url} />
+                  <Price>${item.price}</Price>
+                  <Cart src="images/icons/shop.svg" />
+                </ContentWrapper>
+              </Card>
+            ))}
+          </CardWrapper>
+          <Foo
+        </Wrapper>
+      ) : (
+        <SvgLoading json="7" />
+      )}{" "}
+    </div>
   );
 }
 
