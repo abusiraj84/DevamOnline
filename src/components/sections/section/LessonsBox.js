@@ -3,22 +3,26 @@ import styled from "styled-components";
 import { Caption } from "../../styles/TextStyles";
 
 function LessonsBox(props) {
-  const { lessonnum, lessontitle, lessontime, complete, fontcolor } = props;
+  const {
+    lessonnum,
+    lessontitle,
+    lessontime,
+    preview,
+    fontcolor,
+    isAccess,
+  } = props;
 
-  const divStyle = complete;
   return (
     <LessonsGrid>
       <Id>
-        <Num>{lessonnum || "1"}</Num>
+        <Num>{lessonnum || "0"}</Num>
       </Id>
       <TitlLessons fontcolor={fontcolor}>
         {lessontitle || "lesson num 1"}
       </TitlLessons>
-      <p style={{ color: "black" }}>{complete}</p>
-
-      {/* <img src={`/images/icons/${complete}.png`} /> */}
+      <Preview src={`/images/icons/${preview}`} />
       <Time>
-        <TitleSmall>{lessontime || "12:48"}</TitleSmall>
+        <TitleSmall>{lessontime || ""}</TitleSmall>
       </Time>
     </LessonsGrid>
   );
@@ -28,7 +32,7 @@ export default LessonsBox;
 
 const LessonsGrid = styled.li`
   display: grid;
-  grid-template-columns: 1fr 8fr 2fr 1fr;
+  grid-template-columns: 1fr 9fr 1fr 1fr;
   padding-bottom: 10px;
   border-bottom: 1px solid rgb(255, 255, 255, 0.1);
   margin-bottom: 10px;
@@ -52,7 +56,7 @@ const LessonsGrid = styled.li`
 const TitlLessons = styled(Caption)`
   cursor: pointer;
   font-size: 14px;
-  color: ${(props) => props.fontcolor || "#000"};
+  color: ${(props) => props.fontcolor || "#fff"};
   line-height: 21px;
   text-align: right;
 `;
@@ -102,4 +106,7 @@ const Num = styled(Caption)`
   font-size: 20px;
   color: rgb(255, 255, 255);
   font-weight: normal;
+`;
+const Preview = styled.img`
+  width: 20px;
 `;

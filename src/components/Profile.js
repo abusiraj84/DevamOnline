@@ -7,7 +7,7 @@ import { config } from "../config";
 
 const Profile = () => {
   useEffect(() => {
-    fetchData();
+    fetchOrder();
     setView(Profile());
   }, []);
 
@@ -16,26 +16,39 @@ const Profile = () => {
   const [color, setColor] = useState([]);
   const [items, setItems] = useState([]);
 
-  const fetchData = async () => {
-    const data = await fetch(`${config.siteUrl}/courses`);
-    const items = await data.json();
-    console.log(items.data);
-    setItems(items.data);
-  };
+  const [orders, setOrders] = useState([]);
 
   if (!currentUser) {
     return <Redirect to="/login" />;
   }
 
+  const fetchOrder = async () => {
+    const data = await fetch(`${config.siteUrl}/wp-json/wcm/api/orders`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "dwm-tkn": currentUser && currentUser.cookie,
+      },
+    });
+    const items = await data.json();
+    setOrders(items);
+
+    console.log(items);
+    // const AccessedCourses = [];
+
+    // for (const [index, value] of items.entries()) {
+    //   AccessedCourses.push(value);
+    // }
+    // console.log(AccessedCourses);
+  };
+
   const Profile = () => {
     return (
       <>
-        <Avatar src="https://3znvnpy5ek52a26m01me9p1t-wpengine.netdna-ssl.com/wp-content/uploads/2017/07/noimage_person.png" />
-        <Name>
-          {currentUser.user.firstname + " " + currentUser.user.lastname}
-        </Name>
+        <Avatar src={currentUser.user.avatar} />
+        <Name>{currentUser.user.displayname}</Name>
         <Email> {currentUser.user.email} </Email>
-        <Subscription>{currentUser.user.role.name}</Subscription>
+        {/* <Subscription>{currentUser.user.role.name}</Subscription> */}
       </>
     );
   };
@@ -43,26 +56,36 @@ const Profile = () => {
   const Courses = () => {
     return (
       <>
-        {currentUser.user.courses.map((courses, i) => (
-          <Link key={i} to={`/course/${courses.courses_id}`}>
-            <Box>
-              <InstracturWrapper>
-                {/* <InstracturName>{"dd"}</InstracturName>
+        {orders.length ? (
+          orders.map(
+            (course, i) =>
+              course.status == "completed" && (
+                <Link
+                  key={i}
+                  to={`/course/${course.line_items[0].course_slug.post_name}`}
+                >
+                  <Box>
+                    <InstracturWrapper>
+                      {/* <InstracturName>{"dd"}</InstracturName>
               <InstracturImg
                 src={
                   "https://scontent.fsaw1-9.fna.fbcdn.net/v/t1.0-9/60034390_10155925053061333_7596400182741172224_o.jpg?_nc_cat=101&ccb=2&_nc_sid=174925&_nc_ohc=6uu7a1JoBFQAX_7zy4J&_nc_ht=scontent.fsaw1-9.fna&oh=2a37c9ef28c306d04ef3bf53b1e8d8f5&oe=5FBCF9AC"
                 }
               /> */}
-              </InstracturWrapper>
-              <Title>{courses.title}</Title>
+                    </InstracturWrapper>
+                    <Title>{course.line_items[0].name}</Title>
 
-              <KindWrapper>
-                <VideosNum>{courses.sections} فيديو</VideosNum>
+                    {/* <KindWrapper>
+                <VideosNum>{courses.line_items[0].sections} فيديو</VideosNum>
                 <VideosNum>{courses.hours} ساعات</VideosNum>
-              </KindWrapper>
-            </Box>
-          </Link>
-        ))}
+              </KindWrapper> */}
+                  </Box>
+                </Link>
+              )
+          )
+        ) : (
+          <h1>لا يوجد دورات</h1>
+        )}
       </>
     );
   };
@@ -77,13 +100,13 @@ const Profile = () => {
         {/* {currentUser.user.firstname + " " + currentUser.user.lastname} */}
 
         <Menu>
-          <Button onClick={() => setView(Profile())}>
+          <Button onClick={() => setView(Profile())} bg="rgb(34 19 44 / 32%)">
             <h2>البيانات الشخصية</h2>
           </Button>
-          <Button onClick={() => setView(Courses())}>
+          <Button onClick={() => setView(Courses())} bg="rgb(34 19 44 / 32%)">
             <h2>الدورات</h2>
           </Button>
-          <Button onClick={() => setView(Shop())}>
+          <Button onClick={() => setView(Shop())} bg="rgb(34 19 44 / 32%)">
             <h2>المتجر</h2>
           </Button>
         </Menu>
@@ -149,7 +172,8 @@ const Button = styled.div`
   padding: 10px 20px;
   border-radius: 20px;
   border: 2px solid #fff;
-  background: rgb(34 19 44 / 32%);
+  background: ${(props) => props.bg || "rgb(34 19 44 / 32%)"};
+
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(40px);
   transition: all 0.3s ease-in-out 0s;

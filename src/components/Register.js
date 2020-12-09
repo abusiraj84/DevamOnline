@@ -10,18 +10,18 @@ import { config } from "../config";
 
 const Register = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const [firstname, setFirstName] = useState("");
+  const [user_login, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [user_email, setuser_email] = useState("");
+  const [user_pass, setuser_pass] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
 
   const onChangeFirstname = (e) => {
-    const firstname = e.target.value;
-    setFirstName(firstname);
+    const user_login = e.target.value;
+    setFirstName(user_login);
   };
 
   const onChangeLastName = (e) => {
@@ -29,52 +29,27 @@ const Register = () => {
     setLastName(lastname);
   };
 
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
+  const onChangeuser_email = (e) => {
+    const user_email = e.target.value;
+    setuser_email(user_email);
   };
 
-  const onChangePassword = (e) => {
-    const password = e.target.value;
-    setPassword(password);
+  const onChangeuser_pass = (e) => {
+    const user_pass = e.target.value;
+    setuser_pass(user_pass);
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // dispatch(register(firstname, lastname, email, password))
-    //   .then(() => {
-    //     setLoading(false);
-    //   })
-    //   .catch(() => {
-    //     setLoading(false);
-    //   });
-    axios
-      .post(
-        `${config.siteUrl}/register`,
-        {
-          firstname,
-          lastname,
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      )
-      .then((response) => {
-        if (response.data.token) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-          window.location.href = "/profile";
-        }
-        console.log(response.data);
-        return response.data;
+    dispatch(register(user_login, user_email, user_pass))
+      .then(() => {
+        setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        setLoading(false);
+      });
   };
   if (isLoggedIn) {
     return <Redirect to="/profile" />;
@@ -86,38 +61,30 @@ const Register = () => {
         <Title>اشترك معنا</Title>
         <Base onSubmit={handleRegister} method="POST">
           <InputText
-            id="firstname"
-            placeholder="الإسم الأول"
-            type="firstName"
-            name="firstName"
+            id="user_login"
+            placeholder="الإسم المستخدم"
+            type="user_login"
+            name="user_login"
             onChange={onChangeFirstname}
           />
 
           <InputText
-            id="lastname"
-            placeholder="الإسم الأخير"
-            type="firstName"
-            name="firstName"
-            onChange={onChangeLastName}
-          />
-
-          <InputText
             placeholder="البريد الإلكتروني"
-            id="email"
-            type="email"
-            name="email"
-            onChange={onChangeEmail}
+            id="user_email"
+            type="user_email"
+            name="user_email"
+            onChange={onChangeuser_email}
           />
           <InputText
             autoComplete="off"
             placeholder="كلمة المرور"
-            id="password"
+            id="user_pass"
             type="password"
-            name="password"
-            onChange={onChangePassword}
+            name="user_pass"
+            onChange={onChangeuser_pass}
           />
           <Submit type="submit" value="Login">
-            <span>سجّل الآن</span>
+            <span style={{ marginLeft: "20px" }}>سجّل الآن</span>
             {loading && (
               <span className="spinner-border spinner-border-md"></span>
             )}

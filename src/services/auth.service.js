@@ -7,15 +7,14 @@ const headers = {
   "Access-Control-Allow-Origin": "*",
 };
 
-const register = (firstname, lastname, email, password) => {
+const register = (user_login, user_email, user_pass) => {
   return axios
     .post(
-      config.siteUrl + "/register",
+      "http://devam-wp.io/wp-json/wcm/api/register",
       {
-        firstname,
-        lastname,
-        email,
-        password,
+        user_login,
+        user_email,
+        user_pass,
       },
       {
         headers: {
@@ -25,7 +24,7 @@ const register = (firstname, lastname, email, password) => {
       }
     )
     .then((response) => {
-      if (response.data.token) {
+      if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
         window.location.href = "/profile";
       }
@@ -35,14 +34,14 @@ const register = (firstname, lastname, email, password) => {
     .catch((err) => console.log(err));
 };
 
-const login = (email, password) => {
+const login = (username, password) => {
   return axios
-    .post(config.siteUrl + "/login", {
-      email,
+    .post("http://devam-wp.io/wp-json/wcm/api/login", {
+      username,
       password,
     })
     .then((response) => {
-      if (response.data.token) {
+      if (response.data.cookie) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
 

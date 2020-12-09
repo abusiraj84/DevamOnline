@@ -15,7 +15,7 @@ function MenuTooltip(props) {
     <Wrapper isOpen={isOpen}>
       {currentUser ? (
         <>
-          <Name>{name}</Name>
+          <Name>{currentUser.user.displayname}</Name>
           {tooltipData.map((item, i) => (
             <MenuButton key={i} item={item} />
           ))}
@@ -61,11 +61,12 @@ const Wrapper = styled.div`
 
 const Name = styled(SmallText)`
   color: #000;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   background: #00cffd;
   padding: 7px;
   border-radius: 10px;
+  font-weight: 700;
 `;
 
 const Logout = styled(SmallText)`

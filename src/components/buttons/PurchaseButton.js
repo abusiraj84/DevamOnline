@@ -4,10 +4,10 @@ import { Caption2, SmallText } from "../styles/TextStyles";
 import { Link } from "react-router-dom";
 
 export default function PurchaseButton(props) {
-  const { title, subtitle } = props;
+  const { title, subtitle, price, sale, courseid } = props;
 
   return (
-    <Link to="/courses">
+    <Link to={`/checkout/${courseid}`}>
       <Wrapper>
         <IconWrapper>
           <Icon src="/images/icons/credit.svg" />
@@ -15,9 +15,11 @@ export default function PurchaseButton(props) {
         </IconWrapper>
         <TextWrapper>
           <Title>{title || "Get Pro Access"}</Title>
-
-          <Subtitle>{subtitle || "$19 per month"}</Subtitle>
         </TextWrapper>
+        <PriceWrapper>
+          <Sale>${sale || "0.0"}</Sale>
+          <Price>${price || "0.0"}</Price>
+        </PriceWrapper>
       </Wrapper>
     </Link>
   );
@@ -36,7 +38,7 @@ const Wrapper = styled.div`
   width: 280px;
   height: 77px;
   display: grid;
-  grid-template-columns: 55px auto;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 12px;
   justify-items: start;
   gap: 20px;
@@ -47,15 +49,36 @@ const Wrapper = styled.div`
   }
 `;
 
-const Title = styled(Caption2)``;
+const Title = styled(Caption2)`
+  color: black !important;
+`;
 
 const Subtitle = styled(SmallText)`
-  color: black;
+  color: black !important;
   opacity: 0.7;
 `;
+const Sale = styled(SmallText)`
+  color: black;
+  opacity: 0.7;
+  text-decoration: line-through;
+  font-weight: 700;
+  font-size: 13px;
+`;
+const Price = styled(SmallText)`
+  color: black;
+  opacity: 0.7;
+  font-weight: 700;
+  font-size: 15px;
+`;
+
 const Icon = styled.img`
   width: 29px;
   height: 29px;
+`;
+const PriceWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `;
 const TextWrapper = styled.div`
   display: grid;

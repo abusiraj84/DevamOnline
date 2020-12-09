@@ -25,22 +25,28 @@ function Card(props) {
         alt="Build a web app with React Hooks icon"
       />
       <InstracturWrapper>
-        <InstracturName>{instracturname || "Husam Nasrullah"}</InstracturName>
+        <InstracturName>{instracturname || "غير مسجل"}</InstracturName>
         <InstracturImg
           src={
             instracturimg ||
-            "https://scontent.fsaw1-9.fna.fbcdn.net/v/t1.0-9/60034390_10155925053061333_7596400182741172224_o.jpg?_nc_cat=101&ccb=2&_nc_sid=174925&_nc_ohc=6uu7a1JoBFQAX_7zy4J&_nc_ht=scontent.fsaw1-9.fna&oh=2a37c9ef28c306d04ef3bf53b1e8d8f5&oe=5FBCF9AC"
+            "https://3znvnpy5ek52a26m01me9p1t-wpengine.netdna-ssl.com/wp-content/uploads/2017/07/noimage_person.png"
           }
         />
       </InstracturWrapper>
-      <Title>{title || "Build a web aTitlep with React Hooks"}</Title>
+      <Title>{title || "عنوان الدورة"}</Title>
       <PriceWrapper>
-        <SaleBox>${sale}</SaleBox>
-        <PriceBox>${price}</PriceBox>
-      </PriceWrapper>{" "}
+        {price != "0.00" || price != "" || !price ? (
+          <>
+            <SaleBox>${sale || "0.00"}</SaleBox>
+            <PriceBox>${price || "0.00"}</PriceBox>
+          </>
+        ) : (
+          <SaleBox>دورة مجانية</SaleBox>
+        )}
+      </PriceWrapper>
       <KindWrapper>
-        <VideosNum>{sections} فيديو</VideosNum>
-        <VideosNum>{hours} ساعات</VideosNum>
+        <VideosNum>{sections || "0"} أقسام</VideosNum>
+        <VideosNum>{hours || "0"} ساعة</VideosNum>
       </KindWrapper>
     </Box>
   );

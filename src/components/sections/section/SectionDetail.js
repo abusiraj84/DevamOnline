@@ -20,7 +20,7 @@ function SectionDetail(props) {
   const [course, setCourse] = useState([]);
   useEffect(() => {
     if (currentUser) {
-      fetchUsers();
+      // fetchUsers();
     }
   }, []);
 
@@ -29,6 +29,7 @@ function SectionDetail(props) {
     title,
     img,
     sections,
+    lessons,
     hours,
     desc,
     name,
@@ -38,6 +39,9 @@ function SectionDetail(props) {
     price,
     sale,
     id,
+    isAccess,
+    orderStatus,
+    orderID,
   } = props;
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -101,31 +105,39 @@ function SectionDetail(props) {
   return (
     <Wrapper>
       <BoxImgWrapper imgcolor={imgcolor}>
-        <BoxImg src={img || "images/ills/example1.svg"} />
+        <BoxImg src={img || "../images/Infinity.svg"} />
       </BoxImgWrapper>
-      <Logo src={logo || "images/icons/cubase.svg"} />
+      <Logo src={logo || "../images/Infinity.svg"} />
       <Title>{title}</Title>
       <InstracturWrapper>
-        <InstracturImg
-          src={
-            instaimg ||
-            "https://scontent.fsaw1-6.fna.fbcdn.net/v/t1.0-9/109947688_2536568519897212_8481853244792259908_n.jpg?_nc_cat=109&ccb=2&_nc_sid=09cbfe&_nc_ohc=8Hl_KYSqMNoAX8Xy2Mp&_nc_ht=scontent.fsaw1-6.fna&oh=d51e6ee9c25002df4182a8f11c8da66c&oe=5FB8804F"
-          }
-        />
+        <InstracturImg src={instaimg || "../images/Infinity.svg"} />
         <InstracturName>المدرب: {name || "Husam Nasrullah"}</InstracturName>
       </InstracturWrapper>
       <Desc1>
-        {sections || "0"} أقسام - {hours || "2"} ساعة
+        {sections || "0"} أقسام - {lessons || "0"} درس - {hours || "2"} ساعة
       </Desc1>
       <Desc2>
         {ReactHtmlParser(desc) ||
           " In this course we will show you how to create a promo video using After Effects."}
       </Desc2>
 
-      {isButtonvar()}
+      {/* {isButtonvar()} */}
+
+      {isAccess != true ? (
+        <PurchaseButton
+          title="اشترِ الآن"
+          subtitle="عشرات الدورات بانتظارك"
+          price={price}
+          sale={sale}
+          courseid={id}
+        />
+      ) : null}
+
       <Line />
       <TopicWrapper>
-        <TopicTitle>{topics || "20"} درس</TopicTitle>
+        <TopicTitle>
+          {topics || "0"} أقسام - {lessons || "0"} درس
+        </TopicTitle>
         <TopicDesc>
           جميع الخطوات مشروحة للمتدربين بطريقة مبسطة وسهلة، وستجد كل شيء في
           متناول يديك.
@@ -186,9 +198,7 @@ const BoxImgWrapper = styled.div`
   width: 360px;
   height: 280px;
 
-  background: ${(props) =>
-    props.imgcolor ||
-    "linear-gradient(209.21deg, #9F7FE5 13.57%, #4E99E3 98.38%)"};
+  background: ${(props) => props.imgcolor || "#ffffff24"};
   box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px,
     rgba(255, 255, 255, 0.25) 0px 0px 0px 0.5px inset;
   box-sizing: border-box;
@@ -233,6 +243,7 @@ const Title = styled(H1)`
   color: rgb(255, 255, 255);
   text-align: center;
   text-shadow: rgba(0, 0, 0, 0.3) 0px 20px 40px;
+
   @media (max-width: 1270px) {
     text-align: center;
     font-size: 50px;
@@ -249,7 +260,7 @@ const Desc1 = styled(MediumText)`
   text-align: 193%;
 `;
 
-const Desc2 = styled.p`
+const Desc2 = styled.div`
   padding: 40px;
   text-align: right;
   direction: rtl;
@@ -257,6 +268,10 @@ const Desc2 = styled.p`
   box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 20px,
     rgba(255, 255, 255, 0.25) 0px 0px 0px 0.5px inset;
   border-radius: 20px;
+  ul {
+    margin-bottom: 00px;
+    margin-top: 20px;
+  }
   li {
     padding-bottom: 10px;
     padding-top: 10px;
@@ -269,14 +284,59 @@ const Desc2 = styled.p`
     padding: 10px;
     margin-top: 40px;
   }
+  h1 {
+    font-weight: 700;
+    color: #32b3e4;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
+  h2 {
+    font-weight: 700;
+    color: #32b3e4;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
   strong {
     font-weight: 700;
     color: #32b3e4;
     font-size: 28px;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 10px;
   }
   span {
     padding: 0;
+  }
+  p {
+    margin-bottom: 8px;
+  }
+  a {
+    color: #fff;
+    font-weight: 400;
+    transition: all 0.2s ease-in-out;
+    :hover {
+      color: #32b3e4;
+      transform: translateY(200px);
+    }
+  }
+  table,
+  th {
+  }
+  thead {
+    background: #dddddd1f;
+  }
+
+  table {
+    width: 70%;
+    margin: 0px auto;
+    border-collapse: collapse;
+  }
+  td {
+    width: 100px;
   }
   @media (max-width: 450px) {
     padding: 40px 20px;
@@ -371,4 +431,9 @@ const Registerd = styled.div`
   @media (max-width: 450px) {
     padding: 15px 60px;
   }
+`;
+
+const BuyNow = styled.button`
+  padding: 10px;
+  sha
 `;

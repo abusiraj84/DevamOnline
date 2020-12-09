@@ -2,65 +2,69 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 import { H1, H2, SmallText } from "../styles/TextStyles";
-import LoadingScreen from "../LoadingScreen";
 import { config } from "../../config";
+import SvgLoading from "../SvgLoading";
 
 function InstructursPage() {
   useEffect(() => {
     fetchData();
-    // setTimeout(() => setLoading(false), 500);
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 2000);
   }, []);
-  const [loading, setLoading] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch(`${config.siteUrl}/instructors`);
+    const data = await fetch(`${config.siteUrl}/wp-json/husam/v1/users`);
     const items = await data.json();
-    console.log(items.data);
-    setItems(items.data);
+    console.log(items);
+    setItems(items);
   };
 
   return (
     <>
-      <Wrapper>
-        <Title>المدربون</Title>
-        <CardWrapper>
-          {items.map((item, i) =>
-            item.courses.length ? (
-              <Card key={i}>
-                <Avatar
-                  src={`https://devam.website/admin/_lib/file/img/${item.img}`}
-                />
-                <Name>{item.name}</Name>
-                <CoursNum>عدد الدورات : {item.courses.length}</CoursNum>
-                <Cv>{item.cv}</Cv>
-                <IconsWrapper>
-                  <a href={item.facebook} target="_blank">
-                    <Icon src="images/icons/facebook.svg"></Icon>
-                  </a>
-                  <a href={item.instagram} target="_blank">
-                    <Icon src="images/icons/instagram.svg"></Icon>
-                  </a>
-                  <a href={item.youtube} target="_blank">
-                    <Icon src="images/icons/youtube.svg"></Icon>
-                  </a>
-                  <a href={item.whatsapp} target="_blank">
-                    <Icon src="images/icons/whatsapp.svg"></Icon>
-                  </a>
-                </IconsWrapper>
-                <CourseWrapper>
-                  <CoursNum style={{ textAlign: "center" }}>الدورات</CoursNum>
-                  {item.courses.map((item, i) => (
-                    <Link key={i} to={`/course/${item.courses_id}`}>
-                      <CourseTitle key={i}>{item.title}</CourseTitle>
-                    </Link>
-                  ))}{" "}
-                </CourseWrapper>
-              </Card>
-            ) : null
-          )}
-        </CardWrapper>
-      </Wrapper>
+      {isLoaded ? (
+        <Wrapper>
+          <Title>المدربون</Title>
+          <CardWrapper>
+            {items.map((item, i) =>
+              item.courses.length ? (
+                <Card key={i}>
+                  <Avatar src={`${item.avatar}`} />
+                  <Name>{item.display_name}</Name>
+                  <CoursNum>عدد الدورات : {item.courses.length}</CoursNum>
+                  <Cv>{item.meta.description}</Cv>
+                  <IconsWrapper>
+                    <a href={item.meta.facebook} target="_blank">
+                      <Icon src="images/icons/facebook.svg"></Icon>
+                    </a>
+                    <a href={item.meta.instagram} target="_blank">
+                      <Icon src="images/icons/instagram.svg"></Icon>
+                    </a>
+                    <a href={item.meta.youtube} target="_blank">
+                      <Icon src="images/icons/youtube.svg"></Icon>
+                    </a>
+                    <a href={item.meta.whatsapp} target="_blank">
+                      <Icon src="images/icons/whatsapp.svg"></Icon>
+                    </a>
+                  </IconsWrapper>
+                  <CourseWrapper>
+                    <CoursNum style={{ textAlign: "center" }}>الدورات</CoursNum>
+                    {item.courses.map((item, i) => (
+                      <Link key={i} to={`/course/${item.post_name}`}>
+                        <CourseTitle key={i}>{item.post_title}</CourseTitle>
+                      </Link>
+                    ))}{" "}
+                  </CourseWrapper>
+                </Card>
+              ) : null
+            )}
+          </CardWrapper>
+        </Wrapper>
+      ) : (
+        <SvgLoading />
+      )}
     </>
   );
 }

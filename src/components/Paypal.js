@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -7,25 +7,42 @@ import { config } from "../config";
 function Paypal(props) {
   const { user: currentUser } = useSelector((state) => state.auth);
 
-  const { total } = props;
+  const { total, data } = props;
+  const [orderId, setorderId] = useState("");
+
+  const [loading, setLoading] = useState(false);
 
   const onSuccess = (payment) => {
     // Congratulation, it came here means everything's fine!
     console.log("The payment was succeeded!", payment);
     // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
     //   this.props.onSuccess(payment);
-    axios({
+
+    // alert("لقد اشتريت الدورة بنجاح");
+    // setTimeout(function () {
+    //   window.location.reload();
+    // }, 1000);
+
+    fetch(`http://devam-wp.io//wp-json/wcm/api/orders`, {
       method: "post",
-      url: `${config.siteUrl}/courseuser`,
-      data: {
-        course_id: props.id,
-        user_id: currentUser.user.id,
+      headers: {
+        "Content-Type": "application/json",
+        "dwm-tkn": currentUser.cookie,
       },
-    });
-    alert("لقد اشتريت الدورة بنجاح");
-    setTimeout(function () {
-      window.location.reload();
-    }, 1000);
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setLoading(false);
+
+        console.log("تمت الشراء بنجاح", responseJson.id);
+        setorderId(responseJson.id);
+        window.location.href = `/order-received/${responseJson.id}`;
+      })
+      .catch((error) => {
+        console.error(error);
+        console.log("data", data);
+      });
   };
 
   const onCancel = (data) => {
@@ -71,9 +88,10 @@ function Paypal(props) {
       onCancel={onCancel}
       style={{
         size: "large",
-        color: "blue",
-        shape: "rect",
-        label: "checkout",
+        color: "gold",
+        shape: "pill",
+        label: "paypal",
+        layout: "vertical",
       }}
     />
   );

@@ -72,15 +72,7 @@ function Nav() {
       <div ref={tooltipRef}>
         <MenuTooltip
           isOpen={isOpen}
-          name={
-            currentUser
-              ? currentUser.user.firstname +
-                " " +
-                currentUser.user.lastname +
-                " - " +
-                currentUser.user.role.name
-              : null
-          }
+          name={currentUser && currentUser.user_display_name}
           logout={logOut}
         />
       </div>

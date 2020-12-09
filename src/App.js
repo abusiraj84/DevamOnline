@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Router, Switch, Route, withRouter } from "react-router-dom";
+import { Router, Switch, Route, withRouter, Redirect } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -16,16 +16,19 @@ import WaveBackground from "./components/backgrounds/WaveBackground";
 import CoursesPage from "./components/pages/CoursesPage";
 import CoursePage from "./components/pages/CoursePage";
 import InstructursPage from "./components/pages/InstructursPage";
-import InstructurPage from "./components/pages/InstructurPage";
 import PricesPage from "./components/pages/PricesPage";
 import ShopPage from "./components/pages/ShopPage";
 import LessonPage from "./components/pages/LessonPage";
 import ScrollToTop from "./components/ScrollToTop ";
 import StarBackground from "./components/backgrounds/StarBackground";
 import LoadingScreen from "./components/LoadingScreen";
-import ThankyouPage from "./components/pages/ThankyouPage";
+import Checkout from "./components/pages/CheckoutPage";
+import OrderReceived from "./components/pages/OrderReceived";
+import Home from "./components/Home";
+
 import Nav from "./components/Nav";
-const Home = lazy(() => import("./components/Home"));
+import Footer from "./components/Fotter";
+// const Home = lazy(() => import("./components/Home"));
 
 const App = () => {
   return (
@@ -36,51 +39,51 @@ const App = () => {
           <StarBackground />
           {/* <Header /> */}
           <Nav />
-          <WaveBackground />
+          {/* <WaveBackground /> */}
           <Suspense fallback={<LoadingScreen />}>
             <Switch>
               <Route exact path={["/", "/home"]} component={withRouter(Home)} />
               <Route exact path="/login" component={withRouter(Login)} />
               <Route exact path="/register" component={withRouter(Register)} />
               <Route exact path="/profile" component={withRouter(Profile)} />
-
               <Route
                 exact
                 path="/courses"
                 component={withRouter(CoursesPage)}
               />
-              <Route exact path="/course" component={withRouter(CoursePage)} />
               <Route
                 exact
-                path="/course/:id"
+                path="/course/:slug"
                 component={withRouter(CoursePage)}
               />
+              <Route exact path={["/course", "/lesson"]}>
+                <Redirect to="/home" />
+              </Route>
               <Route
                 exact
-                path="/lesson/:id"
+                path="/lesson/:slug"
                 component={withRouter(LessonPage)}
               />
-
               <Route
                 exact
                 path="/instructurs"
                 component={withRouter(InstructursPage)}
               />
-              <Route
-                exact
-                path="/instructur"
-                component={withRouter(InstructurPage)}
-              />
               <Route exact path="/prices" component={withRouter(PricesPage)} />
               <Route exact path="/shop" component={withRouter(ShopPage)} />
               <Route
                 exact
-                path="/thankyou"
-                component={withRouter(ThankyouPage)}
+                path="/checkout/:id"
+                component={withRouter(Checkout)}
+              />
+              <Route
+                exact
+                path="/order-received/:id"
+                component={withRouter(OrderReceived)}
               />
             </Switch>
           </Suspense>
-        </div>{" "}
+        </div>
       </ScrollToTop>
     </Router>
   );

@@ -4,61 +4,102 @@ import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
 
 function CoursesCards() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     fetchData();
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 500);
   }, []);
   const [items, setItems] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch("https://devam.website/Devam-Api/public/api/cats");
+    const data = await fetch(
+      "http://devam-wp.io/wp-json/wp/v2/course-categories",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    );
     const items = await data.json();
-    console.log(items.data);
-    setItems(items.data);
+    // console.log(items);
+    setItems(items);
   };
+
   return (
-    <CourseCardsWrapper>
-      {items.map((item) => (
-        <div key={item.cat_id}>
-          <br /> <br /> <br />
-          {item.courses.length ? (
-            <>
-              {" "}
-              <CatHeader>{item.name}</CatHeader> <br /> <br />
-            </>
-          ) : (
-            <>
-              <div></div>
-            </>
-          )}
-          <CardSingle>
-            {item.courses.map((item) => (
-              <div key={item.courses_id}>
-                <Link to={`/course/${item.courses_id}`}>
-                  <Card
-                    title={item.title}
-                    img={`https://devam.website/admin/_lib/file/img/${item.img}`}
-                    instracturimg={`https://devam.website/admin/_lib/file/img/${item.instructors["0"].img}`}
-                    instracturname={item.instructors["0"].name}
-                    bgcolor={item.color.color}
-                    price={item.price}
-                    sale={item.sale}
-                    hours={item.hours}
-                    sections={item.sections}
-                  />
-                </Link>
-              </div>
-            ))}
-          </CardSingle>
-        </div>
-      ))}
-    </CourseCardsWrapper>
+    <div>
+      {isLoaded ? (
+        <CourseCardsWrapper>
+          {items.map((item) => (
+            <Box key={item.id}>
+              {item.courses.length ? (
+                <CatHeader>{item.name}</CatHeader>
+              ) : (
+                <div></div>
+              )}{" "}
+              <CardSingle>
+                {item.courses.map((item) => (
+                  <div key={item.id}>
+                    {" "}
+                    {item.status == "publish" && (
+                      <Link to={`/course/${item.slug}`}>
+                        <Card
+                          title={item.title.rendered}
+                          img={item._lp_course_thumb}
+                          instracturimg={
+                            item._lp_course_author &&
+                            item._lp_course_author.avatar
+                          }
+                          instracturname={
+                            item._lp_course_author &&
+                            item._lp_course_author.name
+                          }
+                          bgcolor={item._lp_course_color}
+                          price={item._lp_sale_price}
+                          sale={item._lp_price}
+                          hours={item._lp_course_duration}
+                          sections={item._lp_curriculum.length}
+                        />
+                      </Link>
+                    )}
+                  </div>
+                ))}
+              </CardSingle>
+            </Box>
+          ))}
+        </CourseCardsWrapper>
+      ) : (
+        <Center>
+          <Load src="images/Infinity.svg" />
+        </Center>
+      )}
+    </div>
   );
 }
 
 export default CoursesCards;
+
+const Load = styled.img`
+  width: 100px;
+`;
+
+const Center = styled.div`
+  width: 100px;
+  margin: 0px auto;
+`;
+
 const animation = keyframes`
   from { opacity: 0; transform: translateY(-10px); filter: blur(10px); }
   to { opacity: 1; transform: translateY(0px); filter: blur(0px); }
+`;
+const Box = styled.div`
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
 `;
 
 const CourseCardsWrapper = styled.div`
@@ -151,6 +192,7 @@ const CardSingle = styled.div`
 `;
 const CatHeader = styled.div`
 min-width:95px;
+width: 95px;
 text-align:center;
    padding: 8px 20px;
     display: inline-table;

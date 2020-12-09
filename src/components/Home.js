@@ -1,28 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import HeroSection from "./sections/HeroSection";
-import CoursesCards from "./sections/section/CoursesCards";
 import Helmet from "react-helmet";
+import SvgLoading from "./SvgLoading";
+import CoursesCards from "./sections/section/CoursesCards";
+import HeroSection from "./sections/HeroSection";
 
 const Home = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 1500);
+  }, []);
   return (
-    <Wrapper>
-      <Helmet>
-        <title>دوام أونلاين || Devam.online</title>
-        <meta name="title" content="Default Title" data-react-helmet="true" />
-        <meta
-          name="description"
-          content="الموقع العربي الأول للدورات الاحترافية"
-        />
-        <meta
-          property="og:image"
-          itemprop="image primaryImageOfPage"
-          content="/images/logos/logo.svg"
-        ></meta>
-      </Helmet>
-      <HeroSection />
-      <CoursesCards />
-    </Wrapper>
+    <div>
+      {isLoaded ? (
+        <Wrapper>
+          <Helmet>
+            <title>دوام أونلاين || Devam.online</title>
+            <meta
+              name="title"
+              content="Default Title"
+              data-react-helmet="true"
+            />
+            <meta
+              name="description"
+              content="الموقع العربي الأول للدورات الاحترافية"
+            />
+            <meta
+              property="og:image"
+              itemprop="image primaryImageOfPage"
+              content="/images/logos/logo.svg"
+            ></meta>
+          </Helmet>
+          <HeroSection />
+          <CoursesCards />
+        </Wrapper>
+      ) : (
+        <SvgLoading />
+      )}
+    </div>
   );
 };
 
