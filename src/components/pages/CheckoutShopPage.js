@@ -146,14 +146,17 @@ function CheckoutShopPage({ match }) {
     if (payment_method == "paypal") {
       console.log("paypal");
     } else if (payment_method == "bacs") {
-      fetch(`/wp-json/wcm/api/orders`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          "dwm-tkn": currentUser.cookie,
-        },
-        body: JSON.stringify(data),
-      })
+      fetch(
+        `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            "dwm-tkn": currentUser.cookie,
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then((response) => response.json())
         .then((responseJson) => {
           setLoading(false);
@@ -171,7 +174,7 @@ function CheckoutShopPage({ match }) {
           });
 
           setTimeout(() => {
-            window.location.href = `/order-received/${responseJson.id}`;
+            window.location.href = `https://cors-anywhere.herokuapp.com/https://devam.website/order-received/${responseJson.id}`;
           }, 2500);
         })
         .catch((error) => {

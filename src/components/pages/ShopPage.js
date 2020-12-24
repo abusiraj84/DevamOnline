@@ -14,7 +14,8 @@ import { Link } from "react-router-dom";
 function ShopPage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const url = "/wp-json/wcm/api/products";
+  const url =
+    "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/products";
 
   useEffect(() => {
     loadProgressBar();
@@ -300,14 +301,13 @@ const SlideWrapper = styled.div`
 `;
 const Slide = styled.div`
   display: flex;
-  width:100%;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding:10px;
-border: 1px solid #f3f3f3;
-      margin: 0px auto;
-      margin-bottom:0px;
-  }
+  padding: 10px;
+  border: 1px solid #f3f3f3;
+  margin: 0px auto;
+  margin-bottom: 0px;
 `;
 const Type = styled.div`
   padding: 5px 0;
@@ -316,10 +316,10 @@ const Type = styled.div`
   color: #ccc;
 `;
 const Choise = styled.div`
-    text-align: right;
-    font-weight: 400;
-    color: #797874;
-}`;
+  text-align: right;
+  font-weight: 400;
+  color: #797874;
+`;
 
 const BottomWrapper = styled.div`
   display: flex;
