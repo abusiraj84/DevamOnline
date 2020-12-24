@@ -31,7 +31,7 @@ function LessonPage({ match }) {
   }, []);
   const fetchLessons = async () => {
     const data = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wp/v2/lessons?slug=${match.params.slug}`,
+      `/wp-json/wp/v2/lessons?slug=${match.params.slug}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -48,16 +48,13 @@ function LessonPage({ match }) {
   };
 
   const fetchCourses = async () => {
-    const dataOfCourse = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wp/v2/courses/${courseId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "dwm-tkn": currentUser && currentUser.cookie,
-        },
-      }
-    );
+    const dataOfCourse = await fetch(`/wp-json/wp/v2/courses/${courseId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "dwm-tkn": currentUser && currentUser.cookie,
+      },
+    });
     const items2 = await dataOfCourse.json();
 
     setCourse(items2[0]);

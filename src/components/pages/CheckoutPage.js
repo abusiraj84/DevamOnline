@@ -20,9 +20,7 @@ function CheckoutPage({ match }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const fetchData = async () => {
-    const data = await fetch(
-      `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wp/v2/courses/${match.params.id}`
-    );
+    const data = await fetch(`/wp-json/wp/v2/courses/${match.params.id}`);
     const items = await data.json();
     setItems(items);
     console.log(items);

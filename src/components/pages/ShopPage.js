@@ -14,8 +14,7 @@ import { Link } from "react-router-dom";
 function ShopPage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const url =
-    "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/products";
+  const url = "/wp-json/wcm/api/products";
 
   useEffect(() => {
     loadProgressBar();

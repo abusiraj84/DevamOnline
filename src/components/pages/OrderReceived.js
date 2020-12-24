@@ -17,16 +17,13 @@ function OrderReceived({ match }) {
   }, []);
   const [items, setItems] = useState([]);
   const fetchData = async () => {
-    const data = await fetch(
-      `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/orders/${match.params.id}`,
-      {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          "dwm-tkn": currentUser.cookie,
-        },
-      }
-    );
+    const data = await fetch(`/wp-json/wcm/api/orders/${match.params.id}`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "dwm-tkn": currentUser.cookie,
+      },
+    });
     const items = await data.json();
     setItems(items);
     console.log(items);

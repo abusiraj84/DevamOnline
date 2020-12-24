@@ -146,17 +146,14 @@ function CheckoutShopPage({ match }) {
     if (payment_method == "paypal") {
       console.log("paypal");
     } else if (payment_method == "bacs") {
-      fetch(
-        `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-            "dwm-tkn": currentUser.cookie,
-          },
-          body: JSON.stringify(data),
-        }
-      )
+      fetch(`/wp-json/wcm/api/orders`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          "dwm-tkn": currentUser.cookie,
+        },
+        body: JSON.stringify(data),
+      })
         .then((response) => response.json())
         .then((responseJson) => {
           setLoading(false);
