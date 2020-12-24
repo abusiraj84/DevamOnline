@@ -18,7 +18,7 @@ function OrderReceived({ match }) {
   const [items, setItems] = useState([]);
   const fetchData = async () => {
     const data = await fetch(
-      `${config.siteUrl}/wp-json/wcm/api/orders/${match.params.id}`,
+      `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/orders/${match.params.id}`,
       {
         method: "get",
         headers: {

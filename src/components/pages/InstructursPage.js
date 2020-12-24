@@ -16,7 +16,9 @@ function InstructursPage() {
   const [items, setItems] = useState([]);
 
   const fetchData = async () => {
-    const data = await fetch(`${config.siteUrl}/wp-json/husam/v1/users`);
+    const data = await fetch(
+      `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/husam/v1/users`
+    );
     const items = await data.json();
     console.log(items);
     setItems(items);
