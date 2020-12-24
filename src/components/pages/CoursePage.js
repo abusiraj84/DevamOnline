@@ -25,7 +25,7 @@ function CoursePage({ match }) {
           mode: "cors",
           headers: {
             "Content-Type": "application/json",
-
+            Accept: "application/json",
             "dwm-tkn": currentUser && currentUser.cookie,
           },
         }
