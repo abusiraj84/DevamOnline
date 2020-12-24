@@ -31,7 +31,7 @@ function LessonPage({ match }) {
   }, []);
   const fetchLessons = async () => {
     const data = await fetch(
-      `/wp-json/wp/v2/lessons?slug=${match.params.slug}`,
+      `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wp/v2/lessons?slug=${match.params.slug}`,
       {
         headers: {
           "Content-Type": "application/json",
