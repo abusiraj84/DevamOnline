@@ -24,7 +24,7 @@ function CoursePage({ match }) {
           method: "get",
           headers: {
             "Content-Type": "application/json",
-
+            "Access-Control-Allow-Origin": "*",
             "dwm-tkn": currentUser && currentUser.cookie,
           },
         }
