@@ -19,7 +19,7 @@ function CoursePage({ match }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch(
-        `/wp-json/wp/v2/courses?slug=${match.params.slug}`,
+        `https://devam.website/wp-json/wp/v2/courses?slug=${match.params.slug}`,
         {
           method: "get",
           mode: "cors",
