@@ -36,10 +36,13 @@ const register = (user_login, user_email, user_pass) => {
 
 const login = (username, password) => {
   return axios
-    .post("https://devam.website/wp-json/wcm/api/login", {
-      username,
-      password,
-    })
+    .post(
+      "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/login",
+      {
+        username,
+        password,
+      }
+    )
     .then((response) => {
       if (response.data.cookie) {
         localStorage.setItem("user", JSON.stringify(response.data));

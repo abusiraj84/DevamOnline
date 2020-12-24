@@ -21,7 +21,7 @@ function CheckoutPage({ match }) {
 
   const fetchData = async () => {
     const data = await fetch(
-      `${config.siteUrl}/wp-json/wp/v2/courses/${match.params.id}`
+      `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wp/v2/courses/${match.params.id}`
     );
     const items = await data.json();
     setItems(items);
@@ -145,14 +145,17 @@ function CheckoutPage({ match }) {
 
     if (payment_method == "paypal") {
     } else if (payment_method == "bacs") {
-      fetch(`https://devam.website/wp-json/wcm/api/orders`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          "dwm-tkn": currentUser.cookie,
-        },
-        body: JSON.stringify(data),
-      })
+      fetch(
+        `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+            "dwm-tkn": currentUser.cookie,
+          },
+          body: JSON.stringify(data),
+        }
+      )
         .then((response) => response.json())
         .then((responseJson) => {
           setLoading(false);

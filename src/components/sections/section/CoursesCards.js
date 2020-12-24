@@ -234,29 +234,27 @@ const CardSingle = styled.div`
   }
 `;
 const CatHeader = styled.div`
-min-width:95px;
-width: 95px;
-text-align:center;
-   padding: 8px 20px;
-    display: inline-table;
-    direction: rtl;
-    float: right;
-    color: #fff1f1;
-    border-radius: 6px;
-    margin-right: 20px;
-    box-shadow: 0px 50px 100px rgba(0,0,0,0.25), inset 0px 0px 0px 0.5px rgba(255,255,255,0.2);
-    -webkit-backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    backdrop-filter: blur(40px);
-    background: rgb(70 70 70 / 28%);
-    opacity: 0;
-      animation: ${animation} 1s 0.1s forwards;
-      @media (max-width: 1300px) {
-     margin-right: 70px;
-   /* margin-left: 50px;
+  min-width: 95px;
+  width: 95px;
+  text-align: center;
+  padding: 8px 20px;
+  display: inline-table;
+  direction: rtl;
+  float: right;
+  color: #fff1f1;
+  border-radius: 6px;
+  margin-right: 20px;
+  box-shadow: 0px 50px 100px rgba(0, 0, 0, 0.25),
+    inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  background: rgb(70 70 70 / 28%);
+  opacity: 0;
+  animation: ${animation} 1s 0.1s forwards;
+  @media (max-width: 1300px) {
+    margin-right: 70px;
+    /* margin-left: 50px;
     display:block; */
   }
-
-}
-
 `;
