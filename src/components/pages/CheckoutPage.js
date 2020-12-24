@@ -21,7 +21,7 @@ function CheckoutPage({ match }) {
 
   const fetchData = async () => {
     const data = await fetch(
-      `https://cors-anywhere.herokuapp.com/wp-json/wp/v2/courses/${match.params.id}`
+      `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wp/v2/courses/${match.params.id}`
     );
     const items = await data.json();
     setItems(items);
