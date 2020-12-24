@@ -2,32 +2,48 @@ import React, { useState, useEffect } from "react";
 import Card from "../Card";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
+import { loadProgressBar } from "axios-progress-bar";
+
+import "axios-progress-bar/dist/nprogress.css";
+import axios from "axios";
 
 function CoursesCards() {
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const url = "https://devam.website/wp-json/wp/v2/course-categories";
   useEffect(() => {
-    fetchData();
+    loadProgressBar();
+    axios
+      .get(url)
+      .then((response) => {
+        const myData = response.data;
+        setItems(myData);
+        console.log(myData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // fetchData();
     setTimeout(() => {
       setIsLoaded(true);
     }, 0);
   }, []);
   const [items, setItems] = useState([]);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      "http://devam-wp.io/wp-json/wp/v2/course-categories",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
-    const items = await data.json();
-    // console.log(items);
-    setItems(items);
-  };
+  // const fetchData = async () => {
+  //   const data = await fetch(
+  //     "https://devam.website/wp-json/wp/v2/course-categories",
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //     }
+  //   );
+  //   const items = await data.json();
+  //   // console.log(items);
+  //   setItems(items);
+  // };
 
   return (
     <div>
@@ -39,34 +55,60 @@ function CoursesCards() {
                 <CatHeader>{item.name}</CatHeader>
               ) : (
                 <div></div>
-              )}{" "}
+              )}
+
               <CardSingle>
-                {item.courses.map((item) => (
-                  <div key={item.id}>
-                    {" "}
-                    {item.status == "publish" && (
-                      <Link to={`/course/${item.slug}`}>
-                        <Card
-                          title={item.title.rendered}
-                          img={item._lp_course_thumb}
-                          instracturimg={
-                            item._lp_course_author &&
-                            item._lp_course_author.avatar
-                          }
-                          instracturname={
-                            item._lp_course_author &&
-                            item._lp_course_author.name
-                          }
-                          bgcolor={item._lp_course_color}
-                          price={item._lp_sale_price}
-                          sale={item._lp_price}
-                          hours={item._lp_course_duration}
-                          sections={item._lp_curriculum.length}
-                        />
-                      </Link>
-                    )}
-                  </div>
-                ))}
+                {item.courses
+                  .map((item) => (
+                    <div key={item.id}>
+                      {" "}
+                      {item.status === "publish" &&
+                        (item._lp_is_soon === "no" ? (
+                          <Link to={`/course/${item.slug}`}>
+                            <Card
+                              title={item.title.rendered}
+                              img={item._lp_course_thumb}
+                              instracturimg={
+                                item._lp_course_author &&
+                                item._lp_course_author.avatar
+                              }
+                              instracturname={
+                                item._lp_course_author &&
+                                item._lp_course_author.name
+                              }
+                              bgcolor={item._lp_course_color}
+                              price={item._lp_sale_price}
+                              sale={item._lp_price}
+                              hours={item._lp_course_duration}
+                              sections={item._lp_curriculum.length}
+                            />
+                          </Link>
+                        ) : (
+                          <div style={{ filter: "grayscale(100%)" }}>
+                            <Card
+                              title={item.title.rendered}
+                              img={item._lp_course_thumb}
+                              instracturimg={
+                                item._lp_course_author &&
+                                item._lp_course_author.avatar
+                              }
+                              instracturname={
+                                item._lp_course_author &&
+                                item._lp_course_author.name
+                              }
+                              bgcolor={item._lp_course_color}
+                              price={item._lp_price}
+                              sale={item._lp_price}
+                              soon="قريبا"
+                              isSoon={item._lp_is_soon}
+                              // hours={item._lp_course_duration}
+                              // sections={item._lp_curriculum.length}
+                            />
+                          </div>
+                        ))}
+                    </div>
+                  ))
+                  .reverse()}
               </CardSingle>
             </Box>
           ))}
@@ -105,6 +147,7 @@ const Box = styled.div`
 const CourseCardsWrapper = styled.div`
   margin: 0px auto 0px;
   margin-bottom: 100px;
+  min-height: 482px;
 
   @media (max-width: 1270px) {
     margin: 0px auto;

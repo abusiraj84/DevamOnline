@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { config } from "../config";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 
 function Paypal(props) {
   const { user: currentUser } = useSelector((state) => state.auth);
 
-  const { total, data } = props;
-  const [orderId, setorderId] = useState("");
-
-  const [loading, setLoading] = useState(false);
+  const { total, paypalData } = props;
 
   const onSuccess = (payment) => {
     // Congratulation, it came here means everything's fine!
@@ -23,25 +21,33 @@ function Paypal(props) {
     //   window.location.reload();
     // }, 1000);
 
-    fetch(`http://devam-wp.io//wp-json/wcm/api/orders`, {
+    fetch(`https://devam.website/wp-json/wcm/api/orders`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         "dwm-tkn": currentUser.cookie,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(paypalData),
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        setLoading(false);
+        console.log("تمت الشراء بنجاح", responseJson);
 
-        console.log("تمت الشراء بنجاح", responseJson.id);
-        setorderId(responseJson.id);
-        window.location.href = `/order-received/${responseJson.id}`;
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "تمت عملية الطلب بنجاح",
+          showConfirmButton: false,
+          timer: 1800,
+        });
+
+        setTimeout(() => {
+          window.location.href = `/order-received/${responseJson.id}`;
+        }, 2500);
       })
       .catch((error) => {
         console.error(error);
-        console.log("data", data);
+        console.log("data", paypalData);
       });
   };
 
@@ -91,7 +97,7 @@ function Paypal(props) {
         color: "gold",
         shape: "pill",
         label: "paypal",
-        layout: "vertical",
+        // layout: "vertical",
       }}
     />
   );

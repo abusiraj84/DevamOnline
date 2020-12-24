@@ -39,18 +39,56 @@ const Register = () => {
     setuser_pass(user_pass);
   };
 
+  const [usernameErr, setUsernameErr] = useState({});
+  const [emailErr, setEmailErr] = useState({});
+  const [passwordErr, setPasswordErr] = useState({});
+
   const handleRegister = (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    dispatch(register(user_login, user_email, user_pass))
-      .then(() => {
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    const isValid = formValidation();
+    if (isValid) {
+      setLoading(true);
+
+      dispatch(register(user_login, user_email, user_email))
+        .then(() => {
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+        });
+    }
   };
+  const formValidation = () => {
+    const usernameErr = {};
+    const emailErr = {};
+    const passwordErr = {};
+    let isValid = true;
+
+    if (user_login.trim().length < 3) {
+      usernameErr.usernameErrShort = "اسم المستخدم يجيب أن يكون أكثر من 5 أحرف";
+      isValid = false;
+    }
+    if (user_login.trim().length > 25) {
+      usernameErr.usernameErrLong = "اسم المستخدم يجيب أن يكون أقل من 12 حرف";
+      isValid = false;
+    }
+
+    if (!user_email.includes("@")) {
+      emailErr.emailErrNotEmail =
+        "يجب عليك استخدام بريد الكتروني صالح الاستخدام";
+      isValid = false;
+    }
+    if (user_pass.trim().length < 5) {
+      passwordErr.passwordErrShort = "كلمة المرور يجيب أن تكون أكثر من 5 أحرف";
+      isValid = false;
+    }
+    setUsernameErr(usernameErr);
+    setEmailErr(emailErr);
+    setPasswordErr(passwordErr);
+    return isValid;
+  };
+
   if (isLoggedIn) {
     return <Redirect to="/profile" />;
   }
@@ -62,11 +100,24 @@ const Register = () => {
         <Base onSubmit={handleRegister} method="POST">
           <InputText
             id="user_login"
-            placeholder="الإسم المستخدم"
+            placeholder="اسم المستخدم"
             type="user_login"
             name="user_login"
             onChange={onChangeFirstname}
+            pattern="^\S+$"
           />
+          {Object.keys(usernameErr).map((key) => {
+            return (
+              <>
+                {" "}
+                <br />
+                <div style={{ color: "red", textAlign: "right" }}>
+                  {usernameErr[key]}
+                </div>
+                <br />
+              </>
+            );
+          })}
 
           <InputText
             placeholder="البريد الإلكتروني"
@@ -74,7 +125,19 @@ const Register = () => {
             type="user_email"
             name="user_email"
             onChange={onChangeuser_email}
+            pattern="^\S+$"
           />
+          {Object.keys(emailErr).map((key) => {
+            return (
+              <>
+                <br />{" "}
+                <div style={{ color: "red", textAlign: "right" }}>
+                  {emailErr[key]}
+                </div>{" "}
+                <br />
+              </>
+            );
+          })}
           <InputText
             autoComplete="off"
             placeholder="كلمة المرور"
@@ -82,7 +145,19 @@ const Register = () => {
             type="password"
             name="user_pass"
             onChange={onChangeuser_pass}
+            pattern="^\S+$"
           />
+          {Object.keys(passwordErr).map((key) => {
+            return (
+              <>
+                <br />{" "}
+                <div style={{ color: "red", textAlign: "right" }}>
+                  {passwordErr[key]}
+                </div>{" "}
+                <br />
+              </>
+            );
+          })}
           <Submit type="submit" value="Login">
             <span style={{ marginLeft: "20px" }}>سجّل الآن</span>
             {loading && (

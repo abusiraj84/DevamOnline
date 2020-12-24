@@ -1,141 +1,73 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../modal/modal";
 import styled from "styled-components";
 import { H1, SmallText } from "../styles/TextStyles";
 import Waveform from "../Waveform";
 import SvgLoading from "../SvgLoading";
 
+import { loadProgressBar } from "axios-progress-bar";
+import "axios-progress-bar/dist/nprogress.css";
+import axios from "axios";
+import ReactHtmlParser from "react-html-parser";
+import { Link } from "react-router-dom";
+
 function ShopPage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const url = "https://devam.website/wp-json/wcm/api/products";
+
   useEffect(() => {
+    loadProgressBar();
+    axios
+      .get(url)
+      .then((response) => {
+        const myData = response.data;
+        setItems(myData);
+        console.log(myData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     setTimeout(() => {
       setIsLoaded(true);
     }, 2000);
   }, []);
   const [status, setStatus] = useState(false);
+  const [items, setItems] = useState([]);
 
-  const shopData = [
-    {
-      title: "Octave Music - (A Cappella) aCA001",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/310155654/preview.mp3",
-      price: "15.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA002",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/3d5a0792f43d873c644ce9118beafe66/retina/MU001_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/227502547/preview.mp3",
-      price: "8.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA003",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/1b3e50ebd3bf4d4d1ead8f7c40f86d03/retina/HI001_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/227502547/preview.mp3",
-      price: "23.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA001",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/310155654/preview.mp3",
-      price: "15.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA002",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/3d5a0792f43d873c644ce9118beafe66/retina/MU001_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/227502547/preview.mp3",
-      price: "8.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA003",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/1b3e50ebd3bf4d4d1ead8f7c40f86d03/retina/HI001_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/227502547/preview.mp3",
-      price: "23.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA001",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/310155654/preview.mp3",
-      price: "15.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA002",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/3d5a0792f43d873c644ce9118beafe66/retina/MU001_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/227502547/preview.mp3",
-      price: "8.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA003",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/1b3e50ebd3bf4d4d1ead8f7c40f86d03/retina/HI001_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/227502547/preview.mp3",
-      price: "23.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA001",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/310155654/preview.mp3",
-      price: "15.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA002",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/3d5a0792f43d873c644ce9118beafe66/retina/MU001_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/227502547/preview.mp3",
-      price: "8.99",
-    },
-    {
-      title: "Octave Music - (A Cappella) aCA003",
-      img:
-        "https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/1b3e50ebd3bf4d4d1ead8f7c40f86d03/retina/HI001_Logo.jpg",
-      url:
-        "https://previews.customer.envatousercontent.com/files/227502547/preview.mp3",
-      price: "23.99",
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState("");
+  const [mp3, setMp3] = useState("");
+  const [description, setDescription] = useState("");
+  const [isLooped, setIsLooped] = useState("");
+  const [length, setLength] = useState("");
+  const [tempo, setTempo] = useState("");
+  const [instruments, setInstruments] = useState("");
+  const [tags, setTags] = useState("");
+  const [youtubeContent, setYoutubeContent] = useState("");
+
   return (
     <div>
       {isLoaded ? (
         <Wrapper>
           {status && (
             <Modal closeModal={() => setStatus(false)}>
-              <ModalImg
-                bg={
-                  "url(https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg)"
-                }
-              />
+              <ModalImg src={image} />
               <ContentWrapper>
-                <ModalTitle>Octave Music - (A Cappella) aCA001</ModalTitle>
+                <ModalTitle>{name}</ModalTitle>
                 <IconsWrapper>
-                  <ModalPrice>$15.99</ModalPrice>
+                  <ModalPrice>${price}</ModalPrice>
                   <ModalCart src="images/icons/shop.svg" />
                 </IconsWrapper>
-                <Waveform url="https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3" />
+                <Waveform url={mp3 || "a.mp3"} />
                 <BottomWrapper>
                   <SlideWrapper>
                     <Slide>
                       <Type>Looped Audio</Type>
-                      <Choise>No</Choise>
+                      <Choise>{isLooped}</Choise>
                     </Slide>
                     <Slide>
                       <Type>Audio Files Included</Type>
@@ -151,53 +83,67 @@ function ShopPage() {
                     </Slide>
                     <Slide>
                       <Type>Main Track Length</Type>
-                      <Choise>01:39</Choise>
+                      <Choise>{length}</Choise>
                     </Slide>
 
                     <Slide>
                       <Type>Instruments</Type>
-                      <Choise>Choir</Choise>
+                      <Choise>{instruments}</Choise>
                     </Slide>
 
                     <Slide>
                       <Type>Tempo (BPM)</Type>
-                      <Choise>95</Choise>
+                      <Choise>{tempo}</Choise>
                     </Slide>
 
                     <Slide>
                       <Type>YouTube Content ID Registered</Type>
-                      <Choise>No</Choise>
+                      <Choise>{youtubeContent}</Choise>
                     </Slide>
                     <Slide>
                       <Type>Tags</Type>
-                      <Choise>No</Choise>
+                      <Choise>{tags}</Choise>
                     </Slide>
                   </SlideWrapper>
-                  <Desc>
-                    A Cappella, for use in social media videos. (Watch Now) A
-                    Cappella, for use in social media videos. (Watch Now) A
-                    Cappella, for use in social media videos. (Watch Now) A
-                    Cappella, for use in social media videos. (Watch Now) A
-                    Cappella, for use in social media videos. (Watch Now) A
-                    Cappella, for use in social media videos. (Watch Now) A
-                    Cappella, for use in social media videos. (Watch Now) A
-                  </Desc>
+                  <Desc>{ReactHtmlParser(description)}</Desc>
                 </BottomWrapper>
               </ContentWrapper>
             </Modal>
           )}
-          <CardWrapper onClick={() => status && setStatus(false)}>
-            {shopData.map((item, i) => (
-              <Card key={i}>
-                <Img onClick={() => setStatus(true)} bg={`url(${item.img})`} />
-                <ContentWrapper>
-                  <Title>{item.title}</Title>
-                  <Waveform url={item.url} />
-                  <Price>${item.price}</Price>
-                  <Cart src="images/icons/shop.svg" />
-                </ContentWrapper>
-              </Card>
-            ))}
+          <CardWrapper>
+            {items.map(
+              (item, i) =>
+                item.downloadable && (
+                  <Card key={i}>
+                    <Img
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        setStatus(true);
+                        setName(item.name);
+                        setPrice(item.price);
+                        setMp3(item.preview_mp3);
+                        setIsLooped(item.is_looped);
+                        setLength(item.track_length);
+                        setDescription(item.description);
+                        setTempo(item.track_tempo);
+                        setTags(item.track_tags);
+                        setInstruments(item.instruments);
+                        setYoutubeContent(item.youtube_content);
+                        setImage(item.images[0].src);
+                      }}
+                      bg={`url(${item.images[0].src || "0.jpg"})`}
+                    />
+                    <ContentWrapper>
+                      <Title>{item.name}</Title>
+                      <Waveform url={item.preview_mp3 || "audio.mp3"} />
+                      <Price>${item.price}</Price>
+                      <Link to={`/checkout-shop/${item.id}`}>
+                        <Cart src="images/icons/shop.svg" />
+                      </Link>
+                    </ContentWrapper>
+                  </Card>
+                )
+            )}
           </CardWrapper>
         </Wrapper>
       ) : (
@@ -252,6 +198,7 @@ const Title = styled(H1)`
   line-height: 20px;
   font-weight: 600;
   width: 255px;
+  min-height: 41px;
 `;
 
 const Price = styled(SmallText)`
@@ -289,12 +236,12 @@ const Cart = styled.img`
 
 // // //
 
-const ModalImg = styled.div`
+const ModalImg = styled.img`
   width: 100%;
   height: 504px;
-  background: ${(props) =>
-    props.bg ||
-    "url(https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg)"};
+  /* background: ${(props) =>
+    `url(${props.bg})` ||
+    "url(https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg)"}; */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -315,7 +262,7 @@ const IconsWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-right: 20px;
-  margin-left: 20px;
+  margin-left: 100px;
   margin-bottom: 40px;
   height: 33px;
 `;

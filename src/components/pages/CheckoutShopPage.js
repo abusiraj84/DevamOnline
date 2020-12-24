@@ -8,7 +8,7 @@ import { Redirect } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 
-function CheckoutPage({ match }) {
+function CheckoutShopPage({ match }) {
   useEffect(() => {
     fetchData();
     setTimeout(() => {
@@ -21,7 +21,7 @@ function CheckoutPage({ match }) {
 
   const fetchData = async () => {
     const data = await fetch(
-      `${config.siteUrl}/wp-json/wp/v2/courses/${match.params.id}`
+      `${config.siteUrl}/wp-json/wcm/api/products/${match.params.id}`
     );
     const items = await data.json();
     setItems(items);
@@ -92,10 +92,10 @@ function CheckoutPage({ match }) {
     status: "on-hold",
     line_items: [
       {
-        product_id: items._mlpwc_xref,
+        product_id: items.id,
         quantity: 1,
-        subtotal: items._lp_sale_price,
-        total: items._lp_sale_price,
+        subtotal: items.sale_price,
+        total: items.sale_price,
       },
     ],
     customer_id: currentUser && currentUser.user.id,
@@ -118,7 +118,7 @@ function CheckoutPage({ match }) {
     status: "on-hold",
     line_items: [
       {
-        product_id: items._mlpwc_xref,
+        product_id: items.id,
         quantity: 1,
         subtotal: items.sale_price,
         total: items.sale_price,
@@ -144,6 +144,7 @@ function CheckoutPage({ match }) {
     setLoading(true);
 
     if (payment_method == "paypal") {
+      console.log("paypal");
     } else if (payment_method == "bacs") {
       fetch(`https://devam.website/wp-json/wcm/api/orders`, {
         method: "post",
@@ -538,7 +539,7 @@ function CheckoutPage({ match }) {
                     <center>
                       {" "}
                       <Paypal
-                        total={parseFloat(items._lp_sale_price)}
+                        total={parseFloat(items.price)}
                         id={items.id}
                         paypalData={paypalData}
                       />
@@ -590,14 +591,13 @@ function CheckoutPage({ match }) {
                       }}
                     >
                       <td style={{ textAlign: "right", padding: "10px" }}>
-                        {items.title && items.title.rendered}&nbsp;{" "}
-                        <strong>×&nbsp;1</strong>
+                        {items.name}&nbsp; <strong>×&nbsp;1</strong>
                       </td>
                       <td style={{ textAlign: "right" }}>
                         <span>
                           <bdi>
                             <span style={{ textAlign: "right" }}>$</span>
-                            {items._lp_sale_price}
+                            {items.price}
                           </bdi>
                         </span>{" "}
                       </td>
@@ -618,7 +618,7 @@ function CheckoutPage({ match }) {
                         <span>
                           <bdi>
                             <span style={{ textAlign: "right" }}>$</span>
-                            {items._lp_sale_price}
+                            {items.price}
                           </bdi>
                         </span>
                       </td>
@@ -633,7 +633,7 @@ function CheckoutPage({ match }) {
                           <span style={{ textAlign: "right" }}>
                             <bdi style={{ textAlign: "right" }}>
                               <span style={{ textAlign: "right" }}>$</span>
-                              {items._lp_sale_price}
+                              {items.price}
                             </bdi>
                           </span>
                         </strong>
@@ -707,7 +707,7 @@ function CheckoutPage({ match }) {
   );
 }
 
-export default CheckoutPage;
+export default CheckoutShopPage;
 const Wrapper = styled.div`
   width: 1234px;
   margin: auto auto;

@@ -26,7 +26,7 @@ function Fotter() {
             ))}
           </>
         )}
-        <h2>fdfdf</h2>
+        {/* <h2>fdfdf</h2> */}
       </Grid>
       <Info>
         <h3>

@@ -3,14 +3,7 @@ import styled from "styled-components";
 import { Caption } from "../../styles/TextStyles";
 
 function LessonsBox(props) {
-  const {
-    lessonnum,
-    lessontitle,
-    lessontime,
-    preview,
-    fontcolor,
-    isAccess,
-  } = props;
+  const { lessonnum, lessontitle, lessontime, preview, fontcolor } = props;
 
   return (
     <LessonsGrid>

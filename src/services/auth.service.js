@@ -10,7 +10,7 @@ const headers = {
 const register = (user_login, user_email, user_pass) => {
   return axios
     .post(
-      "http://devam-wp.io/wp-json/wcm/api/register",
+      "https://devam.website/wp-json/wcm/api/register",
       {
         user_login,
         user_email,
@@ -36,7 +36,7 @@ const register = (user_login, user_email, user_pass) => {
 
 const login = (username, password) => {
   return axios
-    .post("http://devam-wp.io/wp-json/wcm/api/login", {
+    .post("https://devam.website/wp-json/wcm/api/login", {
       username,
       password,
     })

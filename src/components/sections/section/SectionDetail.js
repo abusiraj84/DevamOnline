@@ -16,13 +16,8 @@ import {
 
 function SectionDetail(props) {
   const { user: currentUser } = useSelector((state) => state.auth);
-  const [theuser, setTheuser] = useState([]);
   const [course, setCourse] = useState([]);
-  useEffect(() => {
-    if (currentUser) {
-      // fetchUsers();
-    }
-  }, []);
+  useEffect(() => {}, []);
 
   const {
     logo,
@@ -40,56 +35,16 @@ function SectionDetail(props) {
     sale,
     id,
     isAccess,
-    orderStatus,
-    orderID,
   } = props;
 
   ////////////////////////////////////////////////////////////////////////////////
-  const token = currentUser ? currentUser.token : [];
-  const fetchUsers = async () => {
-    const users = await fetch(
-      " https://devam.website/Devam-Api/public/api/user",
-      {
-        method: "get",
-        headers: new Headers({
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/x-www-form-urlencoded",
-        }),
-      }
-    );
-
-    const userdata = await users.json();
-
-    const theuser = [];
-    const course = [];
-
-    for (const [index, value] of userdata.entries()) {
-      // value.id == currentUser.user.id ? theuser.push(value.id) : "";
-
-      if (value.id == currentUser.user.id) {
-        theuser.push(value);
-        for (const [index, courses] of value.courses.entries()) {
-          // console.log(courses);
-          // console.log(id);
-          if (courses.courses_id == id) {
-            course.push(courses);
-            // console.log("yes");
-          }
-        }
-      }
-      // console.log(theuser.push(value.id == currentUser.user.id));
-    }
-    setTheuser(theuser[0]);
-    setCourse(course[0]);
-    // console.log(course[0].courses_id);
-  };
 
   ///////////////////////////////////////////////////////////////////////////////
 
   const isButtonvar = () => {
     if (course) {
       return <Registerd>مشترك</Registerd>;
-    } else if (course == undefined && price != 0.0) {
+    } else if (course === undefined && price !== 0.0) {
       return (
         <PriceWrapper>
           <PriceTitle>اشترِ الدورة بمقابل</PriceTitle>
@@ -98,7 +53,7 @@ function SectionDetail(props) {
           <Paypal total={price} id={id} />
         </PriceWrapper>
       );
-    } else if (price == 0.0) {
+    } else if (price === 0.0) {
       return <Registerd>دورة مجانية!</Registerd>;
     }
   };
@@ -123,7 +78,7 @@ function SectionDetail(props) {
 
       {/* {isButtonvar()} */}
 
-      {isAccess != true ? (
+      {isAccess !== true ? (
         <PurchaseButton
           title="اشترِ الآن"
           subtitle="عشرات الدورات بانتظارك"

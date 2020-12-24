@@ -31,7 +31,7 @@ function LessonPage({ match }) {
   }, []);
   const fetchLessons = async () => {
     const data = await fetch(
-      `http://devam-wp.io/wp-json/wp/v2/lessons?slug=${match.params.slug}`,
+      `https://devam.website/wp-json/wp/v2/lessons?slug=${match.params.slug}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ function LessonPage({ match }) {
 
   const fetchCourses = async () => {
     const dataOfCourse = await fetch(
-      `http://devam-wp.io/wp-json/wp/v2/courses/${courseId}`,
+      `https://devam.website/wp-json/wp/v2/courses/${courseId}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -64,37 +64,6 @@ function LessonPage({ match }) {
     console.log("Course is:", items2[0]);
   };
 
-  //TODO fetch lessonuser by id see if there is a table and setIscomplete according result by useEfect.
-
-  const handleComplete = () => {
-    console.log("complete");
-    // `http://192.168.1.116:8000/api/lessonuser/${currentUser.user.id}/${lesson.lessons_id}`
-    setIsComplete(!isComplete);
-    if (!isComplete) {
-      axios({
-        method: "post",
-        url: `${config.siteUrl}/lessonuser`,
-        data: {
-          lesson_id: lesson.lessons_id,
-          user_id: currentUser.user.id,
-        },
-      });
-    } else {
-      axios.delete(
-        `${config.siteUrl}/lessonuser/${currentUser.user.id}/${lesson.lessons_id}`
-      );
-    }
-  };
-  const complete = () => {
-    if (isComplete) {
-      return <h2>منتهي</h2>;
-    } else {
-      return <h2>لم ينتعي</h2>;
-    }
-  };
-
-  var number = parseInt(match.params.id, 10) + 1;
-
   return (
     <>
       {isLoaded ? (
@@ -103,10 +72,10 @@ function LessonPage({ match }) {
             <title>{lesson.title && lesson.title.rendered}</title>
           </Helmet>
           {lesson._lp_lesson_course_access ||
-          lesson._lp_preview == "yes" ||
-          course._lp_sale_price == "" ||
-          course._lp_sale_price == "0.00" ||
-          lesson.status == "completed" ? (
+          lesson._lp_preview === "yes" ||
+          course._lp_sale_price === "" ||
+          course._lp_sale_price === "0.00" ||
+          lesson.status === "completed" ? (
             <div>
               <VideoWrapper isOpen={isOpen}>
                 <VideoClose onClick={() => setIsOpen(!isOpen)}>
@@ -161,7 +130,7 @@ function LessonPage({ match }) {
         {complete()} */}
                 <Title>
                   {/* {currentUser.user.lessons.map((item, i) =>
-            item.lessons_id == lesson.lessons_id ? "Done" : ""
+            item.lessons_id === lesson.lessons_id ? "Done" : ""
           )} */}
                 </Title>
               </ContentWrapper>

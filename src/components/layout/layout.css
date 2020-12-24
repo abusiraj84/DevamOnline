@@ -107,11 +107,6 @@ section {
   display: block;
 }
 
-@font-face {
-  font-family: "Alaraby";
-  src: url("/fonts/AlarabyTelevision-Bold.ttf") format("truetype"),
-    url("/fonts/AlarabyTelevision-Regular.ttf") format("truetype");
-}
 body {
   line-height: 1;
   /* font-family: "Alaraby"; */

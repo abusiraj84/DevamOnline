@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const formWaveSurferOptions = (ref) => ({
   container: ref,
-  waveColor: "#414DDE",
+  waveColor: "#00CFFD",
   progressColor: "OrangeRed",
   cursorColor: "OrangeRed",
   barWidth: 3,

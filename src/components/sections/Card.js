@@ -13,6 +13,8 @@ function Card(props) {
     sale,
     sections,
     hours,
+    soon,
+    isSoon,
   } = props;
 
   return (
@@ -34,20 +36,31 @@ function Card(props) {
         />
       </InstracturWrapper>
       <Title>{title || "عنوان الدورة"}</Title>
+
       <PriceWrapper>
-        {price != "0.00" || price != "" || !price ? (
+        {price !== "0.00" || price !== "" || !price ? (
           <>
-            <SaleBox>${sale || "0.00"}</SaleBox>
-            <PriceBox>${price || "0.00"}</PriceBox>
+            {!isSoon ? (
+              <>
+                <SaleBox>${sale || "0.00"}</SaleBox>
+                <PriceBox>${price || "0.00"}</PriceBox>
+              </>
+            ) : (
+              <h1 style={{ marginTop: "10px", marginBottom: "6px" }}>{soon}</h1>
+            )}
           </>
         ) : (
           <SaleBox>دورة مجانية</SaleBox>
         )}
       </PriceWrapper>
-      <KindWrapper>
-        <VideosNum>{sections || "0"} أقسام</VideosNum>
-        <VideosNum>{hours || "0"} ساعة</VideosNum>
-      </KindWrapper>
+      {!isSoon ? (
+        <KindWrapper>
+          <VideosNum>{sections || "0"} أقسام</VideosNum>
+          <VideosNum>{hours || "0"} ساعة</VideosNum>
+        </KindWrapper>
+      ) : (
+        <div></div>
+      )}
     </Box>
   );
 }
@@ -149,8 +162,6 @@ const VideosNum = styled(SmallText)`
   text-align: center;
   backdrop-filter: blur(20px) brightness(85%) saturate(150%);
 `;
-
-const Hours = styled.div``;
 
 const PriceBox = styled.div`
   color: white;

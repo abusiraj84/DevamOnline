@@ -1,241 +1,392 @@
 import React, { useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "./tabs.css";
 import styled, { keyframes } from "styled-components";
-import { Caption, H1, H2, SmallText, SmallText2 } from "./styles/TextStyles";
 import { config } from "../config";
+import { useSelector } from "react-redux";
 
-const Profile = () => {
+import { loadProgressBar } from "axios-progress-bar";
+
+import "axios-progress-bar/dist/nprogress.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { Caption, H2 } from "./styles/TextStyles";
+import qs from "qs";
+
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
+
+function Profile() {
+  const { user: currentUser } = useSelector((state) => state.auth);
+
+  const [items, setItems] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const [user, setUser] = useState("");
+  const [display_name, setDisplay_name] = useState("");
+  const [user_email, setuser_email] = useState("");
+  const [user_pass, setuser_pass] = useState("");
+
+  const orderUrl = `${config.siteUrl}/wp-json/wcm/api/orders`;
+  const Userurl = `${config.siteUrl}/wp-json/wp/v2/users/${currentUser.user.id}`;
   useEffect(() => {
-    fetchOrder();
-    setView(Profile());
+    loadProgressBar();
+    axios
+      .get(orderUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          "dwm-tkn": currentUser && currentUser.cookie,
+        },
+      })
+      .then((response) => {
+        const myData = response.data;
+        setItems(myData);
+        console.log(myData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get(Userurl, {
+        headers: {
+          "Content-Type": "application/json",
+          "dwm-tkn": currentUser && currentUser.cookie,
+          "X-WP-Nonce": currentUser && currentUser.nonce,
+        },
+      })
+      .then((response) => {
+        const myData = response.data;
+        setUser(myData);
+        console.log(myData);
+        setDisplay_name(myData.name);
+        setuser_email(myData.user_email);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // fetchData();
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 0);
   }, []);
 
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const [view, setView] = useState();
-  const [color, setColor] = useState([]);
-  const [items, setItems] = useState([]);
+  ///// ///// /////// For Update Form ///// //// ////
 
-  const [orders, setOrders] = useState([]);
+  const onChangeDisplayname = (e) => {
+    const display_name = e.target.value;
+    setDisplay_name(display_name);
+  };
 
-  if (!currentUser) {
-    return <Redirect to="/login" />;
-  }
+  const onChangeuser_email = (e) => {
+    const user_email = e.target.value;
+    setuser_email(user_email);
+  };
 
-  const fetchOrder = async () => {
-    const data = await fetch(`${config.siteUrl}/wp-json/wcm/api/orders`, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        "dwm-tkn": currentUser && currentUser.cookie,
-      },
-    });
-    const items = await data.json();
-    setOrders(items);
+  const onChangeuser_pass = (e) => {
+    const user_pass = e.target.value;
+    setuser_pass(user_pass);
+  };
 
-    console.log(items);
-    // const AccessedCourses = [];
+  const [usernameErr, setUsernameErr] = useState({});
+  const [emailErr, setEmailErr] = useState({});
+  const [passwordErr, setPasswordErr] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [loadingPass, setLoadingPass] = useState(false);
 
-    // for (const [index, value] of items.entries()) {
-    //   AccessedCourses.push(value);
+  const handleUpdata = (e) => {
+    e.preventDefault();
+
+    loadProgressBar();
+
+    setLoading(true);
+    if (display_name !== "" && user_email !== "") {
+      const url = "https://devam.website/wp-json/wp/v2/update-profile";
+
+      const data = qs.stringify({
+        display_name: display_name,
+        user_email: user_email,
+        mobile_number: "",
+      });
+
+      console.log(qs.stringify(data));
+      axios
+        .post(url, data, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            "dwm-tkn": currentUser && currentUser.cookie,
+          },
+        })
+        .then(function (response) {
+          setLoading(false);
+          console.log(response);
+          Swal.fire("ممتاز", "لقد تم تحديث بياناتك بنجاح", "success");
+        })
+        .catch(function (error) {
+          setLoading(false);
+          console.log(error);
+          Swal.fire("نعتذر", "لم يتم تحديث بياناتك بنجاح", "error");
+        });
+    } else {
+      Swal.fire("تنبيه !", "لا يمكنك ترك أحد الحقول فارغة", "info");
+      setLoading(false);
+    }
+
+    // const isValid = formValidation();
+    // if (isValid) {
+    //   setLoading(true);
+
+    //     .then(() => {
+    //       setLoading(false);
+    //     })
+    //     .catch(() => {
+    //       setLoading(false);
+    //     });
     // }
-    // console.log(AccessedCourses);
   };
 
-  const Profile = () => {
-    return (
-      <>
-        <Avatar src={currentUser.user.avatar} />
-        <Name>{currentUser.user.displayname}</Name>
-        <Email> {currentUser.user.email} </Email>
-        {/* <Subscription>{currentUser.user.role.name}</Subscription> */}
-      </>
-    );
+  const handlePassword = (e) => {
+    e.preventDefault();
+
+    loadProgressBar();
+
+    setLoadingPass(true);
+
+    const url = "https://devam.website/wp-json/wp/v2/update-pass";
+
+    const data = qs.stringify({
+      password: user_pass,
+    });
+
+    console.log(qs.stringify(data));
+    axios
+      .post(url, data, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+          "dwm-tkn": currentUser && currentUser.cookie,
+          "X-WP-Nonce": currentUser && currentUser.nonce,
+        },
+      })
+      .then(function (response) {
+        setLoadingPass(false);
+        console.log(response);
+        Swal.fire(
+          "ممتاز",
+          "لقد تم تغيير كلمة المرور بنجاح ، سيتم تسجيل خروجك الآن",
+          "success"
+        );
+        setTimeout(() => {
+          // setIsLoaded(true);
+          localStorage.removeItem("user");
+          window.location.href = "/login";
+        }, 2000);
+      })
+      .catch(function (error) {
+        setLoadingPass(false);
+        console.log(error);
+        Swal.fire("نعتذر", "لم يتم تغيير كلمة المرور بنجاح", "error");
+      });
+
+    // const isValid = formValidation();
+    // if (isValid) {
+    //   setLoading(true);
+
+    //     .then(() => {
+    //       setLoading(false);
+    //     })
+    //     .catch(() => {
+    //       setLoading(false);
+    //     });
+    // }
+  };
+  const formValidation = () => {
+    const usernameErr = {};
+    const emailErr = {};
+    const passwordErr = {};
+    let isValid = true;
+
+    if (display_name.trim().length < 3) {
+      usernameErr.usernameErrShort = "اسم المستخدم يجيب أن يكون أكثر من 5 أحرف";
+      isValid = false;
+    }
+    if (display_name.trim().length > 25) {
+      usernameErr.usernameErrLong = "اسم المستخدم يجيب أن يكون أقل من 12 حرف";
+      isValid = false;
+    }
+
+    if (!user_email.includes("@")) {
+      emailErr.emailErrNotEmail =
+        "يجب عليك استخدام بريد الكتروني صالح الاستخدام";
+      isValid = false;
+    }
+    if (user_pass.trim().length < 5) {
+      passwordErr.passwordErrShort = "كلمة المرور يجيب أن تكون أكثر من 5 أحرف";
+      isValid = false;
+    }
+    setUsernameErr(usernameErr);
+    setEmailErr(emailErr);
+    setPasswordErr(passwordErr);
+    return isValid;
   };
 
-  const Courses = () => {
-    return (
-      <>
-        {orders.length ? (
-          orders.map(
-            (course, i) =>
-              course.status == "completed" && (
-                <Link
-                  key={i}
-                  to={`/course/${course.line_items[0].course_slug.post_name}`}
-                >
-                  <Box>
-                    <InstracturWrapper>
-                      {/* <InstracturName>{"dd"}</InstracturName>
-              <InstracturImg
-                src={
-                  "https://scontent.fsaw1-9.fna.fbcdn.net/v/t1.0-9/60034390_10155925053061333_7596400182741172224_o.jpg?_nc_cat=101&ccb=2&_nc_sid=174925&_nc_ohc=6uu7a1JoBFQAX_7zy4J&_nc_ht=scontent.fsaw1-9.fna&oh=2a37c9ef28c306d04ef3bf53b1e8d8f5&oe=5FBCF9AC"
-                }
-              /> */}
-                    </InstracturWrapper>
-                    <Title>{course.line_items[0].name}</Title>
-
-                    {/* <KindWrapper>
-                <VideosNum>{courses.line_items[0].sections} فيديو</VideosNum>
-                <VideosNum>{courses.hours} ساعات</VideosNum>
-              </KindWrapper> */}
-                  </Box>
-                </Link>
-              )
-          )
-        ) : (
-          <h1>لا يوجد دورات</h1>
-        )}
-      </>
-    );
-  };
-
-  const Shop = () => {
-    return <>Shop</>;
-  };
   return (
     <Wrapper>
-      <TitleHome>ملفي</TitleHome>
-      <BoxWrapper>
-        {/* {currentUser.user.firstname + " " + currentUser.user.lastname} */}
+      <Tabs>
+        <TabList>
+          <Tab>الملف الشخصي</Tab>
+          <Tab>الدورات</Tab>
+          <Tab>المتجر</Tab>
+        </TabList>
 
-        <Menu>
-          <Button onClick={() => setView(Profile())} bg="rgb(34 19 44 / 32%)">
-            <h2>البيانات الشخصية</h2>
-          </Button>
-          <Button onClick={() => setView(Courses())} bg="rgb(34 19 44 / 32%)">
-            <h2>الدورات</h2>
-          </Button>
-          <Button onClick={() => setView(Shop())} bg="rgb(34 19 44 / 32%)">
-            <h2>المتجر</h2>
-          </Button>
-        </Menu>
-        <View>{view || Courses()}</View>
-      </BoxWrapper>
+        <TabPanel>
+          <>
+            <center>
+              <Avatar src={currentUser.user.avatar} />
+            </center>
+
+            <Name>{display_name}</Name>
+
+            <Email> {user_email} </Email>
+
+            {/* Update Form  */}
+
+            <center>
+              <Base onSubmit={handleUpdata} method="POST">
+                <InputText
+                  id="display_name"
+                  placeholder="الإسم"
+                  type="text"
+                  name="display_name"
+                  onChange={onChangeDisplayname}
+                  pattern="^\S+$"
+                />
+                {Object.keys(usernameErr).map((key) => {
+                  return (
+                    <>
+                      <br />
+                      <div style={{ color: "red", textAlign: "right" }}>
+                        {usernameErr[key]}
+                      </div>
+                      <br />
+                    </>
+                  );
+                })}
+
+                <InputText
+                  placeholder="البريد الإلكتروني"
+                  id="user_email"
+                  type="email"
+                  name="user_email"
+                  onChange={onChangeuser_email}
+                  pattern="^\S+$"
+                />
+                {Object.keys(emailErr).map((key) => {
+                  return (
+                    <>
+                      <br />
+                      <div style={{ color: "red", textAlign: "right" }}>
+                        {emailErr[key]}
+                      </div>
+                      <br />
+                    </>
+                  );
+                })}
+
+                <Submit type="submit" value="Login">
+                  <span style={{ marginLeft: "20px" }}>حدّث بياناتك</span>
+                  {loading && (
+                    <span className="spinner-border spinner-border-md"></span>
+                  )}
+                </Submit>
+              </Base>
+              <hr style={{ borderColor: "rgb(83 78 78 / 68%)" }} />
+              <p style={{ marginBottom: "15px" }}>
+                يمكنك تغيير كلمة المرور .. من هنا
+              </p>
+              <Base onSubmit={handlePassword} method="POST">
+                <InputText
+                  autoComplete="off"
+                  placeholder="كلمة المرور"
+                  id="user_pass"
+                  type="password"
+                  name="user_pass"
+                  onChange={onChangeuser_pass}
+                  pattern="^\S+$"
+                />
+                {Object.keys(passwordErr).map((key) => {
+                  return (
+                    <>
+                      <br />
+                      <div style={{ color: "red", textAlign: "right" }}>
+                        {passwordErr[key]}
+                      </div>
+                      <br />
+                    </>
+                  );
+                })}
+                <Submit type="submit" value="Login">
+                  <span style={{ marginLeft: "20px" }}>غيّر كلمة المرور</span>
+                  {loadingPass && (
+                    <span className="spinner-border spinner-border-md"></span>
+                  )}
+                </Submit>
+              </Base>
+            </center>
+          </>
+        </TabPanel>
+        <TabPanel>
+          {items.map(
+            (course, i) =>
+              !course.line_items[0].downloadable &&
+              course.status == "completed" && (
+                <Box className="todo-row" key={i}>
+                  <Link
+                    to={`/course/${
+                      course.line_items[0].course_slug &&
+                      course.line_items[0].course_slug.post_name
+                    }`}
+                  >
+                    <CourseTitle>
+                      {course.line_items && course.line_items[0].name}
+                    </CourseTitle>
+                  </Link>
+                </Box>
+              )
+          )}
+        </TabPanel>
+        <TabPanel>
+          {items.map(
+            (course, i) =>
+              course.line_items[0].downloadable &&
+              course.status == "completed" && (
+                <Box className="todo-row" key={i}>
+                  <CourseTitle>
+                    {course.line_items && course.line_items[0].name}
+                  </CourseTitle>
+                  <a
+                    href={
+                      course.line_items[0].file &&
+                      course.line_items[0].file.meta_value
+                    }
+                  >
+                    Download
+                  </a>
+                </Box>
+              )
+          )}
+        </TabPanel>
+      </Tabs>
     </Wrapper>
   );
-};
+}
 
 export default Profile;
-const animation = keyframes`
-  from { opacity: 0; transform: translateY(-10px); filter: blur(10px); }
-  to { opacity: 1; transform: translateY(0px); filter: blur(0px); }
-`;
 const Wrapper = styled.div`
   padding-top: 200px;
   width: 1234px;
-  margin: auto auto;
-  direction: rtl;
-  text-align: right;
-  overflow: hidden;
-  @media (max-width: 1420px) {
-    width: 100%;
-    margin: auto auto;
-    padding-top: 150px;
-  }
+  margin: auto;
 `;
-
-const TitleHome = styled(H1)`
-  text-align: center;
-  font-size: 35px;
-  margin-bottom: 40px;
-  opacity: 0;
-  animation: ${animation} 1s 0.1s forwards;
-`;
-
-const BoxWrapper = styled.div`
-  width: 1234px;
-  background: rgb(0, 0, 0, 0.4);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(40px);
-  display: flex;
-  min-height: 500px;
-  gap: 30px;
-  @media (max-width: 1420px) {
-    width: 70%;
-    margin: auto auto;
-    flex-direction: column;
-  }
-`;
-
-const Menu = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding-top: 10px;
-`;
-
-const Button = styled.div`
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: 2px solid #fff;
-  background: ${(props) => props.bg || "rgb(34 19 44 / 32%)"};
-
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(40px);
-  transition: all 0.3s ease-in-out 0s;
-  text-align: center;
-  cursor: pointer;
-  :hover {
-    background: #fff;
-    color: #000;
-    transform: translateY(5px);
-  }
-`;
-const View = styled.div`
-  width: 1020px;
-  min-height: 200px;
-  background: rgb(34 19 44 / 32%);
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(40px);
-  border-radius: 20px;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding-top: 50px;
-  @media (max-width: 1420px) {
-    width: 100%;
-    margin: auto auto;
-    flex-direction: column;
-  }
-`;
-
-const Avatar = styled.img`
-  width: 130px;
-  height: 130px;
-  border-radius: 100px;
-  border: 4px solid #fff;
-  margin-bottom: 20px;
-  transition: all 0.3s ease-in-out 0s;
-  @media (max-width: 450px) {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 20px;
-  }
-`;
-const Subscription = styled(SmallText)`
-  background: gold;
-  color: #000;
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: 4px solid #000;
-  margin-bottom: 20px;
-`;
-
-const Name = styled(H2)`
-  margin-bottom: 10px;
-  @media (max-width: 1000px) {
-    font-size: 20px;
-  }
-`;
-const Email = styled(Caption)`
-  margin-bottom: 20px;
-`;
-
-//  // // //
 
 const Box = styled.div`
   position: relative;
@@ -243,7 +394,11 @@ const Box = styled.div`
   margin-right: 20px;
   margin-left: 20px;
   border-radius: 20px;
-  background: ${(props) => props.bgcolor || "palevioletred"};
+  background: linear-gradient(
+    90deg,
+    rgba(255, 118, 20, 1) 0%,
+    rgba(255, 84, 17, 1) 100%
+  );
   box-shadow: rgba(78, 153, 227, 0.3) 0px 20px 40px,
     rgba(0, 0, 0, 0.05) 0px 1px 3px;
   position: relative;
@@ -270,16 +425,7 @@ const Box = styled.div`
   }
 `;
 
-const BoxImg = styled.img`
-  width: 150px;
-  height: 150px;
-  margin-top: 30px;
-  opacity: 1;
-  animation: 1s ease 0s 1 normal forwards running jBcSpD;
-  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-`;
-
-const Title = styled.p`
+const Name = styled.p`
   font-style: normal;
   font-size: 18px;
   line-height: 140%;
@@ -294,40 +440,74 @@ const Title = styled.p`
   margin-bottom: 20px;
 `;
 
-const InstracturWrapper = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 160px;
-  justify-content: space-between;
-`;
-const InstracturName = styled(SmallText2)`
-  color: #fff;
-`;
-const InstracturImg = styled.img`
-  width: 40px;
+const Avatar = styled.img`
+  width: 130px;
+  height: 130px;
   border-radius: 100px;
-  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 0.5px inset,
-    rgba(23, 0, 102, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.1) 0px 1px 3px;
+  border: 4px solid #fff;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out 0s;
+  @media (max-width: 450px) {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
 `;
 
-const KindWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 4fr 4fr;
-  gap: 50px;
-  justify-content: space-around;
+const CourseTitle = styled(H2)`
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 20px;
+  @media (max-width: 1000px) {
+    font-size: 20px;
+  }
 `;
-
-const VideosNum = styled(SmallText)`
-  color: #fff;
-  background: rgb(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 20px;
-  font-size: 12px;
+const Email = styled(Caption)`
+  margin-bottom: 20px;
   text-align: center;
 `;
 
-const Hours = styled.div``;
+export const Base = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  width: 100%;
+`;
+
+export const Title = styled.h1`
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 28px;
+  text-align: right;
+`;
+
+export const InputText = styled.input`
+  background: #fff;
+  border-radius: 4px;
+  border: 0;
+  color: #d72828;
+  height: 50px;
+  line-height: 50px;
+  padding: 5px 20px;
+  margin-bottom: 10px;
+  &:last-of-type {
+    margin-bottom: 30px;
+  }
+`;
+
+export const Submit = styled.button`
+  background: #00cffd;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px 0 12px;
+  padding: 16px;
+  border: 0;
+  color: #080812;
+  margin-bottom: 40px;
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.5;
+  }
+`;

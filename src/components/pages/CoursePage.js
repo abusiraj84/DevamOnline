@@ -17,8 +17,41 @@ function CoursePage({ match }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetch(
+        `${config.siteUrl}/wp-json/wp/v2/courses?slug=${match.params.slug}`,
+        {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+
+            "dwm-tkn": currentUser && currentUser.cookie,
+          },
+        }
+      );
+      const items = await data.json();
+      setItems(items[0]);
+      console.log(items[0]);
+    };
     fetchData();
     if (currentUser) {
+      const fetchOrder = async () => {
+        const data = await fetch(`${config.siteUrl}/wp-json/wcm/api/orders`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "dwm-tkn": currentUser.cookie,
+          },
+        });
+        const items = await data.json();
+        setOrders(items[0]);
+        // setOrderStatus(items[0].status);
+        // setOrderID(items[0].line_items[0].id);
+        // console.log(items[0].line_items[0].id);
+        console.log(items[0]);
+        // console.log(items[0].status);
+      };
+
       fetchOrder();
     }
 
@@ -26,40 +59,6 @@ function CoursePage({ match }) {
       setIsLoaded(true);
     }, 2000);
   }, []);
-
-  const fetchData = async () => {
-    const data = await fetch(
-      `${config.siteUrl}/wp-json/wp/v2/courses?slug=${match.params.slug}`,
-      {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-
-          "dwm-tkn": currentUser && currentUser.cookie,
-        },
-      }
-    );
-    const items = await data.json();
-    setItems(items[0]);
-    console.log(items[0]);
-  };
-
-  const fetchOrder = async () => {
-    const data = await fetch(`${config.siteUrl}/wp-json/wcm/api/orders`, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-        "dwm-tkn": currentUser.cookie,
-      },
-    });
-    const items = await data.json();
-    setOrders(items[0]);
-    // setOrderStatus(items[0].status);
-    // setOrderID(items[0].line_items[0].id);
-    // console.log(items[0].line_items[0].id);
-    console.log(items[0]);
-    // console.log(items[0].status);
-  };
 
   const [items, setItems] = useState([]);
   const [orders, setOrders] = useState("");

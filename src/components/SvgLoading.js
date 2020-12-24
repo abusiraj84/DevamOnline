@@ -12,7 +12,7 @@ function SvgLoading(props) {
       renderer: "svg", // Required
       loop: true, // Optional
       autoplay: true, // Optional
-      animationData: require(`../${json}.json`),
+      animationData: require(`../${props.json}.json`),
     });
   }, []);
 

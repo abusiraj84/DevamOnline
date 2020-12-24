@@ -4,6 +4,7 @@ import Helmet from "react-helmet";
 import SvgLoading from "./SvgLoading";
 import CoursesCards from "./sections/section/CoursesCards";
 import HeroSection from "./sections/HeroSection";
+import Footer from "../components/Fotter";
 
 const Home = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -11,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-    }, 1500);
+    }, 500);
   }, []);
   return (
     <div>
@@ -36,6 +37,7 @@ const Home = () => {
           </Helmet>
           <HeroSection />
           <CoursesCards />
+          <Footer />
         </Wrapper>
       ) : (
         <SvgLoading json="1" />
