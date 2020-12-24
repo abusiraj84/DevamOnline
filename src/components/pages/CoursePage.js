@@ -26,6 +26,7 @@ function CoursePage({ match }) {
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
+            "Access-Control-Allow-Headers": "X-CSRF-Token",
             "dwm-tkn": currentUser && currentUser.cookie,
           },
         }
