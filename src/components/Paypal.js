@@ -21,14 +21,17 @@ function Paypal(props) {
     //   window.location.reload();
     // }, 1000);
 
-    fetch(`/wp-json/wcm/api/orders`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        "dwm-tkn": currentUser.cookie,
-      },
-      body: JSON.stringify(paypalData),
-    })
+    fetch(
+      `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
+      {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          "dwm-tkn": currentUser.cookie,
+        },
+        body: JSON.stringify(paypalData),
+      }
+    )
       .then((response) => response.json())
       .then((responseJson) => {
         console.log("تمت الشراء بنجاح", responseJson);
@@ -42,7 +45,7 @@ function Paypal(props) {
         });
 
         setTimeout(() => {
-          window.location.href = `/order-received/${responseJson.id}`;
+          window.location.href = `https://cors-anywhere.herokuapp.com/https://devam.website/order-received/${responseJson.id}`;
         }, 2500);
       })
       .catch((error) => {
