@@ -249,7 +249,7 @@ const Cart = styled.img`
 // // //
 
 const ModalImg = styled.img`
-  width: 758px;
+  width: 100%;
   height: 400px;
   /* background: ${(props) =>
     `url(${props.bg})` ||
