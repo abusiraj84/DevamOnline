@@ -17,10 +17,10 @@ function HeroSection() {
               ما تبحث عنه من طموحات..
             </Description>
 
-            <PurchaseButton
+            {/* <PurchaseButton
               title="اشترِ الآن"
               subtitle="عشرات الدورات بانتظارك"
-            />
+            /> */}
           </TextWrapper>
           <ImgHero src="../images/backgrounds/herobg.svg" />
         </ContentWrapper>
