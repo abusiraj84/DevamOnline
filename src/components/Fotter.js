@@ -32,7 +32,7 @@ function Fotter() {
         <h3 style={{ marginTop: "18px", textAlign: "center" }}>
           جميع الحقوق محفوظة لدى &nbsp;
           <a
-            href="https://ozone.istanbul"
+            href="https://devam.online"
             style={{ color: "yellow" }}
             target="_blank"
           >
