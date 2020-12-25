@@ -141,44 +141,63 @@ function CheckoutPage({ match }) {
   const handleLogin = (e) => {
     e.preventDefault();
     // console.log(JSON.stringify(data));
-    setLoading(true);
 
-    if (payment_method == "paypal") {
-    } else if (payment_method == "bacs") {
-      fetch(
-        `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
-        {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-            "dwm-tkn": currentUser.cookie,
-          },
-          body: JSON.stringify(data),
-        }
-      )
-        .then((response) => response.json())
-        .then((responseJson) => {
-          setLoading(false);
+    if (
+      billing_first_name !== "" &&
+      billing_last_name !== "" &&
+      billing_address_1 !== "" &&
+      billing_city !== "" &&
+      billing_country !== "" &&
+      billing_email !== "" &&
+      billing_phone !== "" &&
+      billing_postcode !== ""
+    ) {
+      setLoading(true);
+      if (payment_method == "paypal") {
+      } else if (payment_method == "bacs") {
+        fetch(
+          `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
+          {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              "dwm-tkn": currentUser.cookie,
+            },
+            body: JSON.stringify(data),
+          }
+        )
+          .then((response) => response.json())
+          .then((responseJson) => {
+            setLoading(false);
 
-          console.log("تمت الشراء بنجاح", responseJson.id);
-          setorderId(responseJson.id);
-          console.log(responseJson);
-          console.log(currentUser.cookie);
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "تمت عملية الطلب بنجاح",
-            showConfirmButton: false,
-            timer: 1800,
+            console.log("تمت الشراء بنجاح", responseJson.id);
+            setorderId(responseJson.id);
+            console.log(responseJson);
+            console.log(currentUser.cookie);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "تمت عملية الطلب بنجاح",
+              showConfirmButton: false,
+              timer: 1800,
+            });
+
+            setTimeout(() => {
+              window.location.href = `/order-received/${responseJson.id}`;
+            }, 2500);
+          })
+          .catch((error) => {
+            console.error(error);
           });
-
-          setTimeout(() => {
-            window.location.href = `/order-received/${responseJson.id}`;
-          }, 2500);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      }
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "من فضلك يرجى تعبئة جميع الحقول",
+        showConfirmButton: false,
+        timer: 1800,
+      });
     }
   };
 
@@ -525,7 +544,7 @@ function CheckoutPage({ match }) {
                   <InputText
                     placeholder="البريد الإلكتروني"
                     id="billing_email"
-                    type="billing_email"
+                    type="email"
                     name="billing_email"
                     onChange={onChangebilling_email}
                     value={billing_email}

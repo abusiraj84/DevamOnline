@@ -54,6 +54,7 @@ function InstructursPage() {
                   <CourseWrapper>
                     <CoursNum style={{ textAlign: "center" }}>الدورات</CoursNum>
                     {item.courses.map((item, i) => (
+                      item.
                       <Link key={i} to={`/course/${item.post_name}`}>
                         <CourseTitle key={i}>{item.post_title}</CourseTitle>
                       </Link>

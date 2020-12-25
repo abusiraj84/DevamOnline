@@ -264,7 +264,7 @@ const ImgLesson = styled.div`
   position: relative;
   background-image: url(${(props) => props.img});
   background-repeat: no-repeat;
-  width: 400px;
+  width: 492px;
   height: 400px;
   background-size: 500px 500px;
   @media (max-width: 450px) {

@@ -254,7 +254,7 @@ function Profile() {
             {/* Update Form  */}
 
             <center>
-              <Base onSubmit={handleUpdata} method="POST">
+              {/* <Base onSubmit={handleUpdata} method="POST">
                 <InputText
                   id="display_name"
                   placeholder="الإسم"
@@ -301,7 +301,7 @@ function Profile() {
                     <span className="spinner-border spinner-border-md"></span>
                   )}
                 </Submit>
-              </Base>
+              </Base> */}
               <hr style={{ borderColor: "rgb(83 78 78 / 68%)" }} />
               <p style={{ marginBottom: "15px" }}>
                 يمكنك تغيير كلمة المرور .. من هنا
@@ -388,11 +388,17 @@ const Wrapper = styled.div`
   padding-top: 200px;
   width: 1234px;
   margin: auto;
+  @media (max-width: 1300px) {
+    margin: auto;
+    width: 80%;
+
+    margin-top: 50px;
+  }
 `;
 
 const Box = styled.div`
   position: relative;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-right: 20px;
   margin-left: 20px;
   border-radius: 20px;
@@ -404,7 +410,7 @@ const Box = styled.div`
   box-shadow: rgba(78, 153, 227, 0.3) 0px 20px 40px,
     rgba(0, 0, 0, 0.05) 0px 1px 3px;
   position: relative;
-  display: grid;
+  display: block;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr;
   min-width: 200px;
@@ -415,6 +421,8 @@ const Box = styled.div`
   place-content: center;
   justify-items: center;
   align-items: center;
+  width: 68%;
+  margin: auto;
   &:hover {
     box-shadow: rgba(78, 153, 227, 0.3) 0px 20px 80px,
       rgba(0, 0, 0, 0.15) 0px 20px 40px;
@@ -424,6 +432,9 @@ const Box = styled.div`
   &:hover img,
   InstracturImg {
     transform: scale(0.8);
+  }
+  @media (max-width: 600px) {
+    font-size: 20px;
   }
 `;
 
@@ -457,11 +468,12 @@ const Avatar = styled.img`
 `;
 
 const CourseTitle = styled(H2)`
-  margin-bottom: 10px;
   text-align: center;
   font-size: 20px;
+  color: #fff;
+
   @media (max-width: 1000px) {
-    font-size: 20px;
+    font-size: 16px;
   }
 `;
 const Email = styled(Caption)`

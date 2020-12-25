@@ -29,18 +29,24 @@ function Fotter() {
         {/* <h2>fdfdf</h2> */}
       </Grid>
       <Info>
-        <h3>
-          هذا المشروع أحد روافد شركة &nbsp;
+        <h3 style={{ marginTop: "18px", textAlign: "center" }}>
+          جميع الحقوق محفوظة لدى &nbsp;
           <a
             href="https://ozone.istanbul"
             style={{ color: "yellow" }}
             target="_blank"
           >
-            Ozone Istanbul
+            Devam Online
           </a>
         </h3>
-        <p style={{ textAlign: "center", marginTop: "20px" }}>
-          Devam.online © 2020
+        <p
+          style={{
+            textAlign: "center",
+            marginTop: "0px",
+            marginBottom: "8px",
+          }}
+        >
+          Devam.online © 2021
         </p>
       </Info>
     </Wrapper>
@@ -56,27 +62,42 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   margin-bottom: 50px;
+  margin-top: 50px;
+  @media (max-width: 1300px) {
+    margin: auto;
+    width: 80%;
+    /* margin-left: 50px;
+    display:block; */
+    grid-template-columns: 1fr;
+    margin-top: 50px;
+  }
+  @media (max-width: 780px) {
+    width: 90%;
+    /* margin-left: 50px;
+    display:block; */
+  }
 `;
 
 const Grid = styled.div`
-display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
-    width: 100%;
-    gap: 18px;
-    background: #00000024;
-    border-radius: 20px;
-    padding: 10px;
-}
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  width: 100%;
+  gap: 18px;
+  background: #00000024;
+  border-radius: 20px;
+  padding: 10px;
+  /*  */
+  margin-bottom: 50px;
 `;
 
 const Info = styled.div`
-    display: grid;
-    grid-template-columns: 1fr;
+  display: grid;
+  grid-template-columns: 1fr;
 
-    background: #00000024;
-    border-radius: 20px;
-    padding: 50px;
-  
-}
+  background: #00000024;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 50px;
+  width: 95%;
 `;

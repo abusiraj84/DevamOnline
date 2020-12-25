@@ -88,7 +88,6 @@ function CoursePage({ match }) {
     <div>
       {isLoaded ? (
         <All>
-          {" "}
           <WaveBackground />
           {items ? (
             <Wrapper bgcolor={items._lp_course_background}>

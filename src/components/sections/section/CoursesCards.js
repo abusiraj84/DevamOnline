@@ -235,8 +235,7 @@ const CardSingle = styled.div`
   }
 `;
 const CatHeader = styled.div`
-  min-width: 95px;
-  width: 95px;
+  width: 100%;
   text-align: center;
   padding: 8px 20px;
   display: inline-table;
@@ -253,9 +252,12 @@ const CatHeader = styled.div`
   background: rgb(70 70 70 / 28%);
   opacity: 0;
   animation: ${animation} 1s 0.1s forwards;
+  margin-top: 50px;
   @media (max-width: 1300px) {
-    margin-right: 70px;
-    /* margin-left: 50px;
-    display:block; */
+    margin: auto;
+    width: 80%;
+  }
+  @media (max-width: 780px) {
+    width: 90%;
   }
 `;

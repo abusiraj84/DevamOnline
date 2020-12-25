@@ -86,7 +86,20 @@ function SectionDetail(props) {
           sale={sale}
           courseid={id}
         />
-      ) : null}
+      ) : (
+        <h1
+          style={{
+            color: "#ffffff",
+            fontSize: "14px",
+            background: "black",
+            padding: "20px",
+            borderRadius: "20px",
+            textAlign: "center",
+          }}
+        >
+          كلمة مرور ملفات المشاريع : Devam@Online2021
+        </h1>
+      )}
 
       <Line />
       <TopicWrapper>
@@ -118,8 +131,9 @@ const Wrapper = styled.div`
   gap: 40px;
   margin: 0px 20px;
   @media (max-width: 1270px) {
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
+    padding: 100px 0px 0px;
   }
   > * {
     :nth-child(1) {

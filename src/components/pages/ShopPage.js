@@ -119,7 +119,8 @@ function ShopPage() {
           <CardWrapper>
             {items.map(
               (item, i) =>
-                item.downloadable && (
+                item.downloadable &&
+                item.purchasable && (
                   <Card key={i}>
                     <Img
                       style={{ cursor: "pointer" }}
@@ -136,7 +137,7 @@ function ShopPage() {
                         setTags(item.track_tags);
                         setInstruments(item.instruments);
                         setYoutubeContent(item.youtube_content);
-                        setImage(item.images[0].src);
+                        setImage(item.images[0].src || "0.jpg");
                       }}
                       bg={`url(${item.images[0].src || "0.jpg"})`}
                     />
