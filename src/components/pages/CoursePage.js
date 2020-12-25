@@ -32,6 +32,8 @@ function CoursePage({ match }) {
       const items = await data.json();
       setItems(items[0]);
       console.log(items[0]);
+      console.log(items[0]._lp_course_font_color);
+      setFontColor(items[0]._lp_course_font_color);
     };
     fetchData();
     if (currentUser) {
@@ -52,6 +54,7 @@ function CoursePage({ match }) {
         // setOrderID(items[0].line_items[0].id);
         // console.log(items[0].line_items[0].id);
         console.log(items[0]);
+
         // console.log(items[0].status);
       };
 

@@ -42,6 +42,7 @@ function ShopPage() {
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
   const [mp3, setMp3] = useState("");
+  const [id, setId] = useState("");
   const [description, setDescription] = useState("");
   const [isLooped, setIsLooped] = useState("");
   const [length, setLength] = useState("");
@@ -61,7 +62,9 @@ function ShopPage() {
                 <ModalTitle>{name}</ModalTitle>
                 <IconsWrapper>
                   <ModalPrice>${price}</ModalPrice>
-                  <ModalCart src="images/icons/shop.svg" />
+                  <Link to={`/checkout-shop/${id}`}>
+                    <ModalCart src="images/icons/shop.svg" />
+                  </Link>
                 </IconsWrapper>
                 <Waveform
                   url={`https://cors-anywhere.herokuapp.com/` + mp3 || "a.mp3"}
@@ -125,6 +128,7 @@ function ShopPage() {
                         setName(item.name);
                         setPrice(item.price);
                         setMp3(item.preview_mp3);
+                        setId(item.id);
                         setIsLooped(item.is_looped);
                         setLength(item.track_length);
                         setDescription(item.description);
@@ -138,7 +142,12 @@ function ShopPage() {
                     />
                     <ContentWrapper>
                       <Title>{item.name}</Title>
-                      <Waveform url={item.preview_mp3 || "audio.mp3"} />
+                      <Waveform
+                        url={
+                          `https://cors-anywhere.herokuapp.com/${item.preview_mp3}` ||
+                          "audio.mp3"
+                        }
+                      />
                       <Price>${item.price}</Price>
                       <Link to={`/checkout-shop/${item.id}`}>
                         <Cart src="images/icons/shop.svg" />
@@ -240,8 +249,8 @@ const Cart = styled.img`
 // // //
 
 const ModalImg = styled.img`
-  width: 100%;
-  height: 504px;
+  width: 758px;
+  height: 400px;
   /* background: ${(props) =>
     `url(${props.bg})` ||
     "url(https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg)"}; */

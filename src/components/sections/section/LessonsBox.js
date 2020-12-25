@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Caption } from "../../styles/TextStyles";
+import ReactHtmlParser from "react-html-parser";
 
 function LessonsBox(props) {
   const { lessonnum, lessontitle, lessontime, preview, fontcolor } = props;
@@ -11,7 +12,7 @@ function LessonsBox(props) {
         <Num>{lessonnum || "0"}</Num>
       </Id>
       <TitlLessons fontcolor={fontcolor}>
-        {lessontitle || "lesson num 1"}
+        {ReactHtmlParser(lessontitle) || "lesson num 1"}
       </TitlLessons>
       <Preview src={`/images/icons/${preview}`} />
       <Time>
@@ -30,11 +31,12 @@ const LessonsGrid = styled.li`
   border-bottom: 1px solid rgb(255, 255, 255, 0.1);
   margin-bottom: 10px;
   align-items: center;
-  filter: brightness(0.8);
+  /* filter: brightness(0.8); */
   transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
   border-radius: 5px;
   &:hover {
-    filter: brightness(1);
+    /* filter: brightness(1); */
+    color: #000;
     background: rgb(255, 255, 255, 0.1);
     padding: 8px;
     box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 0.5px inset,

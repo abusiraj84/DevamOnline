@@ -390,5 +390,4 @@ const Registerd = styled.div`
 
 const BuyNow = styled.button`
   padding: 10px;
-  sha
 `;
