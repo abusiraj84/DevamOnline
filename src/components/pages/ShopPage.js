@@ -63,7 +63,9 @@ function ShopPage() {
                   <ModalPrice>${price}</ModalPrice>
                   <ModalCart src="images/icons/shop.svg" />
                 </IconsWrapper>
-                <Waveform url={mp3 || "a.mp3"} />
+                <Waveform
+                  url={`https://cors-anywhere.herokuapp.com/` + mp3 || "a.mp3"}
+                />
                 <BottomWrapper>
                   <SlideWrapper>
                     <Slide>

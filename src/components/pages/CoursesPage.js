@@ -11,7 +11,7 @@ function CoursesPage() {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-    }, 500);
+    }, 2000);
   }, []);
   return (
     <div>
