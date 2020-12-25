@@ -18,9 +18,27 @@
 }
 
 .content {
-  margin: 3% auto;
+  margin: 50px auto;
   background-color: white;
   border-radius: 20px;
-  width: 37vw;
+  width: 960px;
   position: relative;
+}
+
+@media (max-width: 1040px) {
+  .content {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 770px) {
+  .content {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 640px) {
+  .content {
+    max-width: 400px;
+  }
 }

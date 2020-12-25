@@ -15,6 +15,7 @@ import qs from "qs";
 
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import Fotter from "./Fotter";
 
 function Profile() {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -379,6 +380,7 @@ function Profile() {
           )}
         </TabPanel>
       </Tabs>
+      <Fotter />
     </Wrapper>
   );
 }

@@ -18,10 +18,8 @@ function SvgLoading(props) {
 
   return (
     <SvgWrapper>
-      <Center>
-        {/* <Load src="../images/Infinity.svg" /> */}
-        <div ref={container}></div>
-      </Center>
+      {/* <Load src="../images/Infinity.svg" /> */}
+      <div ref={container}></div>
     </SvgWrapper>
   );
 }
@@ -42,6 +40,12 @@ const SvgWrapper = styled.div`
   margin: 0px auto;
   background: #5151513b;
   animation: ${Fadeanimation} 1s 0.6s forwards;
+  @media (max-width: 1270px) {
+    width: 100vw;
+    height: 100vh;
+
+    margin: 0;
+  }
 `;
 const Center = styled.div`
   width: 1250px;

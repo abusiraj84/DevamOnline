@@ -10,6 +10,7 @@ import "axios-progress-bar/dist/nprogress.css";
 import axios from "axios";
 import ReactHtmlParser from "react-html-parser";
 import { Link } from "react-router-dom";
+import Fotter from "../Fotter";
 
 function ShopPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -158,6 +159,8 @@ function ShopPage() {
                 )
             )}
           </CardWrapper>
+
+          <Fotter />
         </Wrapper>
       ) : (
         <SvgLoading json="7" />
@@ -171,12 +174,27 @@ const Wrapper = styled.div`
   padding-top: 200px;
   width: 1255px;
   margin: 0px auto;
+  @media (max-width: 1270px) {
+    width: 100%;
+    padding-top: 150px;
+
+    margin: 0;
+  }
 `;
 
 const CardWrapper = styled.div`
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2%;
+  margin: 0 50px;
+  @media (max-width: 1270px) {
+    grid-template-columns: 1fr 1fr;
+    margin: 0 50px;
+  }
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Card = styled.div`
@@ -275,7 +293,7 @@ const IconsWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-right: 20px;
-  margin-left: 100px;
+  margin-left: 42px;
   margin-bottom: 40px;
   height: 33px;
 `;

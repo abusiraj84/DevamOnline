@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { H1, H2, SmallText } from "../styles/TextStyles";
 import { config } from "../../config";
 import SvgLoading from "../SvgLoading";
+import Fotter from "../Fotter";
+import { loadProgressBar } from "axios-progress-bar";
 
 function InstructursPage() {
   useEffect(() => {
@@ -63,6 +65,7 @@ function InstructursPage() {
               ) : null
             )}
           </CardWrapper>
+          <Fotter />
         </Wrapper>
       ) : (
         <SvgLoading json="3" />
@@ -97,6 +100,7 @@ const Title = styled(H1)`
 `;
 
 const CardWrapper = styled.div`
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   direction: rtl;
@@ -221,10 +225,8 @@ const CourseTitle = styled.li`
   padding: 19px;
   border-radius: 6px;
   background: #b9acac29;
-  rgba(255,255,255,0.25) 0px 20px 40px,
-  rgba(0,0,0,0.1) 0px 1px 5px,
-  rgba(255,255,255,0.4) 0px 0px 0px 0.5px inset;
-   &:hover {
+
+  :hover {
     cursor: pointer;
     transform: translateY(-2px);
     color: #ddd;

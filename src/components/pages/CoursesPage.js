@@ -4,7 +4,7 @@ import styled from "styled-components";
 import CoursesCards from "../sections/section/CoursesCards";
 import { H1 } from "../styles/TextStyles";
 import SvgLoading from "../SvgLoading";
-
+import Fotter from "../Fotter";
 function CoursesPage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -23,6 +23,7 @@ function CoursesPage() {
       ) : (
         <SvgLoading json="2" />
       )}
+      <Fotter />
     </div>
   );
 }
@@ -30,6 +31,7 @@ function CoursesPage() {
 export default CoursesPage;
 
 const Wrapper = styled.div`
+  min-height: 100vh;
   padding-top: 200px;
   width: 1234px;
   margin: 0px auto;
