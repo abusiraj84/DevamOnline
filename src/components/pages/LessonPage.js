@@ -69,7 +69,9 @@ function LessonPage({ match }) {
       {isLoaded ? (
         <Wrapper>
           <Helmet>
-            <title>{lesson.title && lesson.title.rendered}</title>
+            <title>
+              {lesson.title && ReactHtmlParser(lesson.title.rendered)}
+            </title>
           </Helmet>
           {lesson._lp_lesson_course_access ||
           lesson._lp_preview === "yes" ||
@@ -110,10 +112,14 @@ function LessonPage({ match }) {
                     onClick={() => setIsOpen(!isOpen)}
                   />
                 </PlayWrapper>
-                <Title>{lesson.title && lesson.title.rendered}</Title>
+                <Title>
+                  {lesson.title && ReactHtmlParser(lesson.title.rendered)}
+                </Title>
                 {lesson.content.rendered != "" ? (
                   <Content>
-                    {ReactHtmlParser(lesson.content && lesson.content.rendered)}
+                    {ReactHtmlParser(
+                      lesson.content && ReactHtmlParser(lesson.content.rendered)
+                    )}
                   </Content>
                 ) : (
                   <p></p>
