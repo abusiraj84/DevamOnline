@@ -11,6 +11,7 @@ import { config } from "../../config";
 import SvgLoading from "../SvgLoading";
 import WaveBackground from "../backgrounds/WaveBackground";
 import Footer from "../../components/Fotter";
+import { FaArrowCircleUp } from "react-icons/fa";
 
 function CoursePage({ match }) {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -74,6 +75,22 @@ function CoursePage({ match }) {
   const [fontcolor, setFontColor] = useState([]);
   const [theuser, setTheuser] = useState([]);
 
+  const [showScroll, setShowScroll] = useState(false);
+
+  const checkScrollTop = () => {
+    if (!showScroll && window.pageYOffset > 400) {
+      setShowScroll(true);
+    } else if (showScroll && window.pageYOffset <= 400) {
+      setShowScroll(false);
+    }
+  };
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  window.addEventListener("scroll", checkScrollTop);
+
   ////////////////////////////////////////////////////////////////////////////////
 
   const mylessons = currentUser ? theuser : []; //..some array
@@ -86,63 +103,92 @@ function CoursePage({ match }) {
 
   return (
     <div>
+      <ScrollTop
+        onClick={scrollTop}
+        style={{
+          height: "40px",
+
+          display: showScroll ? "flex" : "none",
+        }}
+      >
+        <FaArrowCircleUp size={50} />
+      </ScrollTop>
       {isLoaded ? (
         <All>
           <WaveBackground />
           {items ? (
-            <Wrapper bgcolor={items._lp_course_background}>
-              <Helmet title={items.title && items.title.rendered}>
-                <title>{items.title && items.title.rendered}</title>
-                <meta
-                  name="description"
-                  content={items.title && items.title.rendered}
-                  data-react-helmet="true"
-                />
-              </Helmet>
-              {items.code != "rest_forbidden" ? (
-                <ContentWrapper>
-                  <SectionDetail
-                    logo={items._lp_course_logo}
-                    title={items.title && items.title.rendered}
-                    img={items._lp_course_thumb}
-                    sections={
-                      items._lp_curriculum && items._lp_curriculum.length
-                    }
-                    lessons={items._lp_lessons_count}
-                    hours={items._lp_course_duration}
-                    desc={items.content && items.content.rendered}
-                    name={
-                      items._lp_course_author && items._lp_course_author.name
-                    }
-                    instaimg={
-                      items._lp_course_author && items._lp_course_author.avatar
-                    }
-                    topics={items._lp_curriculum && items._lp_curriculum.length}
-                    imgcolor={items._lp_course_background}
-                    price={items._lp_sale_price}
-                    sale={items._lp_price}
-                    id={items.id}
-                    isAccess={items._is_accessed}
-                    orderStatus={orderStatus}
-                    orderID={orderID}
+            items._lp_is_soon === "no" ? (
+              <Wrapper bgcolor={items._lp_course_background}>
+                <Helmet title={items.title && items.title.rendered}>
+                  <title>{items.title && items.title.rendered}</title>
+                  <meta
+                    name="description"
+                    content={items.title && items.title.rendered}
+                    data-react-helmet="true"
                   />
-                  <WrapperWidth>
-                    <WrapperLessons
-                      sectionboxcolor={items._lp_course_background}
-                    >
-                      {items._lp_curriculum &&
-                        items._lp_curriculum.map((item, i) => (
-                          <div key={item.id}>
-                            <Title sectioncolor={items._lp_course_background}>
-                              {item.title}
-                            </Title>
+                </Helmet>
 
-                            {item.items.map((item, index) => (
-                              <div key={item.id}>
-                                {!items._is_accessed &&
-                                items._lp_sale_price != "" ? (
-                                  item.preview == "yes" ? (
-                                    <Link to={`/lesson/${item.slug}`}>
+                {items.code != "rest_forbidden" ? (
+                  <ContentWrapper>
+                    <SectionDetail
+                      logo={items._lp_course_logo}
+                      title={items.title && items.title.rendered}
+                      img={items._lp_course_thumb}
+                      sections={
+                        items._lp_curriculum && items._lp_curriculum.length
+                      }
+                      lessons={items._lp_lessons_count}
+                      hours={items._lp_course_duration}
+                      desc={items.content && items.content.rendered}
+                      name={
+                        items._lp_course_author && items._lp_course_author.name
+                      }
+                      instaimg={
+                        items._lp_course_author &&
+                        items._lp_course_author.avatar
+                      }
+                      topics={
+                        items._lp_curriculum && items._lp_curriculum.length
+                      }
+                      imgcolor={items._lp_course_background}
+                      price={items._lp_sale_price}
+                      sale={items._lp_price}
+                      id={items.id}
+                      isAccess={items._is_accessed}
+                      orderStatus={orderStatus}
+                      orderID={orderID}
+                    />
+                    <WrapperWidth>
+                      <WrapperLessons
+                        sectionboxcolor={items._lp_course_background}
+                      >
+                        {items._lp_curriculum &&
+                          items._lp_curriculum.map((item, i) => (
+                            <div key={item.id}>
+                              <Title sectioncolor={items._lp_course_background}>
+                                {item.title}
+                              </Title>
+
+                              {item.items.map((item, index) => (
+                                <div key={item.id}>
+                                  {!items._is_accessed &&
+                                  items._lp_sale_price != "" ? (
+                                    item.preview == "yes" ? (
+                                      <Link to={`/lesson/${item.slug}`}>
+                                        <LessonsBox
+                                          lessonnum={item.lesson_num}
+                                          lessontitle={item.title}
+                                          lessontime={item.lesson_duration}
+                                          preview={
+                                            item.preview == "yes"
+                                              ? "eye.svg"
+                                              : "lock2.svg"
+                                          }
+                                          isAccess={items._is_accessed}
+                                          fontcolor={fontcolor}
+                                        />
+                                      </Link>
+                                    ) : (
                                       <LessonsBox
                                         lessonnum={item.lesson_num}
                                         lessontitle={item.title}
@@ -152,47 +198,42 @@ function CoursePage({ match }) {
                                             ? "eye.svg"
                                             : "lock2.svg"
                                         }
+                                        fontcolor={fontcolor}
+                                      />
+                                    )
+                                  ) : (
+                                    <Link to={`/lesson/${item.slug}`}>
+                                      <LessonsBox
+                                        lessonnum={item.lesson_num}
+                                        lessontitle={item.title}
+                                        lessontime={item.lesson_duration}
+                                        preview={"play-button.svg"}
                                         isAccess={items._is_accessed}
                                         fontcolor={fontcolor}
                                       />
                                     </Link>
-                                  ) : (
-                                    <LessonsBox
-                                      lessonnum={item.lesson_num}
-                                      lessontitle={item.title}
-                                      lessontime={item.lesson_duration}
-                                      preview={
-                                        item.preview == "yes"
-                                          ? "eye.svg"
-                                          : "lock2.svg"
-                                      }
-                                      fontcolor={fontcolor}
-                                    />
-                                  )
-                                ) : (
-                                  <Link to={`/lesson/${item.slug}`}>
-                                    <LessonsBox
-                                      lessonnum={item.lesson_num}
-                                      lessontitle={item.title}
-                                      lessontime={item.lesson_duration}
-                                      preview={"play-button.svg"}
-                                      isAccess={items._is_accessed}
-                                      fontcolor={fontcolor}
-                                    />
-                                  </Link>
-                                )}
-                              </div>
-                            ))}
-                          </div>
-                        ))}
-                    </WrapperLessons>
-                  </WrapperWidth>{" "}
-                  <Footer />
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          ))}
+                      </WrapperLessons>
+                    </WrapperWidth>{" "}
+                    <Footer />
+                  </ContentWrapper>
+                ) : (
+                  <Redirect to="/" />
+                )}
+              </Wrapper>
+            ) : (
+              <Wrapper>
+                <ContentWrapper>
+                  <center>
+                    <h1 style={{ fontSize: "30px" }}>الدورة تحت التنفيذ</h1>
+                  </center>
                 </ContentWrapper>
-              ) : (
-                <Redirect to="/" />
-              )}
-            </Wrapper>
+              </Wrapper>
+            )
           ) : (
             <Redirect to="/home" />
           )}
@@ -298,4 +339,31 @@ const LoadingWrapper = styled.div`
 const Load = styled.img`
   width: 100px;
   margin-top: 50vh;
+`;
+
+const ScrollTop = styled.div`
+  position: fixed;
+
+  bottom: 40px;
+  right: 40px;
+  align-items: center;
+  height: 20px;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+  animation: fadeIn 0.3s;
+  transition: opacity 0.4s;
+  opacity: 0.5;
+
+  :hover {
+    opacity: 1;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
 `;
