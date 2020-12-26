@@ -29,11 +29,18 @@ function Fotter() {
         {/* <h2>fdfdf</h2> */}
       </Grid>
       <Info>
-        <h3 style={{ marginTop: "18px", textAlign: "center" }}>
+        <h3
+          style={{
+            marginTop: "18px",
+            textAlign: "center",
+            fontSize: "12px",
+            lineHeight: "140%",
+          }}
+        >
           جميع الحقوق محفوظة لدى &nbsp;
           <a
             href="https://devam.online"
-            style={{ color: "yellow" }}
+            style={{ color: "yellow", fontSize: "13px" }}
             target="_blank"
           >
             Devam Online
