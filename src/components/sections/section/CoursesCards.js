@@ -85,7 +85,7 @@ function CoursesCards() {
                             />
                           </Link>
                         ) : (
-                          <div style={{ filter: "grayscale(100%)" }}>
+                          <div>
                             <Card
                               title={item.title.rendered}
                               img={item._lp_course_thumb}

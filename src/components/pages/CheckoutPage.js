@@ -740,10 +740,19 @@ const Wrapper = styled.div`
   label {
     color: #fff;
   }
+
+  @media (max-width: 1270px) {
+    width: 100%;
+    margin: auto;
+  }
 `;
 const ContentWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: center;
+  @media (max-width: 1270px) {
+    grid-template-columns: 1fr;
+  }
 `;
 const Head = styled.h1`
   font-size: 40px;
