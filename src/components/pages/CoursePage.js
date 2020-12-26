@@ -229,7 +229,17 @@ function CoursePage({ match }) {
               <Wrapper>
                 <ContentWrapper>
                   <center>
-                    <h1 style={{ fontSize: "30px" }}>الدورة تحت التنفيذ</h1>
+                    <h1
+                      style={{
+                        fontSize: "30px",
+                        marginTop: "100px",
+                        background: "#00000059",
+                        padding: "10px",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      الدورة قيد التنفيذ
+                    </h1>
                   </center>
                 </ContentWrapper>
               </Wrapper>

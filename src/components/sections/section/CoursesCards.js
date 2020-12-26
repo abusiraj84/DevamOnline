@@ -59,8 +59,8 @@ function CoursesCards() {
               )}
 
               <CardSingle>
-                {item.courses
-                  .map((item) => (
+                {
+                  item.courses.map((item) => (
                     <div key={item.id}>
                       {" "}
                       {item.status === "publish" &&
@@ -109,7 +109,8 @@ function CoursesCards() {
                         ))}
                     </div>
                   ))
-                  .reverse()}
+                  // .reverse()
+                }
               </CardSingle>
             </Box>
           ))}

@@ -102,9 +102,9 @@ const Title = styled(H1)`
 const CardWrapper = styled.div`
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   direction: rtl;
-
+  gap: 50px;
   > * {
     :nth-child(1) {
       opacity: 0;
@@ -122,7 +122,7 @@ const CardWrapper = styled.div`
   @media (max-width: 1300px) {
     width: 100%;
     margin: 0px auto;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
   }
   @media (max-width: 800px) {
@@ -132,7 +132,7 @@ const CardWrapper = styled.div`
   }
 `;
 const Card = styled.div`
-  width: 350px;
+  /* width: 350px; */
   padding: 20px;
   border-radius: 20px;
   box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 0.5px inset;
@@ -225,6 +225,7 @@ const CourseTitle = styled.li`
   padding: 19px;
   border-radius: 6px;
   background: #b9acac29;
+  margin-bottom: 5px;
 
   :hover {
     cursor: pointer;
