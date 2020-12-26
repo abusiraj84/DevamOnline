@@ -20,7 +20,7 @@ function CoursePage({ match }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch(
-        `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wp/v2/courses?slug=${match.params.slug}`,
+        `${config.siteUrl}/wp-json/wp/v2/courses?slug=${match.params.slug}`,
         {
           method: "get",
           headers: {
@@ -39,16 +39,13 @@ function CoursePage({ match }) {
     fetchData();
     if (currentUser) {
       const fetchOrder = async () => {
-        const data = await fetch(
-          `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/orders`,
-          {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json",
-              "dwm-tkn": currentUser.cookie,
-            },
-          }
-        );
+        const data = await fetch(`${config.siteUrl}/wp-json/wcm/api/orders`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+            "dwm-tkn": currentUser.cookie,
+          },
+        });
         const items = await data.json();
         setOrders(items[0]);
         // setOrderStatus(items[0].status);

@@ -28,8 +28,8 @@ function Profile() {
   const [user_email, setuser_email] = useState("");
   const [user_pass, setuser_pass] = useState("");
 
-  const orderUrl = `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`;
-  const Userurl = `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wp/v2/users/${currentUser.user.id}`;
+  const orderUrl = `https://devam.website/wp-json/wcm/api/orders`;
+  const Userurl = `https://devam.website/wp-json/wp/v2/users/${currentUser.user.id}`;
   useEffect(() => {
     loadProgressBar();
     axios
@@ -103,8 +103,7 @@ function Profile() {
 
     setLoading(true);
     if (display_name !== "" && user_email !== "") {
-      const url =
-        "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wp/v2/update-profile";
+      const url = "https://devam.website/wp-json/wp/v2/update-profile";
 
       const data = qs.stringify({
         display_name: display_name,
@@ -155,8 +154,7 @@ function Profile() {
 
     setLoadingPass(true);
 
-    const url =
-      "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wp/v2/update-pass";
+    const url = "https://devam.website/wp-json/wp/v2/update-pass";
 
     const data = qs.stringify({
       password: user_pass,
