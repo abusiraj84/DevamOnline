@@ -9,7 +9,8 @@ import axios from "axios";
 
 function CoursesCards() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const url = "https://devam.website/wp-json/wp/v2/course-categories";
+  const url =
+    "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wp/v2/course-categories";
   useEffect(() => {
     loadProgressBar();
     axios
