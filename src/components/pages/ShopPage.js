@@ -172,7 +172,7 @@ function ShopPage() {
 export default ShopPage;
 const Wrapper = styled.div`
   padding-top: 200px;
-  width: 1255px;
+  width: 1440px;
   margin: 0px auto;
   @media (max-width: 1270px) {
     width: 100%;
@@ -188,9 +188,14 @@ const CardWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2%;
   margin: 0 50px;
-  @media (max-width: 1270px) {
+  @media (max-width: 1420px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 50px;
+  }
+  @media (max-width: 1085px) {
     grid-template-columns: 1fr 1fr;
     margin: 0 50px;
+    gap: 30px;
   }
   @media (max-width: 800px) {
     grid-template-columns: 1fr;
@@ -204,6 +209,15 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1),
     inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
+  width: 315px;
+  @media (max-width: 1420px) {
+  }
+  @media (max-width: 1085px) {
+    width: 100%;
+  }
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 const Img = styled.div`
@@ -228,7 +242,7 @@ const Title = styled(H1)`
   font-size: 19px;
   line-height: 20px;
   font-weight: 600;
-  width: 255px;
+  /* width: 255px; */
   min-height: 41px;
 `;
 
@@ -269,7 +283,7 @@ const Cart = styled.img`
 
 const ModalImg = styled.img`
   width: 100%;
-  height: 400px;
+  height: 520px;
   /* background: ${(props) =>
     `url(${props.bg})` ||
     "url(https://static-2.gumroad.com/res/gumroad/1407992308196/asset_previews/9f0bcd6797e2e275e3ba810d0bafeeec/retina/BU00C_Logo.jpg)"}; */
@@ -277,6 +291,17 @@ const ModalImg = styled.img`
   background-size: cover;
   background-position: center;
   border-radius: 20px 20px 0px 0px;
+
+  @media (max-width: 780px) {
+    height: 100%;
+    /* margin-left: 50px;
+    display:block; */
+  }
+  @media (max-width: 1040px) {
+    height: 100%;
+    /* margin-left: 50px;
+    display:block; */
+  }
 `;
 
 const ModalTitle = styled(H1)`

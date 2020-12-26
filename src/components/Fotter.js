@@ -72,7 +72,7 @@ const Wrapper = styled.div`
     margin-top: 50px;
   }
   @media (max-width: 780px) {
-    width: 90%;
+    width: 100%;
     /* margin-left: 50px;
     display:block; */
   }
@@ -89,6 +89,11 @@ const Grid = styled.div`
   padding: 10px;
   /*  */
   margin-bottom: 50px;
+  @media (max-width: 780px) {
+    display: none;
+    /* margin-left: 50px;
+    display:block; */
+  }
 `;
 
 const Info = styled.div`
@@ -100,4 +105,12 @@ const Info = styled.div`
   padding: 20px;
   margin-bottom: 50px;
   width: 95%;
+  @media (max-width: 780px) {
+    width: 70%;
+    /* margin-left: 50px;
+    display:block; */
+    h3 {
+      margin-bottom: 10px;
+    }
+  }
 `;
