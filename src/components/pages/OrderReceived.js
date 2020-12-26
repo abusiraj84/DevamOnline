@@ -191,6 +191,10 @@ const Wrapper = styled.div`
   margin: 0px auto;
   opacity: 0;
   animation: ${animation} 1s 0.1s forwards;
+  @media (max-width: 1270px) {
+    width: 80%;
+    margin: auto;
+  }
 `;
 const Header = styled(H2)`
   text-align: center;

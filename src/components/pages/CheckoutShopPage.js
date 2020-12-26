@@ -213,6 +213,177 @@ function CheckoutShopPage({ match }) {
               <FormsWrapper></FormsWrapper>
             </ContentWrapper>
             <FormsWrapper>
+              <Order>
+                <FormHeader style={{ marginBottom: "50px" }}>طلبك</FormHeader>
+
+                <table style={{ width: "100%" }}>
+                  <thead>
+                    <tr
+                      style={{
+                        textAlign: "right",
+                        marginBottom: "20px",
+                        padding: "10px",
+                        borderTop: "1px solid #ddd",
+                      }}
+                    >
+                      <th
+                        style={{
+                          textAlign: "right",
+                          padding: "10px",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        المنتج
+                      </th>
+                      <th
+                        style={{
+                          textAlign: "right",
+                          fontSize: "20px",
+                          fontWeight: "600",
+                        }}
+                      >
+                        المجموع
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody style={{ textAlign: "right", marginBottom: "20px" }}>
+                    <tr
+                      style={{
+                        textAlign: "right",
+                        marginBottom: "40px",
+                        paddingBottom: "40px",
+                        borderTop: "1px solid #ddd",
+                      }}
+                    >
+                      <td style={{ textAlign: "right", padding: "10px" }}>
+                        {items.name}&nbsp; <strong>×&nbsp;1</strong>
+                      </td>
+                      <td style={{ textAlign: "right" }}>
+                        <span>
+                          <bdi>
+                            <span style={{ textAlign: "right" }}>$</span>
+                            {items.price}
+                          </bdi>
+                        </span>{" "}
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr style={{ textAlign: "right", marginBottom: "20px" }}>
+                      <th
+                        style={{
+                          textAlign: "right",
+                          marginBottom: "20px",
+                          padding: "10px",
+                        }}
+                      >
+                        المجموع
+                      </th>
+                      <td style={{ textAlign: "right" }}>
+                        <span>
+                          <bdi>
+                            <span style={{ textAlign: "right" }}>$</span>
+                            {items.price}
+                          </bdi>
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr style={{ textAlign: "right", marginBottom: "20px" }}>
+                      <th style={{ textAlign: "right", padding: "10px" }}>
+                        الإجمالي
+                      </th>
+                      <td>
+                        <strong>
+                          <span style={{ textAlign: "right" }}>
+                            <bdi style={{ textAlign: "right" }}>
+                              <span style={{ textAlign: "right" }}>$</span>
+                              {items.price}
+                            </bdi>
+                          </span>
+                        </strong>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+
+                <ul style={{ marginTop: "20px" }}>
+                  <li
+                    style={{
+                      direction: "rtl",
+                      textAlign: "right",
+                      fontSize: "20px",
+                      background: "#000",
+                      padding: "10px",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <input
+                      id="payment_method_bacs"
+                      type="radio"
+                      name="payment_method"
+                      checked={payment_method === "bacs"}
+                      value="bacs"
+                      onChange={handlePayment_method}
+                    />
+
+                    <label
+                      htmlFor="payment_method_bacs"
+                      style={{
+                        direction: "rtl",
+                        textAlign: "right",
+                        marginRight: "10px",
+                      }}
+                    >
+                      حوالة مصرفية مباشرة
+                    </label>
+                    <div>
+                      <p
+                        style={{
+                          lineHeight: "140%",
+                          marginTop: "20px",
+                          fontSize: "14px",
+                        }}
+                      >
+                        قم بإجراء حوالة مباشرة لأحد حساباتنا المصرفية. الرجاء
+                        استخدام رقم طلبك كمرجع لعملية الدفع. لن يتم شحن طلبك حتى
+                        يتم التأكد من عملية الدفع.
+                      </p>
+                    </div>
+                  </li>
+                  <li
+                    style={{
+                      direction: "rtl",
+                      textAlign: "right",
+                      fontSize: "20px",
+                      background: "#000",
+                      padding: "10px",
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="payment_method"
+                      checked={payment_method === "paypal"}
+                      value="paypal"
+                      data-order_button_text="التوجه إلى PayPal"
+                      style={{ marginTop: "10px" }}
+                      onChange={handlePayment_method}
+                    />
+                    <label
+                      htmlFor="payment_method_paypal"
+                      style={{ marginRight: "10px" }}
+                    ></label>
+                    PayPal
+                    <div style={{ display: "none" }}>
+                      <p>
+                        الدفع بواسطة PayPal؛ يمكنك الدفع باستخدام بطاقتك
+                        الائتمانية إذا لم يكن لديك حساب على PayPal.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </Order>
               <BillDetails>
                 <FormHeader>تفاصيل الفاتورة</FormHeader>
                 <Base onSubmit={handleLogin} ref={form}>
@@ -570,154 +741,6 @@ function CheckoutShopPage({ match }) {
                   )}
                 </Base>
               </BillDetails>
-              <Order>
-                <FormHeader style={{ marginBottom: "50px" }}>طلبك</FormHeader>
-
-                <table style={{ width: "100%" }}>
-                  <thead>
-                    <tr
-                      style={{
-                        textAlign: "right",
-                        marginBottom: "20px",
-                        padding: "10px",
-                        borderTop: "1px solid #ddd",
-                      }}
-                    >
-                      <th
-                        style={{
-                          textAlign: "right",
-                          padding: "10px",
-                          fontSize: "20px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        المنتج
-                      </th>
-                      <th
-                        style={{
-                          textAlign: "right",
-                          fontSize: "20px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        المجموع
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody style={{ textAlign: "right", marginBottom: "20px" }}>
-                    <tr
-                      style={{
-                        textAlign: "right",
-                        marginBottom: "40px",
-                        paddingBottom: "40px",
-                        borderTop: "1px solid #ddd",
-                      }}
-                    >
-                      <td style={{ textAlign: "right", padding: "10px" }}>
-                        {items.name}&nbsp; <strong>×&nbsp;1</strong>
-                      </td>
-                      <td style={{ textAlign: "right" }}>
-                        <span>
-                          <bdi>
-                            <span style={{ textAlign: "right" }}>$</span>
-                            {items.price}
-                          </bdi>
-                        </span>{" "}
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr style={{ textAlign: "right", marginBottom: "20px" }}>
-                      <th
-                        style={{
-                          textAlign: "right",
-                          marginBottom: "20px",
-                          padding: "10px",
-                        }}
-                      >
-                        المجموع
-                      </th>
-                      <td style={{ textAlign: "right" }}>
-                        <span>
-                          <bdi>
-                            <span style={{ textAlign: "right" }}>$</span>
-                            {items.price}
-                          </bdi>
-                        </span>
-                      </td>
-                    </tr>
-
-                    <tr style={{ textAlign: "right", marginBottom: "20px" }}>
-                      <th style={{ textAlign: "right", padding: "10px" }}>
-                        الإجمالي
-                      </th>
-                      <td>
-                        <strong>
-                          <span style={{ textAlign: "right" }}>
-                            <bdi style={{ textAlign: "right" }}>
-                              <span style={{ textAlign: "right" }}>$</span>
-                              {items.price}
-                            </bdi>
-                          </span>
-                        </strong>
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
-
-                <ul style={{ marginTop: "20px" }}>
-                  <li style={{ direction: "rtl", textAlign: "right" }}>
-                    <input
-                      id="payment_method_bacs"
-                      type="radio"
-                      name="payment_method"
-                      checked={payment_method === "bacs"}
-                      value="bacs"
-                      onChange={handlePayment_method}
-                    />
-
-                    <label
-                      htmlFor="payment_method_bacs"
-                      style={{
-                        direction: "rtl",
-                        textAlign: "right",
-                        marginRight: "10px",
-                      }}
-                    >
-                      حوالة مصرفية مباشرة
-                    </label>
-                    <div>
-                      <p style={{ lineHeight: "140%", marginTop: "20px" }}>
-                        قم بإجراء حوالة مباشرة لأحد حساباتنا المصرفية. الرجاء
-                        استخدام رقم طلبك كمرجع لعملية الدفع. لن يتم شحن طلبك حتى
-                        يتم التأكد من عملية الدفع.
-                      </p>
-                    </div>
-                  </li>
-                  <li style={{ direction: "rtl", textAlign: "right" }}>
-                    <input
-                      type="radio"
-                      name="payment_method"
-                      checked={payment_method === "paypal"}
-                      value="paypal"
-                      data-order_button_text="التوجه إلى PayPal"
-                      style={{ marginTop: "10px" }}
-                      onChange={handlePayment_method}
-                    />
-                    <label
-                      htmlFor="payment_method_paypal"
-                      style={{ marginRight: "10px" }}
-                    ></label>
-                    PayPal
-                    <div style={{ display: "none" }}>
-                      <p>
-                        الدفع بواسطة PayPal؛ يمكنك الدفع باستخدام بطاقتك
-                        الائتمانية إذا لم يكن لديك حساب على PayPal.
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </Order>
             </FormsWrapper>
           </Wrapper>
         ) : (
@@ -741,21 +764,40 @@ const Wrapper = styled.div`
   label {
     color: #fff;
   }
+
+  @media (max-width: 1270px) {
+    width: 100%;
+    margin: auto;
+  }
 `;
 const ContentWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   justify-content: center;
+  @media (max-width: 1270px) {
+    width: 100%;
+    margin: auto;
+    grid-template-columns: 1fr;
+  }
 `;
 const Head = styled.h1`
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 50px;
+  text-align: center;
+  @media (max-width: 1270px) {
+    text-align: center;
+  }
 `;
 const FormsWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
   gap: 2%;
   margin-bottom: 50px;
+  @media (max-width: 1270px) {
+    grid-template-columns: 1fr;
+  }
 `;
 const FormHeader = styled.h2`
   text-align: right;
@@ -763,19 +805,33 @@ const FormHeader = styled.h2`
 `;
 
 const BillDetails = styled.div`
-  width: 48%;
   background: #ffffff40;
   min-height: 800px;
   padding: 20px;
   backdrop-filter: blur(20px) brightness(80%) saturate(150%);
   border-radius: 9px;
+  @media (max-width: 1270px) {
+    width: 50%;
+    margin: auto;
+  }
+  @media (max-width: 1040px) {
+    width: 70%;
+    margin: auto;
+  }
 `;
 const Order = styled.div`
-  width: 48%;
   background: #ffffff40;
   padding: 20px;
   backdrop-filter: blur(20px) brightness(80%) saturate(150%);
   border-radius: 9px;
+  @media (max-width: 1270px) {
+    width: 50%;
+    margin: auto;
+  }
+  @media (max-width: 1040px) {
+    width: 70%;
+    margin: auto;
+  }
 `;
 
 export const Base = styled.form`
@@ -786,6 +842,11 @@ export const Base = styled.form`
   z-index: 10;
   padding-top: 50px;
   margin-right: 20px;
+
+  @media (max-width: 1040px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 
 export const InputText = styled.input`
@@ -799,6 +860,9 @@ export const InputText = styled.input`
   &:last-of-type {
     margin-bottom: 30px;
   }
+  @media (max-width: 1040px) {
+    width: 100%;
+  }
 `;
 export const InputSelect = styled.select`
   /* background: #333; */
@@ -809,6 +873,9 @@ export const InputSelect = styled.select`
   padding: 5px 20px;
   margin-bottom: 20px;
   font-weight: 600;
+  @media (max-width: 1040px) {
+    width: 100%;
+  }
 `;
 
 export const Submit = styled.button`
