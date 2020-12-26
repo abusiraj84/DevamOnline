@@ -174,31 +174,58 @@ const Wrapper = styled.div`
   padding-top: 200px;
   width: 1440px;
   margin: 0px auto;
+
   @media (max-width: 1270px) {
     width: 100%;
     padding-top: 150px;
-
+    margin: 0;
+  }
+  @media (max-width: 1420px) {
+    width: 100%;
+    padding-top: 150px;
+    margin: 0;
+  }
+  @media (max-width: 1600px) {
+    width: 100%;
+    padding-top: 150px;
+    margin: 0;
+  }
+  @media (max-width: 1900px) {
+    width: 100%;
+    padding-top: 150px;
     margin: 0;
   }
 `;
 
 const CardWrapper = styled.div`
-  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2%;
   margin: 0 50px;
+  margin-bottom: 100px;
+
   @media (max-width: 1420px) {
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0 50px;
+    gap: 50px;
+    min-height: 100%;
+  }
+
+  @media (max-width: 1340px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 50px;
+    gap: 50px;
+    min-height: 100%;
   }
   @media (max-width: 1085px) {
     grid-template-columns: 1fr 1fr;
     margin: 0 50px;
-    gap: 30px;
+    gap: 50px;
+    min-height: 100%;
   }
   @media (max-width: 800px) {
     grid-template-columns: 1fr;
+    min-height: 100%;
   }
 `;
 
@@ -209,8 +236,12 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1),
     inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
-  width: 315px;
+
   @media (max-width: 1420px) {
+    width: 100%;
+  }
+  @media (max-width: 1260px) {
+    width: 100%;
   }
   @media (max-width: 1085px) {
     width: 100%;
