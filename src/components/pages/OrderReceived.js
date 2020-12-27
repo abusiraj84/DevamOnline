@@ -5,6 +5,7 @@ import { config } from "../../config";
 import { useSelector } from "react-redux";
 import SvgLoading from "../SvgLoading";
 import { Helmet } from "react-helmet";
+import Fotter from "../Fotter";
 
 function OrderReceived({ match }) {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -179,6 +180,7 @@ function OrderReceived({ match }) {
               </tr>
             </tfoot>
           </table>
+          <Fotter />
         </Wrapper>
       ) : (
         <SvgLoading json="6" />
@@ -195,7 +197,7 @@ const animation = keyframes`
 `;
 const Wrapper = styled.div`
   padding-top: 180px;
-  width: 35%;
+  width: 1234px;
   margin: 0px auto;
   opacity: 0;
   animation: ${animation} 1s 0.1s forwards;

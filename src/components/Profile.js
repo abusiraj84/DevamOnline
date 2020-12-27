@@ -29,7 +29,7 @@ function Profile() {
   const [user_email, setuser_email] = useState("");
   const [user_pass, setuser_pass] = useState("");
 
-  const orderUrl = `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`;
+  const orderUrl = `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/orders?per_page=100`;
   const Userurl = `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wp/v2/users/${currentUser.user.id}`;
   useEffect(() => {
     loadProgressBar();

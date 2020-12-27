@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import { Helmet } from "react-helmet";
+import Fotter from "../Fotter";
 
 function CheckoutPage({ match }) {
   useEffect(() => {
@@ -753,6 +754,7 @@ function CheckoutPage({ match }) {
                 </Base>
               </BillDetails>
             </FormsWrapper>
+            <Fotter />
           </Wrapper>
         ) : (
           <Redirect to="/login" />
