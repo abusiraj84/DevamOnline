@@ -54,7 +54,7 @@ function Profile() {
         headers: {
           "Content-Type": "application/json",
           "dwm-tkn": currentUser && currentUser.cookie,
-          "X-WP-Nonce": currentUser && currentUser.nonce,
+          // "X-WP-Nonce": currentUser && currentUser.nonce,
         },
       })
       .then((response) => {
