@@ -32,8 +32,8 @@ function CoursePage({ match }) {
       );
       const items = await data.json();
       setItems(items[0]);
-      console.log(items[0]);
-      console.log(items[0]._lp_course_font_color);
+      // console.log(items[0]);
+
       setFontColor(items[0]._lp_course_font_color);
     };
     fetchData();
@@ -54,7 +54,6 @@ function CoursePage({ match }) {
         // setOrderStatus(items[0].status);
         // setOrderID(items[0].line_items[0].id);
         // console.log(items[0].line_items[0].id);
-        console.log(items[0]);
 
         // console.log(items[0].status);
       };

@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { config } from "../../config";
 import { useSelector } from "react-redux";
 import Paypal from "../Paypal";
 import SvgLoading from "../SvgLoading";
@@ -155,8 +154,8 @@ function CheckoutPage({ match }) {
       billing_postcode !== ""
     ) {
       setLoading(true);
-      if (payment_method == "paypal") {
-      } else if (payment_method == "bacs") {
+      if (payment_method === "paypal") {
+      } else if (payment_method === "bacs") {
         fetch(
           `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
           {
@@ -732,7 +731,7 @@ function CheckoutPage({ match }) {
                     onChange={onChangebilling_email}
                     value={billing_email}
                   />
-                  {payment_method == "bacs" ? (
+                  {payment_method === "bacs" ? (
                     <Submit type="submit" value="Login">
                       <span style={{ marginLeft: "20px" }}>
                         {loading ? "يرجى الإنتظار" : "تأكيد الطلب"}

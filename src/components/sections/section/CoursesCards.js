@@ -18,7 +18,7 @@ function CoursesCards() {
       .then((response) => {
         const myData = response.data;
         setItems(myData);
-        console.log(myData);
+        // console.log(myData);
       })
       .catch((error) => {
         console.log(error);

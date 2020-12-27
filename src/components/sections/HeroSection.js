@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import PurchaseButton from "../../components/buttons/PurchaseButton";
-import WaveBackground from "../backgrounds/WaveBackground";
+// import WaveBackground from "../backgrounds/WaveBackground";
 import { H1, MediumText } from "../styles/TextStyles";
 
 function HeroSection() {

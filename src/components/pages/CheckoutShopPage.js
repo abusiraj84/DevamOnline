@@ -155,9 +155,9 @@ function CheckoutShopPage({ match }) {
     ) {
       setLoading(true);
 
-      if (payment_method == "paypal") {
+      if (payment_method === "paypal") {
         console.log("paypal");
-      } else if (payment_method == "bacs") {
+      } else if (payment_method === "bacs") {
         fetch(
           `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
           {
@@ -732,7 +732,7 @@ function CheckoutShopPage({ match }) {
                     onChange={onChangebilling_email}
                     value={billing_email}
                   />
-                  {payment_method == "bacs" ? (
+                  {payment_method === "bacs" ? (
                     <Submit type="submit" value="Login">
                       <span style={{ marginLeft: "20px" }}>
                         {" "}

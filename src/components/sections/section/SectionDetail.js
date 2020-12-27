@@ -15,8 +15,6 @@ import {
 } from "../../styles/TextStyles";
 
 function SectionDetail(props) {
-  const { user: currentUser } = useSelector((state) => state.auth);
-  const [course, setCourse] = useState([]);
   useEffect(() => {}, []);
 
   const {
@@ -41,22 +39,6 @@ function SectionDetail(props) {
 
   ///////////////////////////////////////////////////////////////////////////////
 
-  const isButtonvar = () => {
-    if (course) {
-      return <Registerd>مشترك</Registerd>;
-    } else if (course === undefined && price !== 0.0) {
-      return (
-        <PriceWrapper>
-          <PriceTitle>اشترِ الدورة بمقابل</PriceTitle>
-          <Sale>${sale}</Sale>
-          <Price>${price}</Price>
-          <Paypal total={price} id={id} />
-        </PriceWrapper>
-      );
-    } else if (price === 0.0) {
-      return <Registerd>دورة مجانية!</Registerd>;
-    }
-  };
   return (
     <Wrapper>
       <BoxImgWrapper imgcolor={imgcolor}>
@@ -400,8 +382,4 @@ const Registerd = styled.div`
   @media (max-width: 450px) {
     padding: 15px 60px;
   }
-`;
-
-const BuyNow = styled.button`
-  padding: 10px;
 `;
