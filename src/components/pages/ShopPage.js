@@ -12,6 +12,7 @@ import axios from "axios";
 import ReactHtmlParser from "react-html-parser";
 import { Link } from "react-router-dom";
 import Fotter from "../Fotter";
+import { FaArrowCircleUp } from "react-icons/fa";
 
 function ShopPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -52,9 +53,33 @@ function ShopPage() {
   const [instruments, setInstruments] = useState("");
   const [tags, setTags] = useState("");
   const [youtubeContent, setYoutubeContent] = useState("");
+  const [showScroll, setShowScroll] = useState(false);
+  const checkScrollTop = () => {
+    if (!showScroll && window.pageYOffset > 400) {
+      setShowScroll(true);
+    } else if (showScroll && window.pageYOffset <= 400) {
+      setShowScroll(false);
+    }
+  };
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  window.addEventListener("scroll", checkScrollTop);
 
   return (
     <div>
+      <ScrollTop
+        onClick={scrollTop}
+        style={{
+          height: "40px",
+
+          display: showScroll ? "flex" : "none",
+        }}
+      >
+        <FaArrowCircleUp size={50} />
+      </ScrollTop>
       {isLoaded ? (
         <Wrapper>
           <Helmet title="متجر دوام أونلاين">
@@ -182,6 +207,33 @@ function ShopPage() {
 }
 
 export default ShopPage;
+const ScrollTop = styled.div`
+  position: fixed;
+
+  bottom: 40px;
+  right: 40px;
+  align-items: center;
+  height: 20px;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+  animation: fadeIn 0.3s;
+  transition: opacity 0.4s;
+  opacity: 0.5;
+
+  :hover {
+    opacity: 1;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+`;
+
 const Wrapper = styled.div`
   padding-top: 200px;
   width: 1440px;
