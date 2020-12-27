@@ -425,6 +425,7 @@ const Box = styled.div`
   align-items: center;
   width: 68%;
   margin: auto;
+  margin-bottom: 15px;
   &:hover {
     box-shadow: rgba(78, 153, 227, 0.3) 0px 20px 80px,
       rgba(0, 0, 0, 0.15) 0px 20px 40px;
