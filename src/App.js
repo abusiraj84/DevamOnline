@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 
 import Profile from "./components/Profile";
+import Us from "./components/Us";
 
 import { history } from "./helpers/history";
 import Layout from "./components/layout/layout";
@@ -44,6 +45,7 @@ const App = () => {
             <Route exact path="/register" component={withRouter(Register)} />
             <Route exact path="/profile" component={withRouter(Profile)} />
             <Route exact path="/courses" component={withRouter(CoursesPage)} />
+            <Route exact path="/us" component={withRouter(Us)} />
             <Route
               exact
               path="/course/:slug"

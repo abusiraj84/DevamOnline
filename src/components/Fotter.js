@@ -68,7 +68,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-  margin-bottom: 50px;
+
   margin-top: 50px;
   @media (max-width: 1300px) {
     margin: auto;
