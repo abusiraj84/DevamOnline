@@ -6,6 +6,7 @@ import { config } from "../../config";
 import SvgLoading from "../SvgLoading";
 import Fotter from "../Fotter";
 import { loadProgressBar } from "axios-progress-bar";
+import { Helmet } from "react-helmet";
 
 function InstructursPage() {
   useEffect(() => {
@@ -30,6 +31,14 @@ function InstructursPage() {
     <>
       {isLoaded ? (
         <Wrapper>
+          <Helmet title="المدربون">
+            <title>المدربون</title>
+            <meta
+              name="description"
+              content="المدربون"
+              data-react-helmet="true"
+            />
+          </Helmet>
           <Title>المدربون</Title>
           <CardWrapper>
             {items.map((item, i) =>

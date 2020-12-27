@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { H1, SmallText } from "../styles/TextStyles";
 import Waveform from "../Waveform";
 import SvgLoading from "../SvgLoading";
+import { Helmet } from "react-helmet";
 
 import { loadProgressBar } from "axios-progress-bar";
 import "axios-progress-bar/dist/nprogress.css";
@@ -56,6 +57,14 @@ function ShopPage() {
     <div>
       {isLoaded ? (
         <Wrapper>
+          <Helmet title="متجر دوام أونلاين">
+            <title>متجر دوام أونلاين</title>
+            <meta
+              name="description"
+              content="متجر دوام أونلاين"
+              data-react-helmet="true"
+            />
+          </Helmet>
           {status && (
             <Modal closeModal={() => setStatus(false)}>
               <ModalImg src={image} />

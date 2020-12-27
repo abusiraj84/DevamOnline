@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
+import { Helmet } from "react-helmet";
 import CoursesCards from "../sections/section/CoursesCards";
 import { H1 } from "../styles/TextStyles";
 import SvgLoading from "../SvgLoading";
@@ -17,6 +17,14 @@ function CoursesPage() {
     <div>
       {isLoaded ? (
         <Wrapper>
+          <Helmet title="دورات دوام أونلاين">
+            <title>دورات دوام أونلاين</title>
+            <meta
+              name="description"
+              content="دورات دوام أونلاين"
+              data-react-helmet="true"
+            />
+          </Helmet>
           <Title> جميع الدورات </Title>
           <CoursesCards />
         </Wrapper>

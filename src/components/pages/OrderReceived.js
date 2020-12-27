@@ -4,6 +4,7 @@ import { H2, H3 } from "../styles/TextStyles";
 import { config } from "../../config";
 import { useSelector } from "react-redux";
 import SvgLoading from "../SvgLoading";
+import { Helmet } from "react-helmet";
 
 function OrderReceived({ match }) {
   const { user: currentUser } = useSelector((state) => state.auth);
@@ -38,7 +39,14 @@ function OrderReceived({ match }) {
     <div>
       {isLoaded ? (
         <Wrapper>
-          {" "}
+          <Helmet title="متجر دوام أونلاين">
+            <title>متجر دوام أونلاين</title>
+            <meta
+              name="description"
+              content="متجر دوام أونلاين"
+              data-react-helmet="true"
+            />
+          </Helmet>{" "}
           <center>
             <img src="../images/icons/download.png" alt="" />
           </center>

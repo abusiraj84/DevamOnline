@@ -4,6 +4,7 @@ import "./tabs.css";
 import styled, { keyframes } from "styled-components";
 import { config } from "../config";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 
 import { loadProgressBar } from "axios-progress-bar";
 
@@ -235,6 +236,14 @@ function Profile() {
 
   return (
     <Wrapper>
+      <Helmet title="الملف الشخصي">
+        <title>الملف الشخصي</title>
+        <meta
+          name="description"
+          content="الملف الشخصي"
+          data-react-helmet="true"
+        />
+      </Helmet>
       <Tabs>
         <TabList>
           <Tab>الملف الشخصي</Tab>
