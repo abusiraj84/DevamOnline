@@ -21,7 +21,7 @@ function CheckoutShopPage({ match }) {
 
   const fetchData = async () => {
     const data = await fetch(
-      `${config.siteUrl}/wp-json/wcm/api/products/${match.params.id}`
+      `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/products/${match.params.id}`
     );
     const items = await data.json();
     setItems(items);
