@@ -63,7 +63,7 @@ function Fotter() {
 export default Fotter;
 
 const Wrapper = styled.div`
-  /* width: 1234px; */
+  width: 1234px;
   margin: 0px auto;
   display: grid;
   grid-template-columns: 1fr 1fr;

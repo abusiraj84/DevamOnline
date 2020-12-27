@@ -83,6 +83,7 @@ function ShopPage() {
                   }
                 />
                 <BottomWrapper>
+                  <Desc>{ReactHtmlParser(description)}</Desc>
                   <SlideWrapper>
                     <Slide>
                       <Type>Looped Audio</Type>
@@ -124,7 +125,6 @@ function ShopPage() {
                       <Choise>{tags}</Choise>
                     </Slide>
                   </SlideWrapper>
-                  <Desc>{ReactHtmlParser(description)}</Desc>
                 </BottomWrapper>
               </ContentWrapper>
             </Modal>
@@ -392,6 +392,9 @@ const ModalCart = styled.img`
 const SlideWrapper = styled.div`
   direction: ltr;
   width: 40%;
+  @media (max-width: 1000px) {
+    width: 80%;
+  }
 `;
 const Slide = styled.div`
   display: flex;
@@ -420,10 +423,20 @@ const BottomWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin-top: 50px;
+
+  @media (max-width: 1000px) {
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const Desc = styled.div`
   color: #000;
   width: 40%;
   line-height: 25px;
+
+  @media (max-width: 1000px) {
+    width: 80%;
+    margin-bottom: 50px;
+  }
 `;

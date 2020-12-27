@@ -7,6 +7,7 @@ import SvgLoading from "../SvgLoading";
 import { Redirect } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
+import { Helmet } from "react-helmet";
 
 function CheckoutPage({ match }) {
   useEffect(() => {
@@ -206,6 +207,15 @@ function CheckoutPage({ match }) {
       {isLoaded ? (
         currentUser ? (
           <Wrapper>
+            <Helmet title="إتمام الطلب">
+              <title>إتمام الطلب</title>
+              <meta
+                name="description"
+                content="إتمام الطلب"
+                data-react-helmet="true"
+              />
+            </Helmet>
+
             <ContentWrapper>
               <Head>إتمام الطلب</Head>
               <FormsWrapper></FormsWrapper>

@@ -39,11 +39,11 @@ function OrderReceived({ match }) {
     <div>
       {isLoaded ? (
         <Wrapper>
-          <Helmet title="متجر دوام أونلاين">
-            <title>متجر دوام أونلاين</title>
+          <Helmet title="حالة الطلب">
+            <title>حالة الطلب</title>
             <meta
               name="description"
-              content="متجر دوام أونلاين"
+              content="حالة الطلب"
               data-react-helmet="true"
             />
           </Helmet>{" "}
