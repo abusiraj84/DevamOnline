@@ -20,7 +20,7 @@ function CoursePage({ match }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetch(
-        `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wp/v2/courses?slug=${match.params.slug}`,
+        `https://fierce-forest-56659.herokuapp.com/${config.siteUrl}/wp-json/wp/v2/courses?slug=${match.params.slug}`,
         {
           method: "get",
           headers: {
@@ -40,7 +40,7 @@ function CoursePage({ match }) {
     if (currentUser) {
       const fetchOrder = async () => {
         const data = await fetch(
-          `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/orders`,
+          `https://fierce-forest-56659.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/orders`,
           {
             method: "get",
             headers: {

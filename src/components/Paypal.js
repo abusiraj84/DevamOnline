@@ -22,7 +22,7 @@ function Paypal(props) {
     // }, 1000);
 
     fetch(
-      `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
+      `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
       {
         method: "post",
         headers: {
@@ -45,7 +45,7 @@ function Paypal(props) {
         });
 
         setTimeout(() => {
-          window.location.href = `https://cors-anywhere.herokuapp.com/https://devam.website/order-received/${responseJson.id}`;
+          window.location.href = `https://fierce-forest-56659.herokuapp.com/https://devam.website/order-received/${responseJson.id}`;
         }, 2500);
       })
       .catch((error) => {

@@ -10,7 +10,7 @@ const headers = {
 const register = (user_login, user_email, user_pass) => {
   return axios
     .post(
-      "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/register",
+      "https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/register",
       {
         user_login,
         user_email,
@@ -37,7 +37,7 @@ const register = (user_login, user_email, user_pass) => {
 const login = (username, password) => {
   return axios
     .post(
-      "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/login",
+      "https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/login",
       {
         username,
         password,

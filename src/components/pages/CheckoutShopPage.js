@@ -21,7 +21,7 @@ function CheckoutShopPage({ match }) {
 
   const fetchData = async () => {
     const data = await fetch(
-      `https://cors-anywhere.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/products/${match.params.id}`
+      `https://fierce-forest-56659.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/products/${match.params.id}`
     );
     const items = await data.json();
     setItems(items);
@@ -157,7 +157,7 @@ function CheckoutShopPage({ match }) {
         console.log("paypal");
       } else if (payment_method == "bacs") {
         fetch(
-          `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
+          `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/orders`,
           {
             method: "post",
             headers: {
@@ -724,7 +724,10 @@ function CheckoutShopPage({ match }) {
                   />
                   {payment_method == "bacs" ? (
                     <Submit type="submit" value="Login">
-                      <span style={{ marginLeft: "20px" }}>تأكيد الطلب</span>
+                      <span style={{ marginLeft: "20px" }}>
+                        {" "}
+                        {loading ? "يرجى الإنتظار" : "تأكيد الطلب"}
+                      </span>
                       {loading && (
                         <span className="spinner-border spinner-border-md"></span>
                       )}

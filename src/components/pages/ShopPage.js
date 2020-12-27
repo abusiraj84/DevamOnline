@@ -16,7 +16,7 @@ function ShopPage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const url =
-    "https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/wcm/api/products";
+    "https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wcm/api/products?per_page=100";
 
   useEffect(() => {
     loadProgressBar();
@@ -68,7 +68,10 @@ function ShopPage() {
                   </Link>
                 </IconsWrapper>
                 <Waveform
-                  url={`https://cors-anywhere.herokuapp.com/` + mp3 || "a.mp3"}
+                  url={
+                    `https://fierce-forest-56659.herokuapp.com/` + mp3 ||
+                    "a.mp3"
+                  }
                 />
                 <BottomWrapper>
                   <SlideWrapper>
@@ -146,7 +149,7 @@ function ShopPage() {
                       <Title>{item.name}</Title>
                       <Waveform
                         url={
-                          `https://cors-anywhere.herokuapp.com/${item.preview_mp3}` ||
+                          `https://fierce-forest-56659.herokuapp.com/${item.preview_mp3}` ||
                           "audio.mp3"
                         }
                       />
@@ -202,30 +205,26 @@ const CardWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2%;
   margin: 0 50px;
-  margin-bottom: 100px;
+  margin-bottom: 561px;
 
   @media (max-width: 1420px) {
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0 50px;
     gap: 50px;
-    min-height: 100%;
   }
 
   @media (max-width: 1340px) {
     grid-template-columns: 1fr 1fr 1fr;
     margin: 0 50px;
     gap: 50px;
-    min-height: 100%;
   }
   @media (max-width: 1085px) {
     grid-template-columns: 1fr 1fr;
     margin: 0 50px;
     gap: 50px;
-    min-height: 100%;
   }
   @media (max-width: 800px) {
     grid-template-columns: 1fr;
-    min-height: 100%;
   }
 `;
 

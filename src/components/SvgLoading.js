@@ -38,7 +38,7 @@ const SvgWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   margin: 0px auto;
-  background: #5151513b;
+  background: #1f1f47;
   animation: ${Fadeanimation} 1s 0.6s forwards;
   @media (max-width: 1270px) {
     width: 100vw;

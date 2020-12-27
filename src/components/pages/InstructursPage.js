@@ -19,7 +19,7 @@ function InstructursPage() {
 
   const fetchData = async () => {
     const data = await fetch(
-      `https://cors-anywhere.herokuapp.com/https://devam.website/wp-json/husam/v1/users`
+      `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/husam/v1/users`
     );
     const items = await data.json();
     console.log(items);
