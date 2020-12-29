@@ -9,25 +9,33 @@ import axios from "axios";
 
 function CoursesCards() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const url =
-    "https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wp/v2/course-categories";
+  const url = "https://devam.website/wp-json/wp/v2/course-categories";
   useEffect(() => {
-    loadProgressBar();
-    axios
-      .get(url)
-      .then((response) => {
-        const myData = response.data;
-        setItems(myData);
-        // console.log(myData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // loadProgressBar();
+    // axios
+    //   .get(url)
+    //   .then((response) => {
+    //     const myData = response.data;
+    //     setItems(myData);
+    //     console.log(myData);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
 
-    // fetchData();
-    setTimeout(() => {
+    const fetchData = async () => {
+      const data = await fetch(url, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const itemss = await data.json();
       setIsLoaded(true);
-    }, 0);
+      setItems(itemss);
+      console.log(itemss);
+    };
+    fetchData();
   }, []);
   const [items, setItems] = useState([]);
 
@@ -78,7 +86,11 @@ function CoursesCards() {
                                 item._lp_course_author.name
                               }
                               bgcolor={item._lp_course_color}
-                              price={item._lp_sale_price}
+                              price={
+                                item._lp_sale_price === "0"
+                                  ? "مجانية"
+                                  : item._lp_sale_price
+                              }
                               sale={item._lp_price}
                               hours={item._lp_course_duration}
                               sections={item._lp_curriculum.length}
