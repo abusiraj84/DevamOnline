@@ -124,21 +124,8 @@ function LessonPage({ match }) {
                 ) : (
                   <p></p>
                 )}
-                {/* <NextPreWrapper>
-          <Link to={number}>
-            {" "}
-            <Next>التالي</Next>
-          </Link>
-          <Pre>السابق</Pre>
-        </NextPreWrapper> */}
 
-                {/* <button onClick={handleComplete}>تم الإنتهاء</button>
-        {complete()} */}
-                <Title>
-                  {/* {currentUser.user.lessons.map((item, i) =>
-            item.lessons_id === lesson.lessons_id ? "Done" : ""
-          )} */}
-                </Title>
+                <Title></Title>
               </ContentWrapper>
             </div>
           ) : (
@@ -216,9 +203,9 @@ const ContentWrapper = styled.div`
 const VideoWrapper = styled(motion.div)`
   position: fixed;
   width: 100%;
-  top: 127px;
+  top: 0;
   right: 0;
-  background: rgb(0, 0, 0);
+  background: #151515;
   backdrop-filter: blur(40px);
   z-index: 99999;
   transition: 0.3s ease-in-out;
