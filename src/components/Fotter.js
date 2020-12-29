@@ -99,7 +99,7 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   justify-items: center;
 
-  margin-top: 50px;
+  margin-top: 20px;
   @media (max-width: 1300px) {
     margin: auto;
     width: 80%;
@@ -143,7 +143,9 @@ const Info = styled.div`
   margin-bottom: 50px;
   width: 95%;
   @media (max-width: 780px) {
-    width: 70%;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 30px;
     /* margin-left: 50px;
     display:block; */
     h3 {

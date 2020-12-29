@@ -103,5 +103,10 @@ const Num = styled(Caption)`
   font-weight: normal;
 `;
 const Preview = styled.img`
-  width: 20px;
+  width: 25px;
+  background: #ffffff14;
+  padding: 5px;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 40px,
+    rgba(255, 255, 255, 0.25) 0px 0px 0px 0.5px inset;
 `;

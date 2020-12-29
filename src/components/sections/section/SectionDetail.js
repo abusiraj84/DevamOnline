@@ -69,7 +69,20 @@ function SectionDetail(props) {
           sale={sale}
           courseid={id}
         />
-      ) : price === "0" ? null : (
+      ) : price === "0" ? (
+        <h1
+          style={{
+            color: "#ffffff",
+            fontSize: "14px",
+            background: "black",
+            padding: "20px",
+            borderRadius: "20px",
+            textAlign: "center",
+          }}
+        >
+          كلمة مرور المرفقات: No Password
+        </h1>
+      ) : (
         <h1
           style={{
             color: "#ffffff",
