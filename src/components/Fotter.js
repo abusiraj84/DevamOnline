@@ -61,28 +61,28 @@ function Fotter() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon src="images/icons/facebook.svg"></Icon>
+            <Icon src="../images/icons/facebook.svg"></Icon>
           </a>
           <a
             href="https://www.instagram.com/devamonline/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon src="images/icons/instagram.svg"></Icon>
+            <Icon src="../images/icons/instagram.svg"></Icon>
           </a>
           <a
             href="https://www.youtube.com/channel/UCPAUIw4YGaCQwtYpau89gGw/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon src="images/icons/youtube.svg"></Icon>
+            <Icon src="../images/icons/youtube.svg"></Icon>
           </a>
           <a
             href="https://wa.me/905318549587"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon src="images/icons/whatsapp.svg"></Icon>
+            <Icon src="../images/icons/whatsapp.svg"></Icon>
           </a>
         </IconsWrapper>
       </Info>

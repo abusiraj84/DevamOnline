@@ -107,7 +107,7 @@ const Wrapper = styled.div`
 const MenuWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(${(props) => props.count}, auto);
-  gap: 30px;
+  gap: 10px;
   @media (max-width: 988px) {
     grid-template-columns: auto;
     > a {

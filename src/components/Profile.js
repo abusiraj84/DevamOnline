@@ -341,7 +341,12 @@ function Profile() {
                       fontSize: "15px",
                     }}
                   >
-                    <h2>Password: Devam@Online2021</h2>
+                    <h2>
+                      Password:{" "}
+                      {(course.line_items[0].zip_password &&
+                        course.line_items[0].zip_password.meta_value) ||
+                        "NO PASS"}
+                    </h2>
                   </center>
                 </Box>
               )
