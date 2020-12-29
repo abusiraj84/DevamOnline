@@ -23,7 +23,7 @@ function CheckoutPage({ match }) {
     setTimeout(() => {
       setIsLoaded(true);
     }, 2000);
-  }, [fetchData]);
+  }, []);
 
   const { user: currentUser } = useSelector((state) => state.auth);
   const [isLoaded, setIsLoaded] = useState(false);
