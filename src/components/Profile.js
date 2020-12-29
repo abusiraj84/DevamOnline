@@ -373,17 +373,51 @@ function Profile() {
               course.line_items[0].downloadable &&
               course.status == "completed" && (
                 <Box className="todo-row" key={i}>
-                  <CourseTitle>
+                  <CourseTitle style={{ marginBottom: "20px" }}>
                     {course.line_items && course.line_items[0].name}
                   </CourseTitle>
-                  <a
-                    href={
-                      course.line_items[0].file &&
-                      course.line_items[0].file.meta_value
-                    }
+                  <center
+                    style={{
+                      color: "#fff",
+                      background: "#03030326",
+                      fontWeight: "400",
+                      padding: "5px 10px",
+                      display: "table",
+                      borderRadius: "10px",
+                      textAlign: "center",
+                      width: "10%",
+                      margin: "auto",
+                      fontSize: "15px",
+                    }}
                   >
-                    Download
-                  </a>
+                    <a
+                      href={
+                        course.line_items[0].file &&
+                        course.line_items[0].file.meta_value
+                      }
+                    >
+                      {" "}
+                      <h2>Download</h2>
+                    </a>
+                  </center>
+                  <div style={{ height: "10px" }}></div>
+                  <center
+                    style={{
+                      marginTop: "40px",
+                      color: "#fff",
+                      background: "#03030326",
+                      fontWeight: "300",
+                      padding: "5px 10px",
+                      display: "table",
+                      borderRadius: "10px",
+                      textAlign: "center",
+                      width: "30%",
+                      margin: "auto",
+                      fontSize: "15px",
+                    }}
+                  >
+                    <h2>Password: Devam@Online2021</h2>
+                  </center>
                 </Box>
               )
           )}
@@ -426,7 +460,7 @@ const Box = styled.div`
   grid-template-rows: 1fr 1fr;
   min-width: 200px;
   transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-  padding: 20px;
+  padding: 10px;
   transform: scale(1);
   -webkit-box-pack: center;
   place-content: center;
@@ -440,6 +474,7 @@ const Box = styled.div`
       rgba(0, 0, 0, 0.15) 0px 20px 40px;
     cursor: pointer;
     transform: scale(1.1);
+    cursor: auto;
   }
   &:hover img,
   InstracturImg {
@@ -447,6 +482,10 @@ const Box = styled.div`
   }
   @media (max-width: 600px) {
     font-size: 20px;
+  }
+
+  :hover a {
+    color: black;
   }
 `;
 
