@@ -3,15 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { register } from "../actions/auth";
-import axios from "axios";
 
 import { NavLink, Redirect } from "react-router-dom";
-import { config } from "../config";
 
 const Register = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [user_login, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
   const [user_email, setuser_email] = useState("");
   const [user_pass, setuser_pass] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,11 +19,6 @@ const Register = () => {
   const onChangeFirstname = (e) => {
     const user_login = e.target.value;
     setFirstName(user_login);
-  };
-
-  const onChangeLastName = (e) => {
-    const lastname = e.target.value;
-    setLastName(lastname);
   };
 
   const onChangeuser_email = (e) => {

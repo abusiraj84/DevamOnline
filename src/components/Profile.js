@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "./tabs.css";
-import styled, { keyframes } from "styled-components";
-import { config } from "../config";
+import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
-
 import { loadProgressBar } from "axios-progress-bar";
-
 import "axios-progress-bar/dist/nprogress.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Caption, H2 } from "./styles/TextStyles";
 import qs from "qs";
-
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 import Fotter from "./Fotter";
@@ -22,9 +18,7 @@ function Profile() {
   const { user: currentUser } = useSelector((state) => state.auth);
 
   const [items, setItems] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
 
-  const [user, setUser] = useState("");
   const [display_name, setDisplay_name] = useState("");
   const [user_email, setuser_email] = useState("");
   const [user_pass, setuser_pass] = useState("");
@@ -59,7 +53,6 @@ function Profile() {
       })
       .then((response) => {
         const myData = response.data;
-        setUser(myData);
         console.log(myData);
         setDisplay_name(myData.name);
         setuser_email(myData.user_email);
@@ -69,30 +62,15 @@ function Profile() {
       });
 
     // fetchData();
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 0);
-  }, []);
+  }, [currentUser, orderUrl, Userurl]);
 
   ///// ///// /////// For Update Form ///// //// ////
-
-  const onChangeDisplayname = (e) => {
-    const display_name = e.target.value;
-    setDisplay_name(display_name);
-  };
-
-  const onChangeuser_email = (e) => {
-    const user_email = e.target.value;
-    setuser_email(user_email);
-  };
 
   const onChangeuser_pass = (e) => {
     const user_pass = e.target.value;
     setuser_pass(user_pass);
   };
 
-  const [usernameErr, setUsernameErr] = useState({});
-  const [emailErr, setEmailErr] = useState({});
   const [passwordErr, setPasswordErr] = useState({});
   const [loading, setLoading] = useState(false);
   const [loadingPass, setLoadingPass] = useState(false);
@@ -135,18 +113,6 @@ function Profile() {
       Swal.fire("تنبيه !", "لا يمكنك ترك أحد الحقول فارغة", "info");
       setLoading(false);
     }
-
-    // const isValid = formValidation();
-    // if (isValid) {
-    //   setLoading(true);
-
-    //     .then(() => {
-    //       setLoading(false);
-    //     })
-    //     .catch(() => {
-    //       setLoading(false);
-    //     });
-    // }
   };
 
   const handlePassword = (e) => {
@@ -191,47 +157,6 @@ function Profile() {
         console.log(error);
         Swal.fire("نعتذر", "لم يتم تغيير كلمة المرور بنجاح", "error");
       });
-
-    // const isValid = formValidation();
-    // if (isValid) {
-    //   setLoading(true);
-
-    //     .then(() => {
-    //       setLoading(false);
-    //     })
-    //     .catch(() => {
-    //       setLoading(false);
-    //     });
-    // }
-  };
-  const formValidation = () => {
-    const usernameErr = {};
-    const emailErr = {};
-    const passwordErr = {};
-    let isValid = true;
-
-    if (display_name.trim().length < 3) {
-      usernameErr.usernameErrShort = "اسم المستخدم يجيب أن يكون أكثر من 5 أحرف";
-      isValid = false;
-    }
-    if (display_name.trim().length > 25) {
-      usernameErr.usernameErrLong = "اسم المستخدم يجيب أن يكون أقل من 12 حرف";
-      isValid = false;
-    }
-
-    if (!user_email.includes("@")) {
-      emailErr.emailErrNotEmail =
-        "يجب عليك استخدام بريد الكتروني صالح الاستخدام";
-      isValid = false;
-    }
-    if (user_pass.trim().length < 5) {
-      passwordErr.passwordErrShort = "كلمة المرور يجيب أن تكون أكثر من 5 أحرف";
-      isValid = false;
-    }
-    setUsernameErr(usernameErr);
-    setEmailErr(emailErr);
-    setPasswordErr(passwordErr);
-    return isValid;
   };
 
   return (
@@ -351,7 +276,7 @@ function Profile() {
           {items.map(
             (course, i) =>
               !course.line_items[0].downloadable &&
-              course.status == "completed" && (
+              course.status === "completed" && (
                 <Box className="todo-row" key={i}>
                   <Link
                     to={`/course/${
@@ -371,7 +296,7 @@ function Profile() {
           {items.map(
             (course, i) =>
               course.line_items[0].downloadable &&
-              course.status == "completed" && (
+              course.status === "completed" && (
                 <Box className="todo-row" key={i}>
                   <CourseTitle style={{ marginBottom: "20px" }}>
                     {course.line_items && course.line_items[0].name}

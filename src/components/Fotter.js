@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { tooltipData, GuestData } from "../data/menuData";
 import MenuButton from "./buttons/MenuButton";
-import { H2, SmallText } from "./styles/TextStyles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function Fotter() {
   // const { isOpen, name, logout } = props;
@@ -42,6 +41,7 @@ function Fotter() {
             href="https://devam.online"
             style={{ color: "yellow", fontSize: "13px" }}
             target="_blank"
+            rel="noopener noreferrer"
           >
             Devam Online
           </a>

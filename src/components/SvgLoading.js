@@ -4,7 +4,7 @@ import lottie from "lottie-web";
 
 function SvgLoading(props) {
   const container = useRef(null);
-  const { json } = props;
+
   useEffect(() => {
     lottie.loadAnimation({
       container: container.current, // Required
@@ -14,7 +14,7 @@ function SvgLoading(props) {
       autoplay: true, // Optional
       animationData: require(`../${props.json}.json`),
     });
-  }, []);
+  }, [props.json]);
 
   return (
     <SvgWrapper>
@@ -46,8 +46,4 @@ const SvgWrapper = styled.div`
 
     margin: 0;
   }
-`;
-const Center = styled.div`
-  width: 1250px;
-  margin: 0px auto;
 `;

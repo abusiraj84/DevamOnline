@@ -1,7 +1,6 @@
 import React from "react";
 import PaypalExpressBtn from "react-paypal-express-checkout";
 import { useSelector } from "react-redux";
-import { config } from "../config";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import "sweetalert2/src/sweetalert2.scss";
 

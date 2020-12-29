@@ -37,42 +37,38 @@ function CoursePage({ match }) {
       setFontColor(items[0]._lp_course_font_color);
     };
     fetchData();
-    if (currentUser) {
-      const fetchOrder = async () => {
-        const data = await fetch(
-          `https://fierce-forest-56659.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/orders`,
-          {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json",
-              "dwm-tkn": currentUser.cookie,
-            },
-          }
-        );
-        const items = await data.json();
-        setOrders(items[0]);
-        // setOrderStatus(items[0].status);
-        // setOrderID(items[0].line_items[0].id);
-        // console.log(items[0].line_items[0].id);
-
-        // console.log(items[0].status);
-      };
-
-      fetchOrder();
-    }
+    // if (currentUser) {
+    //   // const fetchOrder = async () => {
+    //   //   const data = await fetch(
+    //   //     `https://fierce-forest-56659.herokuapp.com/${config.siteUrl}/wp-json/wcm/api/orders`,
+    //   //     {
+    //   //       method: "get",
+    //   //       headers: {
+    //   //         "Content-Type": "application/json",
+    //   //         "dwm-tkn": currentUser.cookie,
+    //   //       },
+    //   //     }
+    //   //   );
+    //   //   // const items = await data.json();
+    //   //   // setOrders(items[0]);
+    //   //   // setOrderStatus(items[0].status);
+    //   //   // setOrderID(items[0].line_items[0].id);
+    //   //   // console.log(items[0].line_items[0].id);
+    //   //   // console.log(items[0].status);
+    //   // };
+    //   // fetchOrder();
+    // }
 
     setTimeout(() => {
       setIsLoaded(true);
     }, 2000);
-  }, []);
+  }, [currentUser, match.params.slug]);
 
   const [items, setItems] = useState([]);
-  const [orders, setOrders] = useState("");
-  const [orderStatus, setOrderStatus] = useState("");
-  const [orderID, setOrderID] = useState("");
+  // const [orders, setOrders] = useState("");
+  // const [orderID, setOrderID] = useState("");
 
   const [fontcolor, setFontColor] = useState([]);
-  const [theuser, setTheuser] = useState([]);
 
   const [showScroll, setShowScroll] = useState(false);
 
@@ -91,14 +87,6 @@ function CoursePage({ match }) {
   window.addEventListener("scroll", checkScrollTop);
 
   ////////////////////////////////////////////////////////////////////////////////
-
-  const mylessons = currentUser ? theuser : []; //..some array
-
-  const lessonscompleted = [];
-
-  for (const [index, value] of mylessons.entries()) {
-    lessonscompleted.push(value.lessons_id);
-  }
 
   return (
     <div>
@@ -127,7 +115,7 @@ function CoursePage({ match }) {
                   />
                 </Helmet>
 
-                {items.code != "rest_forbidden" ? (
+                {items.code !== "rest_forbidden" ? (
                   <ContentWrapper>
                     <SectionDetail
                       logo={items._lp_course_logo}
@@ -154,8 +142,9 @@ function CoursePage({ match }) {
                       sale={items._lp_price}
                       id={items.id}
                       isAccess={items._is_accessed}
-                      orderStatus={orderStatus}
-                      orderID={orderID}
+                      password={items._lp_course_password}
+                      // orderStatus={orderStatus}
+                      // orderID={orderID}
                     />
                     <WrapperWidth>
                       <WrapperLessons
@@ -171,15 +160,15 @@ function CoursePage({ match }) {
                               {item.items.map((item, index) => (
                                 <div key={item.id}>
                                   {!items._is_accessed &&
-                                  items._lp_sale_price != "" ? (
-                                    item.preview == "yes" ? (
+                                  items._lp_sale_price !== "" ? (
+                                    item.preview === "yes" ? (
                                       <Link to={`/lesson/${item.slug}`}>
                                         <LessonsBox
                                           lessonnum={item.lesson_num}
                                           lessontitle={item.title}
                                           lessontime={item.lesson_duration}
                                           preview={
-                                            item.preview == "yes"
+                                            item.preview === "yes"
                                               ? "eye.svg"
                                               : "lock2.svg"
                                           }
@@ -193,7 +182,7 @@ function CoursePage({ match }) {
                                         lessontitle={item.title}
                                         lessontime={item.lesson_duration}
                                         preview={
-                                          item.preview == "yes"
+                                          item.preview === "yes"
                                             ? "eye.svg"
                                             : "lock2.svg"
                                         }
@@ -266,10 +255,6 @@ const animation = keyframes`
 const All = styled.div`
   animation: ${animation} 2s ease 0s 1 normal forwards running;
 `;
-const Center = styled.div`
-  width: 100px;
-  margin: 0px auto;
-`;
 
 const Wrapper = styled.div`
   max-width: 100%;
@@ -333,21 +318,6 @@ const Title = styled(Caption2)`
     rgba(0, 0, 0, 0.2) 0px 10px 20px, rgba(0, 0, 0, 0.1) 0px 1px 3px;
   backdrop-filter: blur(20px) brightness(80%) saturate(150%);
   border-radius: 20px;
-`;
-
-const LoadingWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  /* background: #032022; */
-  /* backdrop-filter: blur(20px) brightness(80%) saturate(150%); */
-  animation: ${animation} 2s ease 0s 1 normal forwards running;
-`;
-
-const Load = styled.img`
-  width: 100px;
-  margin-top: 50vh;
 `;
 
 const ScrollTop = styled.div`

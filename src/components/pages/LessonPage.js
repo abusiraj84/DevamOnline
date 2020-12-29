@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { H3, SmallText } from "../../components/styles/TextStyles";
+import { H3 } from "../../components/styles/TextStyles";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { config } from "../../config";
 import ReactHtmlParser from "react-html-parser";
 import PurchaseButton from "../buttons/PurchaseButton";
 
@@ -15,54 +14,54 @@ function LessonPage({ match }) {
 
   const [lesson, setLesson] = useState("");
   const [course, setCourse] = useState("");
-  const [courseId, setCourseId] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const [isComplete, setIsComplete] = useState(false);
   useEffect(() => {
-    fetchLessons();
-    fetchCourses();
+    axios
+      .get(
+        `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wp/v2/lessons?slug=${match.params.slug}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "dwm-tkn": currentUser && currentUser.cookie,
+          },
+        }
+      )
+      .then((response) => {
+        const myData = response.data;
+        setLesson(myData[0]);
+        console.log(myData);
+
+        axios
+          .get(
+            `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wp/v2/courses/${myData[0]._lp_lesson_course}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "dwm-tkn": currentUser && currentUser.cookie,
+              },
+            }
+          )
+          .then((response) => {
+            const myData = response.data;
+            setCourse(myData);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     setTimeout(() => {
       setIsLoaded(true);
     }, 3000);
-  }, []);
-  const fetchLessons = async () => {
-    const data = await fetch(
-      `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wp/v2/lessons?slug=${match.params.slug}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "dwm-tkn": currentUser && currentUser.cookie,
-        },
-      }
-    );
-    const items = await data.json();
-
-    setLesson(items[0]);
-    setCourseId(items[0]._lp_lesson_course);
-    console.log("Lesson is:", items[0]);
-  };
-
-  const fetchCourses = async () => {
-    const dataOfCourse = await fetch(
-      `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wp/v2/courses/${courseId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "dwm-tkn": currentUser && currentUser.cookie,
-        },
-      }
-    );
-    const items2 = await dataOfCourse.json();
-
-    setCourse(items2[0]);
-    console.log("Course is:", items2[0]);
-  };
+  }, [currentUser, match.params.slug]);
 
   return (
     <>
@@ -94,6 +93,7 @@ function LessonPage({ match }) {
                     width="100%"
                     height="675"
                     allow="autoplay; fullscreen"
+                    title="lesson.title"
                   ></iframe>
                 </VideoContent>
               </VideoWrapper>
@@ -115,7 +115,7 @@ function LessonPage({ match }) {
                 <Title>
                   {lesson.title && ReactHtmlParser(lesson.title.rendered)}
                 </Title>
-                {lesson.content.rendered != "" ? (
+                {lesson.content.rendered !== "" ? (
                   <Content>
                     {ReactHtmlParser(
                       lesson.content && ReactHtmlParser(lesson.content.rendered)
@@ -306,45 +306,45 @@ const Content = styled.div`
   border-radius: 20px;
 `;
 
-const NextPreWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 0 40px;
-  margin-bottom: 20px;
-  align-items: center;
-  justify-content: space-between;
-  justify-items: start;
-`;
+// const NextPreWrapper = styled.div`
+//   display: flex;
+//   width: 100%;
+//   padding: 0 40px;
+//   margin-bottom: 20px;
+//   align-items: center;
+//   justify-content: space-between;
+//   justify-items: start;
+// `;
 
-const Next = styled(H3)`
-  padding: 10px 40px;
-  background: rgba(15, 14, 71, 0.3);
-  border-radius: 26px;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1),
-    inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease-in-out;
-  backdrop-filter: blur(40px);
-  :hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1),
-      inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
-  }
-`;
-const Pre = styled(H3)`
-  padding: 10px 40px;
-  background: rgba(15, 14, 71, 0.3);
-  border-radius: 26px;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1),
-    inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
-  transition: all 0.2s ease-in-out;
-  backdrop-filter: blur(40px);
-  :hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1),
-      inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
-  }
-`;
+// const Next = styled(H3)`
+//   padding: 10px 40px;
+//   background: rgba(15, 14, 71, 0.3);
+//   border-radius: 26px;
+//   font-size: 18px;
+//   cursor: pointer;
+//   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1),
+//     inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
+//   transition: all 0.2s ease-in-out;
+//   backdrop-filter: blur(40px);
+//   :hover {
+//     transform: translateY(-5px);
+//     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1),
+//       inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
+//   }
+// `;
+// const Pre = styled(H3)`
+//   padding: 10px 40px;
+//   background: rgba(15, 14, 71, 0.3);
+//   border-radius: 26px;
+//   font-size: 18px;
+//   cursor: pointer;
+//   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1),
+//     inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
+//   transition: all 0.2s ease-in-out;
+//   backdrop-filter: blur(40px);
+//   :hover {
+//     transform: translateY(-5px);
+//     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1),
+//       inset 0px 0px 0px 0.5px rgba(255, 255, 255, 0.2);
+//   }
+// `;

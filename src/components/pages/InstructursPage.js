@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
-import { H1, H2, SmallText } from "../styles/TextStyles";
-import { config } from "../../config";
+import { H1, H2 } from "../styles/TextStyles";
 import SvgLoading from "../SvgLoading";
 import Fotter from "../Fotter";
-import { loadProgressBar } from "axios-progress-bar";
 import { Helmet } from "react-helmet";
 
 function InstructursPage() {
@@ -49,16 +47,32 @@ function InstructursPage() {
                   <CoursNum>عدد الدورات : {item.courses.length}</CoursNum>
                   <Cv>{item.meta.description}</Cv>
                   <IconsWrapper>
-                    <a href={item.meta.facebook} target="_blank">
+                    <a
+                      href={item.meta.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Icon src="images/icons/facebook.svg"></Icon>
                     </a>
-                    <a href={item.meta.instagram} target="_blank">
+                    <a
+                      href={item.meta.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Icon src="images/icons/instagram.svg"></Icon>
                     </a>
-                    <a href={item.meta.youtube} target="_blank">
+                    <a
+                      href={item.meta.youtube}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Icon src="images/icons/youtube.svg"></Icon>
                     </a>
-                    <a href={item.meta.whatsapp} target="_blank">
+                    <a
+                      href={item.meta.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Icon src="images/icons/whatsapp.svg"></Icon>
                     </a>
                   </IconsWrapper>

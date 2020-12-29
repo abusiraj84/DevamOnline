@@ -33,6 +33,7 @@ function SectionDetail(props) {
     sale,
     id,
     isAccess,
+    password,
   } = props;
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +61,7 @@ function SectionDetail(props) {
 
       {/* {isButtonvar()} */}
 
-      {isAccess !== true ? (
+      {isAccess !== true && price !== "0" ? (
         <PurchaseButton
           title="اشترِ الآن"
           subtitle="عشرات الدورات بانتظارك"
@@ -68,7 +69,7 @@ function SectionDetail(props) {
           sale={sale}
           courseid={id}
         />
-      ) : (
+      ) : price === "0" ? null : (
         <h1
           style={{
             color: "#ffffff",
@@ -79,7 +80,7 @@ function SectionDetail(props) {
             textAlign: "center",
           }}
         >
-          كلمة مرور ملفات المشاريع : Devam@Online2021
+          كلمة مرور ملفات المشاريع: {password}
         </h1>
       )}
 

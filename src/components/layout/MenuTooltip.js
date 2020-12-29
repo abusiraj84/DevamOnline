@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { tooltipData, GuestData } from "../../data/menuData";
 import MenuButton from "../buttons/MenuButton";
-import { H2, SmallText } from "../styles/TextStyles";
-import { useDispatch, useSelector } from "react-redux";
+import { SmallText } from "../styles/TextStyles";
+import { useSelector } from "react-redux";
 
 function MenuTooltip(props) {
-  const { isOpen, name, logout } = props;
+  const { isOpen, logout } = props;
 
   const { user: currentUser } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <Wrapper isOpen={isOpen}>

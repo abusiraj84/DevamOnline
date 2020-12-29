@@ -43,7 +43,7 @@ function Card(props) {
             {!isSoon ? (
               <>
                 <SaleBox>${sale || "0.00"}</SaleBox>
-                <PriceBox>${price || "0.00"}</PriceBox>
+                <PriceBox>{price || "0.00"}</PriceBox>
               </>
             ) : (
               <h1 style={{ marginTop: "10px", marginBottom: "6px" }}>{soon}</h1>

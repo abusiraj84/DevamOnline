@@ -49,22 +49,22 @@ export default function Waveform({ url }) {
     // Removes events, elements and disconnects Web Audio nodes.
     // when component unmount
     return () => wavesurfer.current.destroy();
-  }, [url]);
+  }, [url, volume]);
 
   const handlePlayPause = () => {
     setPlay(!playing);
     wavesurfer.current.playPause();
   };
 
-  const onVolumeChange = (e) => {
-    const { target } = e;
-    const newVolume = +target.value;
+  // const onVolumeChange = (e) => {
+  //   const { target } = e;
+  //   const newVolume = +target.value;
 
-    if (newVolume) {
-      setVolume(newVolume);
-      wavesurfer.current.setVolume(newVolume || 1);
-    }
-  };
+  //   if (newVolume) {
+  //     setVolume(newVolume);
+  //     wavesurfer.current.setVolume(newVolume || 1);
+  //   }
+  // };
 
   return (
     <Wrapper>
@@ -79,6 +79,7 @@ export default function Waveform({ url }) {
               transform: "translate(2px,2px)",
             }}
             src="./images/play.svg"
+            alt=""
           />
         ) : (
           <img
@@ -88,6 +89,7 @@ export default function Waveform({ url }) {
               transform: "translate(0px,2px)",
             }}
             src="./images/stop.svg"
+            alt=""
           />
         )}
       </Play>

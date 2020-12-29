@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { H2, H3 } from "../styles/TextStyles";
-import { config } from "../../config";
 import { useSelector } from "react-redux";
 import SvgLoading from "../SvgLoading";
 import { Helmet } from "react-helmet";
@@ -10,7 +9,6 @@ import Fotter from "../Fotter";
 function OrderReceived({ match }) {
   const { user: currentUser } = useSelector((state) => state.auth);
   const [isLoaded, setIsLoaded] = useState(false);
-  const container = useRef(null);
   useEffect(() => {
     fetchData();
     setTimeout(() => {
@@ -80,7 +78,7 @@ function OrderReceived({ match }) {
             <li>
               وسيلة الدفع:{" "}
               <strong>
-                {items.payment_method == "bacs"
+                {items.payment_method === "bacs"
                   ? "حوالة مصرفية مباشرة"
                   : "Paypal"}
               </strong>

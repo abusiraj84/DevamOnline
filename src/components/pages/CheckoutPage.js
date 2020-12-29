@@ -11,23 +11,23 @@ import Fotter from "../Fotter";
 
 function CheckoutPage({ match }) {
   useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetch(
+        `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wp/v2/courses/${match.params.id}`
+      );
+      const items = await data.json();
+      setItems(items);
+      console.log(items);
+    };
     fetchData();
     setTimeout(() => {
       setIsLoaded(true);
     }, 2000);
-  }, []);
+  }, [fetchData]);
 
   const { user: currentUser } = useSelector((state) => state.auth);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      `https://fierce-forest-56659.herokuapp.com/https://devam.website/wp-json/wp/v2/courses/${match.params.id}`
-    );
-    const items = await data.json();
-    setItems(items);
-    console.log(items);
-  };
   const form = useRef();
   const [items, setItems] = useState([]);
   const [billing_first_name, setBilling_first_name] = useState("");

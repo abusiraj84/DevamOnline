@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Card from "../Card";
 import styled, { keyframes } from "styled-components";
 import { Link } from "react-router-dom";
-import { loadProgressBar } from "axios-progress-bar";
+// import { loadProgressBar } from "axios-progress-bar";
 
 import "axios-progress-bar/dist/nprogress.css";
-import axios from "axios";
+// import axios from "axios";
 
 function CoursesCards() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -89,7 +89,7 @@ function CoursesCards() {
                               price={
                                 item._lp_sale_price === "0"
                                   ? "مجانية"
-                                  : item._lp_sale_price
+                                  : `$${item._lp_sale_price}`
                               }
                               sale={item._lp_price}
                               hours={item._lp_course_duration}

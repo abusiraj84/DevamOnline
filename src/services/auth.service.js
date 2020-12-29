@@ -1,11 +1,4 @@
 import axios from "axios";
-import { config } from "../config";
-
-const API_URL = config.siteUrl;
-const headers = {
-  "Content-Type": "application/json",
-  "Access-Control-Allow-Origin": "*",
-};
 
 const register = (user_login, user_email, user_pass) => {
   return axios

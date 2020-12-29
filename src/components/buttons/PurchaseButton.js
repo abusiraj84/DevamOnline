@@ -4,7 +4,7 @@ import { Caption2, SmallText } from "../styles/TextStyles";
 import { Link } from "react-router-dom";
 
 export default function PurchaseButton(props) {
-  const { title, subtitle, price, sale, courseid } = props;
+  const { title, price, sale, courseid } = props;
 
   return (
     <Link to={`/checkout/${courseid}`}>
@@ -53,10 +53,6 @@ const Title = styled(Caption2)`
   color: black !important;
 `;
 
-const Subtitle = styled(SmallText)`
-  color: black !important;
-  opacity: 0.7;
-`;
 const Sale = styled(SmallText)`
   color: black;
   opacity: 0.7;

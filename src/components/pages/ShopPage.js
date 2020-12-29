@@ -40,7 +40,7 @@ function ShopPage() {
   const [status, setStatus] = useState(false);
   const [items, setItems] = useState([]);
 
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
