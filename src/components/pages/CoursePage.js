@@ -61,7 +61,7 @@ function CoursePage({ match }) {
 
     setTimeout(() => {
       setIsLoaded(true);
-    }, 2000);
+    }, 1000);
   }, [currentUser, match.params.slug]);
 
   const [items, setItems] = useState([]);
@@ -216,19 +216,21 @@ function CoursePage({ match }) {
             ) : (
               <Wrapper>
                 <ContentWrapper>
-                  <center>
-                    <h1
-                      style={{
-                        fontSize: "30px",
-                        marginTop: "100px",
-                        background: "#00000059",
-                        padding: "10px",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      الدورة قيد التنفيذ
-                    </h1>
-                  </center>
+                  {items._lp_is_soon === "yes" ? (
+                    <center>
+                      <h1
+                        style={{
+                          fontSize: "30px",
+                          marginTop: "100px",
+                          background: "#00000059",
+                          padding: "10px",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        "الدورة قيد التنفيذ"
+                      </h1>
+                    </center>
+                  ) : null}
                 </ContentWrapper>
               </Wrapper>
             )

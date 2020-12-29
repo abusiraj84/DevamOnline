@@ -52,7 +52,7 @@ function SectionDetail(props) {
         <InstracturName>المدرب: {name || "Husam Nasrullah"}</InstracturName>
       </InstracturWrapper>
       <Desc1>
-        {sections || "0"} أقسام - {lessons || "0"} درس - {hours || "2"} ساعة
+        {sections || "0"} أقسام || {lessons || "0"} درس || {hours || "2"} ساعة
       </Desc1>
       <Desc2>
         {ReactHtmlParser(desc) ||
@@ -80,7 +80,7 @@ function SectionDetail(props) {
             textAlign: "center",
           }}
         >
-          كلمة مرور ملفات المشاريع: {password}
+          كلمة مرور المرفقات: {password}
         </h1>
       )}
 
@@ -90,8 +90,7 @@ function SectionDetail(props) {
           {topics || "0"} أقسام - {lessons || "0"} درس
         </TopicTitle>
         <TopicDesc>
-          جميع الخطوات مشروحة للمتدربين بطريقة مبسطة وسهلة، وستجد كل شيء في
-          متناول يديك.
+          جميع الدروس مشروحة بخطوات سهلة ومباشرة، ما عليك إلا المشاهدة.{" "}
         </TopicDesc>
       </TopicWrapper>
     </Wrapper>

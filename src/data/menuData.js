@@ -67,17 +67,17 @@ export const tooltipData = [
 export const GuestData = [
   {
     title: "الرئيسية",
-    icon: "../images/icons/credit.svg",
+    icon: "../images/icons/home.svg",
     link: "/",
   },
   {
     title: "الدورات",
-    icon: "../images/icons/credit.svg",
+    icon: "../images/icons/courses.svg",
     link: "/courses",
   },
   {
     title: "المدربون",
-    icon: "../images/icons/credit.svg",
+    icon: "../images/icons/team.svg",
     link: "/instructurs",
   },
   {
@@ -87,12 +87,12 @@ export const GuestData = [
   },
   {
     title: "تسجيل الدخول",
-    icon: "../images/icons/credit.svg",
+    icon: "../images/icons/account.svg",
     link: "/login",
   },
   {
     title: "الاشتراك",
-    icon: "../images/icons/credit.svg",
+    icon: "../images/icons/account.svg",
     link: "/register",
   },
 ];

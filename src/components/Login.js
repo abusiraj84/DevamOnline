@@ -6,6 +6,7 @@ import { login } from "../actions/auth";
 
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import Fotter from "./Fotter";
 
 const Login = (props) => {
   const form = useRef();
@@ -58,7 +59,7 @@ const Login = (props) => {
         <Title>تسجيل الدخول</Title>
         <Base onSubmit={handleLogin} ref={form}>
           <InputText
-            placeholder="البريد الإلكتروني"
+            placeholder="اسم المستخدم أو البريد الإلكتروني"
             id="username"
             type="username"
             name="username"
@@ -86,10 +87,10 @@ const Login = (props) => {
           لست مسجلًا؟ <NavLink to="/register">سجل عضويتك الآن</NavLink>
         </Text>
         <TextSmall>
-          لن نقوم بنشر معلوماتك الخاصة فجميع الحقوق محفوظة لدى مجموعة دوام
-          أونلاين.
+          لن نقوم بنشر معلوماتك الخاصة .. فجميع الحقوق محفوظة لدى دوام أونلاين.
         </TextSmall>
       </Container>
+      <Fotter />
     </Wrapper>
   );
 };
@@ -114,6 +115,7 @@ export const Container = styled.div`
   @media (max-width: 500px) {
     width: 95%;
     margin: -94px auto;
+    margin-bottom: 50px;
   }
 `;
 

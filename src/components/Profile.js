@@ -244,7 +244,7 @@ function Profile() {
               <Base onSubmit={handlePassword} method="POST">
                 <InputText
                   autoComplete="off"
-                  placeholder="كلمة المرور"
+                  placeholder="كلمة المرور (الجديدة)"
                   id="user_pass"
                   type="password"
                   name="user_pass"

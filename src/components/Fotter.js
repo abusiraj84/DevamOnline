@@ -30,21 +30,20 @@ function Fotter() {
       <Info>
         <h3
           style={{
-            marginTop: "18px",
             textAlign: "center",
             fontSize: "12px",
             lineHeight: "140%",
           }}
         >
-          جميع الحقوق محفوظة لدى &nbsp;
-          <a
+          جميع الحقوق محفوظة &nbsp;
+          {/* <a
             href="https://devam.online"
             style={{ color: "yellow", fontSize: "13px" }}
             target="_blank"
             rel="noopener noreferrer"
           >
             Devam Online
-          </a>
+          </a> */}
         </h3>
         <p
           style={{
@@ -55,6 +54,37 @@ function Fotter() {
         >
           Devam.online © 2021
         </p>
+
+        <IconsWrapper>
+          <a
+            href="https://www.facebook.com/Devam.Online"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon src="images/icons/facebook.svg"></Icon>
+          </a>
+          <a
+            href="https://www.instagram.com/devamonline/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon src="images/icons/instagram.svg"></Icon>
+          </a>
+          <a
+            href="https://www.youtube.com/channel/UCPAUIw4YGaCQwtYpau89gGw/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon src="images/icons/youtube.svg"></Icon>
+          </a>
+          <a
+            href="https://wa.me/905318549587"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon src="images/icons/whatsapp.svg"></Icon>
+          </a>
+        </IconsWrapper>
       </Info>
     </Wrapper>
   );
@@ -119,5 +149,29 @@ const Info = styled.div`
     h3 {
       margin-bottom: 10px;
     }
+  }
+`;
+
+const IconsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+
+  margin: auto;
+`;
+const Icon = styled.img`
+  /* width: 40px; */
+  height: 28px;
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+  /* color: blue; */
+  background: #fff;
+  padding: 6px;
+  border-radius: 10px;
+  margin-left: 12px;
+  margin-right: 12px;
+
+  :hover {
+    transform: scale(1.1) !important;
   }
 `;

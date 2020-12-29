@@ -48,29 +48,29 @@ function InstructursPage() {
                   <Cv>{item.meta.description}</Cv>
                   <IconsWrapper>
                     <a
-                      href={item.meta.facebook || "#"}
-                      target="_blank"
+                      href={item.meta.facebook || ""}
+                      target={item.meta.facebook ? "_blank" : ""}
                       rel="noopener noreferrer"
                     >
                       <Icon src="images/icons/facebook.svg"></Icon>
                     </a>
                     <a
-                      href={item.meta.instagram || "#"}
-                      target="_blank"
+                      href={item.meta.instagram || ""}
+                      target={item.meta.instagram ? "_blank" : ""}
                       rel="noopener noreferrer"
                     >
                       <Icon src="images/icons/instagram.svg"></Icon>
                     </a>
                     <a
-                      href={item.meta.youtube || "#"}
-                      target="_blank"
+                      href={item.meta.youtube || ""}
+                      target={item.meta.youtube ? "_blank" : ""}
                       rel="noopener noreferrer"
                     >
                       <Icon src="images/icons/youtube.svg"></Icon>
                     </a>
                     <a
-                      href={item.meta.whatsapp || "#"}
-                      target="_blank"
+                      href={item.meta.whatsapp || ""}
+                      target={item.meta.whatsapp ? "_blank" : ""}
                       rel="noopener noreferrer"
                     >
                       <Icon src="images/icons/whatsapp.svg"></Icon>

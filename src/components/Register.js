@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { register } from "../actions/auth";
 
 import { NavLink, Redirect } from "react-router-dom";
+import Fotter from "./Fotter";
 
 const Register = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -152,7 +153,7 @@ const Register = () => {
             );
           })}
           <Submit type="submit" value="Login">
-            <span style={{ marginLeft: "20px" }}>سجّل الآن</span>
+            <span style={{ marginLeft: "20px" }}>اشترك الآن</span>
             {loading && (
               <span className="spinner-border spinner-border-md"></span>
             )}
@@ -162,10 +163,10 @@ const Register = () => {
           هل لديك عضوية <NavLink to="/login">سجل دخول الآن</NavLink>
         </Text>
         <TextSmall>
-          لن نقوم بنشر معلوماتك الخاصة فجميع الحقوق محفوظة لدى مجموعة دوام
-          أونلاين.
+          لن نقوم بنشر معلوماتك الخاصة .. فجميع الحقوق محفوظة لدى دوام أونلاين.
         </TextSmall>
       </Container>
+      <Fotter />
     </Wrapper>
   );
 };
@@ -191,6 +192,7 @@ export const Container = styled.div`
   @media (max-width: 500px) {
     width: 95%;
     margin: -94px auto;
+    margin-bottom: 50px;
   }
 `;
 
