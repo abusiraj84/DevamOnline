@@ -66,11 +66,11 @@ const Register = () => {
     let isValid = true;
 
     if (user_login.trim().length < 3) {
-      usernameErr.usernameErrShort = "اسم المستخدم يجيب أن يكون أكثر من 5 أحرف";
+      usernameErr.usernameErrShort = "اسم المستخدم يجب أن يكون أكثر من 5 أحرف";
       isValid = false;
     }
     if (user_login.trim().length > 25) {
-      usernameErr.usernameErrLong = "اسم المستخدم يجيب أن يكون أقل من 12 حرف";
+      usernameErr.usernameErrLong = "اسم المستخدم يجب أن يكون أقل من 12 حرف";
       isValid = false;
     }
 
@@ -80,7 +80,8 @@ const Register = () => {
       isValid = false;
     }
     if (user_pass.trim().length < 5) {
-      passwordErr.passwordErrShort = "كلمة المرور يجيب أن تكون أكثر من 5 أحرف";
+      passwordErr.passwordErrShort =
+        "كلمة المرور يجب أن تكون أكثر من 5 أحرف وأرقام";
       isValid = false;
     }
     setUsernameErr(usernameErr);
