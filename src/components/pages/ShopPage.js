@@ -462,7 +462,7 @@ const Type = styled.div`
   padding: 5px 0;
   font-size: 15px;
   line-height: 15px;
-  color: #ccc;
+  color: #767676;
 `;
 const Choise = styled.div`
   text-align: right;
