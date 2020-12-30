@@ -93,7 +93,7 @@ function SectionDetail(props) {
             textAlign: "center",
           }}
         >
-          كلمة مرور المرفقات: {password}
+          كلمة مرور ملفات التحميل: {password}
         </h1>
       )}
 
