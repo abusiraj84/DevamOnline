@@ -165,7 +165,7 @@ const VideosNum = styled(SmallText)`
 
 const PriceBox = styled.div`
   color: white;
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 const SaleBox = styled.div`
