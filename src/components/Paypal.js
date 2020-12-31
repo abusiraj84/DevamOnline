@@ -44,7 +44,7 @@ function Paypal(props) {
         });
 
         setTimeout(() => {
-          window.location.href = `https://devam.website/order-received/${responseJson.id}`;
+          window.location.href = `https://devam.online/order-received/${responseJson.id}`;
         }, 2500);
       })
       .catch((error) => {

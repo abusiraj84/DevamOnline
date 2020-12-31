@@ -121,8 +121,8 @@ function CheckoutPage({ match }) {
       {
         product_id: items._mlpwc_xref,
         quantity: 1,
-        subtotal: items.sale_price,
-        total: items.sale_price,
+        subtotal: items._lp_sale_price,
+        total: items._lp_sale_price,
       },
     ],
     customer_id: currentUser ? currentUser.user.id : "",
@@ -201,7 +201,7 @@ function CheckoutPage({ match }) {
       });
     }
   };
-
+  console.log(paypalData);
   return (
     <div>
       {isLoaded ? (
