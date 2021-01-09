@@ -97,9 +97,9 @@ function ShopPage() {
                 <ModalTitle>{name}</ModalTitle>
                 <IconsWrapper>
                   <ModalPrice>${price}</ModalPrice>
-                  <Link to={`/checkout-shop/${id}`}>
+                  <a href={`https://devam.website/shop/?add-to-cart=${id}`}>
                     <ModalCart src="images/icons/shop.svg" />
-                  </Link>
+                  </a>
                 </IconsWrapper>
                 <Waveform
                   url={
@@ -188,9 +188,11 @@ function ShopPage() {
                         }
                       />
                       <Price>${item.price}</Price>
-                      <Link to={`/checkout-shop/${item.id}`}>
+                      <a
+                        href={`https://devam.website/shop/?add-to-cart=${item.id}`}
+                      >
                         <Cart src="images/icons/shop.svg" />
-                      </Link>
+                      </a>
                     </ContentWrapper>
                   </Card>
                 )
