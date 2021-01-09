@@ -32,7 +32,7 @@ function CoursePage({ match }) {
       );
       const items = await data.json();
       setItems(items[0]);
-      // console.log(items[0]);
+      console.log(items[0]);
 
       setFontColor(items[0]._lp_course_font_color);
     };
@@ -140,7 +140,7 @@ function CoursePage({ match }) {
                       imgcolor={items._lp_course_background}
                       price={items._lp_sale_price}
                       sale={items._lp_price}
-                      id={items.id}
+                      id={items._mlpwc_xref}
                       isAccess={items._is_accessed}
                       password={items._lp_course_password}
                       // orderStatus={orderStatus}

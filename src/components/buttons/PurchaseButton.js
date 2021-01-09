@@ -7,7 +7,7 @@ export default function PurchaseButton(props) {
   const { title, price, sale, courseid } = props;
 
   return (
-    <Link to={`/checkout/${courseid}`}>
+    <a href={`https://devam.website/shop/?add-to-cart=${courseid}`}>
       <Wrapper>
         <IconWrapper>
           <Icon src="/images/icons/credit.svg" />
@@ -21,7 +21,7 @@ export default function PurchaseButton(props) {
           <Price>${price || "0.0"}</Price>
         </PriceWrapper>
       </Wrapper>
-    </Link>
+    </a>
   );
 }
 
